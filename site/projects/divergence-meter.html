@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/divergence-meter.html" />
+  <title>divergence-meter — awesome-mad-projects</title>
+  <meta name="description"
+        content="A Steins;Gate worldline-divergence number: SHA-256 hash to exact Fraction, attractor field classification, and nixie-tube ASCII display." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="divergence-meter — awesome-mad-projects" />
+  <meta property="og:description"  content="Steins;Gate worldline divergence number via SHA-256, exact fractions, nixie-tube display." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/divergence-meter.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/divergence-meter.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="divergence-meter — awesome-mad-projects" />
+  <meta name="twitter:description" content="Steins;Gate worldline divergence meter with exact SHA-256 hash arithmetic." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/divergence-meter.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>divergence-meter
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>divergence-meter</h1>
+          <p class="detail-tagline">A Steins;Gate worldline-divergence number, classified into an attractor field and rendered on a nixie-tube ASCII display &mdash; the hash is exact, never floating-point.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/divergence-meter"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/divergence_meter_worldlines.png"
+               alt="Divergence meter worldlines plot showing attractor field classification"
+               loading="lazy" width="800" height="600" />
+          <figcaption>divergence-meter &mdash; worldlines and attractor fields</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Steins;Gate</em>, the Divergence Meter reads a worldline number &mdash; a value in
+          [0, 2) &mdash; that indicates which attractor field (timeline cluster) the current worldline
+          belongs to. The show's canonical Steins;Gate worldline is exactly 1.048596.
+        </p>
+        <p>
+          This package computes a divergence number deterministically from any payload string using
+          SHA-256 hashing, with all arithmetic done as exact <code>fractions.Fraction</code>.
+          The result is classified into an attractor field and rendered on a 3&times;5 seven-segment
+          nixie-tube ASCII display.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Hash &rarr; worldline &rarr; attractor field</span>
+          <pre>word = SHA-256(payload)[:8]  →  64-bit integer
+divergence = Fraction(word, 2^63)  ∈ [0, 2)
+  (exact, no floating point)
+
+Attractor fields:
+  Alpha-Low  [0,   0.5)  — low-divergence alpha
+  Alpha      [0.5, 1.0)  — alpha attractor
+  Beta       [1.0, 1.5)  — beta attractor
+  Beta-High  [1.5, 2.0)  — high-divergence beta
+
+Steins;Gate worldline: 1.048596  (within tolerance 5e-7 of 1.048596)
+
+Golden pair: "El Psy Congroo" → 1.062031
+  word = 9795511409617762124
+
+Reading Steiner: atomic-write JSON store, frozen dataclasses</pre>
+        </div>
+        <p>
+          The ASCII nixie display renders each digit as a 3&times;5 seven-segment character with
+          a physical nixie-tube feel. The display is purely text &mdash; no images, no dependencies.
+        </p>
+        <div class="formula">
+          <span class="formula-label">Sample nixie output (1.048596)</span>
+          <pre> _     _  _     _  _  _
+|_|   | ||_    |_||_  _|
+  |   | | _|   |_||_  _|
+
+  Worldline: 1.048596   [Steins;Gate attractor — MATCH]</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <img src="../assets/divergence_meter_worldlines.png"
+                 alt="Worldlines plot: divergence values mapped to attractor fields with band boundaries"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>Worldlines &mdash; attractor field map</h4>
+              <p>Sample payload strings mapped to their divergence numbers, coloured by
+                 attractor field. The Steins;Gate 1.048596 target is marked.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd divergence-meter
+
+pip install -e .
+python -m divergence_meter "El Psy Congroo"
+# → Worldline: 1.062031  [Beta attractor]
+
+# Check the canonical Steins;Gate worldline
+python -m divergence_meter --check-steins-gate
+
+# Run tests
+python -m pytest tests/ -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/divergence-meter"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

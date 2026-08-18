@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/gojo_infinity.html" />
+  <title>gojo_infinity — awesome-mad-projects</title>
+  <meta name="description"
+        content="Gojo Satoru's Infinity examined through four independent mathematical lenses — Zeno series, Lebesgue measure, Riemannian conformal geometry, and topology." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="gojo_infinity — awesome-mad-projects" />
+  <meta property="og:description"  content="Gojo Satoru's Infinity examined through four independent mathematical lenses — can an attacker ever reach him?" />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/gojo_infinity.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/gojo_infinity.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="gojo_infinity — awesome-mad-projects" />
+  <meta name="twitter:description" content="Gojo Satoru's Infinity examined through four independent mathematical lenses." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/gojo_infinity.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>gojo_infinity
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>gojo_infinity</h1>
+          <p class="detail-tagline">Gojo Satoru's &ldquo;Infinity&rdquo; examined through four independent mathematical lenses &mdash; can an attacker ever reach him?</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/gojo_infinity"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/emblems/gojo_infinity.png"
+               alt="gojo_infinity emblem — geometric abstraction of converging geodesics"
+               width="600" height="600" />
+          <figcaption>infinity-lab &mdash; gojo_infinity emblem</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Jujutsu Kaisen</em>, Gojo Satoru maintains a perpetual barrier called &ldquo;Infinity&rdquo;
+          that subdivides the space between any incoming attack and himself into infinitely many sub-intervals,
+          so the attacker &mdash; in theory &mdash; never arrives. The show treats this as unbreakable.
+        </p>
+        <p>
+          This package asks: is that actually true? The answer depends entirely on which mathematics you
+          apply. Four independent lenses each give a different verdict, and the verdicts disagree. The
+          project is inspired by Achmad Roykhan Sabiq&rsquo;s 2026 Oxford Mathematics Essay Competition
+          entry and the 2021 RIKEN &times; Gege Akutami &ldquo;Abyss of Math&rdquo; paper.
+        </p>
+        <p>
+          All arithmetic uses Python&rsquo;s <code>fractions.Fraction</code> throughout &mdash; no floating
+          point in any comparison or convergence test. The package ships 155 pure-stdlib tests and 217 tests
+          with numpy/matplotlib.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+
+        <h3 style="margin-bottom:12px;font-size:1.05rem;">Lens 1 &mdash; Zeno&rsquo;s geometric series &mdash; <span class="status-fragile">Fragile</span></h3>
+        <p>Model each step as covering half the remaining distance. The partial sums converge:</p>
+        <div class="formula">
+          <span class="formula-label">Geometric series</span>
+          <pre>S_n = 1 - (1/2)^n  →  1  as  n → ∞
+
+The series sums to exactly 1.  Under real analysis the attacker
+arrives in finite time — the infinite subdivision does not stop them.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.05rem;">Lens 2 &mdash; Lebesgue measure &mdash; <span class="status-fragile">Fragile</span></h3>
+        <p>
+          Build the Infinity barrier as a Cantor-like construction: iteratively remove the middle third of
+          each remaining interval. The resulting set Z has measure zero.
+        </p>
+        <div class="formula">
+          <span class="formula-label">Lebesgue measure</span>
+          <pre>m(Z) = 0
+
+A measure-zero set has zero thickness — a point mass moving at any
+positive speed crosses it in zero time.  The barrier is invisible
+to Lebesgue integration.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.05rem;">Lens 3 &mdash; Riemannian conformal geometry &mdash; <span class="status-formidable">Formidable</span></h3>
+        <p>
+          Replace the flat metric with a conformal metric that blows up as the attacker approaches
+          Gojo&rsquo;s position x&#x2080;. The conformal factor &Omega; is calibrated by bisection so
+          that the metric at 80% approach equals 4.1 (a value extracted from the show&rsquo;s geometry).
+        </p>
+        <div class="formula">
+          <span class="formula-label">Conformal metric</span>
+          <pre>Ω(x) = 1 + λ · K(x, x_gojo) / (x_gojo - x)
+
+where λ ≈ 0.284118  (calibrated by bisection to g(0.8) = 4.1)
+
+Geodesic length integral:
+  L = ∫₀^{x_gojo} Ω(x) dx  →  math.inf
+
+The path length diverges before contact.  Under this metric,
+the attacker never arrives — the geometry itself is the barrier.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.05rem;">Lens 4 &mdash; Topology / World-Cutting Slash &mdash; <span class="status-falls">Falls</span></h3>
+        <p>
+          Gojo&rsquo;s &ldquo;World-Cutting Slash&rdquo; severs the conformal metric entirely, setting
+          the metric to <code>None</code> at his position. The geodesic computation raises an exception
+          and returns no path.
+        </p>
+        <div class="formula">
+          <span class="formula-label">Severed metric</span>
+          <pre>g(x_gojo) = None   (metric excised)
+
+The topological surgery removes the singularity itself.
+The barrier collapses — the Slash lands.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.1rem;">Verdict table</h3>
+        <table class="verdict-table verdict">
+          <thead>
+            <tr>
+              <th>Lens</th>
+              <th>Mathematical tool</th>
+              <th>Key result</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 &mdash; Zeno</td>
+              <td>Geometric series</td>
+              <td>S&#x2099; &rarr; 1; attacker arrives</td>
+              <td class="status-fragile">Fragile</td>
+            </tr>
+            <tr>
+              <td>2 &mdash; Measure</td>
+              <td>Lebesgue measure</td>
+              <td>m(Z) = 0; barrier is null</td>
+              <td class="status-fragile">Fragile</td>
+            </tr>
+            <tr>
+              <td>3 &mdash; Geometry</td>
+              <td>Conformal Riemannian metric</td>
+              <td>L = &infin;; path diverges</td>
+              <td class="status-formidable">Formidable</td>
+            </tr>
+            <tr>
+              <td>4 &mdash; Topology</td>
+              <td>Metric excision (slash)</td>
+              <td>g = None; barrier severed</td>
+              <td class="status-falls">Falls</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <p>
+          The package is a pure Python src-layout library with four independent modules, each implementing
+          one lens. A top-level runner executes all four in sequence and prints both a verdict table and
+          calls matplotlib to render the artifact plots.
+        </p>
+        <ul>
+          <li><strong>Zeno module</strong>: iterates <code>Fraction(1,2)**n</code> steps, computes
+            partial sums exactly, and checks convergence against <code>Fraction(1,1)</code>.</li>
+          <li><strong>Measure module</strong>: builds the Cantor set by iterating complement intervals,
+            computes total measure as a <code>Fraction</code>, and confirms it equals zero.</li>
+          <li><strong>Conformal geometry module</strong>: integrates the metric numerically using
+            <code>fractions.Fraction</code>-based midpoint quadrature; the integral diverges
+            (raises <code>OverflowError</code> or returns <code>math.inf</code>) before x&#x2080;.</li>
+          <li><strong>Topology module</strong>: applies the World-Cutting Slash by setting
+            <code>metric[x_gojo] = None</code> and re-integrating; the geodesic computation
+            raises <code>MetricExcisedError</code>.</li>
+        </ul>
+        <p>
+          A shared <code>calibrate.py</code> bisects over &lambda; to find the value that makes the
+          conformal metric read 4.1 at 80% approach, matching the show&rsquo;s implied geometry.
+          All calibration comparisons use <code>fractions.Fraction</code> to avoid floating-point drift.
+        </p>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <p>
+          Nine rendered artifacts: six static plots covering each lens, plus three animations showing
+          the conformal geometry in motion. The four-lenses composite is the headline render.
+        </p>
+
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/gojo_geodesic_3d.png">
+              <source src="../assets/gojo_four_lenses.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Four lenses &mdash; composite animation</h4>
+              <p>All four mathematical analyses side-by-side: series convergence, measure,
+                 blowing-up metric, and severed geodesic.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/gojo_geodesic_3d.png">
+              <source src="../assets/gojo_geodesic_approach.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Geodesic approach animation</h4>
+              <p>A geodesic advancing toward x&#x2080; under the conformal metric &mdash;
+                 watch the step sizes shrink as the metric diverges.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/gojo_geodesic_3d.png">
+              <source src="../assets/gojo_geodesic_3d_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Geodesic bundle, rotating (3-D)</h4>
+              <p>The bundle of geodesics approaching the conformal singularity, rendered as a
+                 rotating 3-D surface. The length integral diverges before the apex.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_metric_blowup.png"
+                 alt="Conformal metric Ω(x) blowing up as x approaches x_gojo"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Metric blow-up</h4>
+              <p>The conformal factor &Omega;(x) as the attacker approaches x&#x2080;.
+                 The metric diverges &mdash; the path length becomes infinite.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_series_convergence.png"
+                 alt="Zeno partial sums S_n converging to 1"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Zeno series convergence</h4>
+              <p>Partial sums S&#x2099; = 1 &minus; (1/2)&#x207F; approaching 1. Convergence is
+                 exact &mdash; the attacker reaches Gojo under real analysis.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_geodesic_bundle.png"
+                 alt="Bundle of geodesics approaching the metric singularity"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Geodesic bundle (2-D)</h4>
+              <p>Multiple geodesic paths launched from different angles, all failing to
+                 reach x&#x2080; in finite length.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_length_divergence.png"
+                 alt="Accumulated path length diverging to infinity"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Length divergence</h4>
+              <p>Accumulated geodesic length as a function of how far the attacker has
+                 travelled. The curve goes vertical before x&#x2080;.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_geodesic_3d.png"
+                 alt="3-D view of the conformal metric surface"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Conformal surface (3-D static)</h4>
+              <p>The metric surface &Omega;(x, y) rendered as a 3-D plot, showing the
+                 spike at Gojo&rsquo;s position.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/gojo_cover_convergence.png"
+                 alt="Cover convergence for the measure-zero Cantor construction"
+                 loading="lazy" width="800" height="500" />
+            <figcaption class="cap">
+              <h4>Cover convergence (Lebesgue)</h4>
+              <p>Successive open covers of the Infinity barrier set, shrinking toward
+                 total measure zero.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="caveats" style="margin-top:32px;">
+          <p><strong>Honest caveats:</strong> The Zeno and Lebesgue lenses both find Infinity fragile
+          under standard real analysis. Only the Riemannian conformal model genuinely prevents arrival,
+          and that model is a deliberate construction &mdash; the &lambda; parameter is calibrated to
+          match the show&rsquo;s implied scale, not derived from first principles. The topology lens shows
+          that even the conformal barrier is defeated by the World-Cutting Slash: severing the metric
+          removes the singularity itself. Two of four lenses say &ldquo;Fragile&rdquo;; one says
+          &ldquo;Formidable&rdquo;; one says &ldquo;Falls.&rdquo; The math cannot give a single answer
+          because the question is underdetermined without fixing the physical model.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre># Clone and enter the monorepo
+git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd awesome-mad-projects/infinity-lab
+
+# Install gojo_infinity in editable mode (no extra deps required)
+pip install -e packages/gojo_infinity
+
+# Run all four lenses and print verdict table
+python -m gojo_infinity
+
+# Run the full test suite (155 stdlib tests)
+python -m pytest packages/gojo_infinity/tests -v
+
+# Run tests including numpy/matplotlib artifacts (217 tests)
+pip install numpy matplotlib
+python -m pytest packages/gojo_infinity/tests -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/gojo_infinity"
+             rel="noopener" target="_blank">source &#x2197;</a>
+          <a class="btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/issues"
+             rel="noopener" target="_blank">open an issue &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>
+            Mathematics after <strong>Achmad Roykhan Sabiq</strong>, whose essay for the
+            <em>Oxford Mathematics Essay Competition 2026</em> inspired the infinity-lab work.
+            Attribution and summary only &mdash; no essay prose is reproduced here.
+            <a href="https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf"
+               rel="noopener" target="_blank">Essay PDF &#x2197;</a>
+          </p>
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/issues" rel="noopener" target="_blank">Issues &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

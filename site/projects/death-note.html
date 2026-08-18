@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/death-note.html" />
+  <title>death-note — awesome-mad-projects</title>
+  <meta name="description"
+        content="A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named sandbox target is terminated. Entirely safe userspace. Rust." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="death-note — awesome-mad-projects" />
+  <meta property="og:description"  content="Safe sandboxed process reaper: /dev/deathnote-style CLI, safe userspace, Rust." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/death-note.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/death-note.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="death-note — awesome-mad-projects" />
+  <meta name="twitter:description" content="Safe sandboxed process reaper in Rust — no kernel access." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/death-note.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>death-note
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-rust">Rust</span>
+          <h1>death-note</h1>
+          <p class="detail-tagline">A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named target &mdash; a process the tool spawned and owns &mdash; is terminated. No kernel access required.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/death-note"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/death-note.png"
+               alt="death-note banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>death-note &mdash; safe sandboxed process reaper</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Death Note</em>, writing a person&rsquo;s name in the notebook causes their death.
+          This package models that as a process lifecycle manager: the tool spawns named sandbox
+          processes (simulated workers), maintains a registry, and terminates any process whose name
+          you write into the CLI. The processes are threads or child processes that the tool created
+          and owns &mdash; the tool cannot affect any external process.
+        </p>
+        <p>
+          The constraint is strict: the death note can only kill processes it spawned. Attempting to
+          register a PID from outside the sandbox is rejected. This keeps the project entirely safe
+          while modelling the concept faithfully.
+        </p>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <ul>
+          <li>Spawns a pool of named worker threads, each with a unique name (the &ldquo;target&rdquo;).</li>
+          <li>Maintains a registry mapping names to thread handles or process IDs.</li>
+          <li>Accepts names via stdin or CLI argument. If the name is in the registry, sends a
+            shutdown signal to that worker and removes it from the registry.</li>
+          <li>Workers outside the registry cannot be addressed &mdash; the tool refuses with an error.</li>
+          <li>Written in safe Rust (<code>#![forbid(unsafe_code)]</code>).</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd death-note
+
+cargo test
+cargo run
+
+# Spawning workers: alpha, beta, gamma, delta ...
+# Write a name to terminate: beta
+# [beta] received shutdown signal — terminated.
+# Remaining: alpha, gamma, delta</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/death-note"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

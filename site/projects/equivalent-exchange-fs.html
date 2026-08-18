@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/equivalent-exchange-fs.html" />
+  <title>equivalent-exchange-fs — awesome-mad-projects</title>
+  <meta name="description"
+        content="A filesystem enforcing the Law of Equivalent Exchange: to obtain, something of equal value must be lost. In-memory VFS, conservation invariant verified by tests. Rust." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="equivalent-exchange-fs — awesome-mad-projects" />
+  <meta property="og:description"  content="Filesystem enforcing conservation: write N bytes, delete N bytes. In-memory VFS, Rust." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/equivalent-exchange-fs.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/equivalent-exchange-fs.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="equivalent-exchange-fs — awesome-mad-projects" />
+  <meta name="twitter:description" content="Conservation law filesystem: write N bytes, delete N bytes. Rust." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/equivalent-exchange-fs.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>equivalent-exchange-fs
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-rust">Rust</span>
+          <h1>equivalent-exchange-fs</h1>
+          <p class="detail-tagline">A filesystem enforcing the Law of Equivalent Exchange: to obtain, something of equal value must be lost. Write N bytes &rarr; delete N bytes. Conservation invariant verified by tests. Rust.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/equivalent-exchange-fs"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/equivalent-exchange-fs.png"
+               alt="equivalent-exchange-fs banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>equivalent-exchange-fs &mdash; conservation law VFS</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Fullmetal Alchemist</em>, the Law of Equivalent Exchange governs alchemy:
+          to obtain something, something of equal value must be sacrificed. This package applies
+          that law to a virtual filesystem: the total number of bytes stored is invariant.
+          To write N bytes of new data, you must simultaneously delete N bytes of existing data.
+        </p>
+        <p>
+          The filesystem is fully in-memory; no real disk I/O occurs. The conservation invariant
+          is checked after every mutation and enforced by the type system where possible. Tests
+          verify that no sequence of operations can change the total byte count.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Conservation invariant</span>
+          <pre>State: S = (files, total_bytes)
+
+Invariant: total_bytes = Σ |content(f)|  for all f ∈ files
+           total_bytes is constant  (never changes after initialisation)
+
+Operations:
+  write(path, data):   must specify sacrifice(path', n) where n = |data|
+    → adds |data| bytes, removes n bytes from sacrifice target
+    → total_bytes unchanged
+
+  read(path):          no cost
+  delete(path):        returns bytes to a "void pool" — not writeable
+  void_exchange(n):    writes n bytes from void pool (sacrifices void capacity)</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd equivalent-exchange-fs
+
+cargo test
+cargo run
+
+# FS capacity: 1024 bytes
+# write("a.txt", 200 bytes, sacrifice="b.txt")  →  OK
+# total_bytes: 1024  ✓ (invariant holds)
+# write("c.txt", 300 bytes)  →  ERROR: no sacrifice specified</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/equivalent-exchange-fs"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,60 +1,77 @@
 # gojo_infinity
 
-Gojo Satoru's **"Infinity"** (Jujutsu Kaisen) examined through four independent
-mathematical lenses, after Achmad Roykhan Sabiq's Oxford Maths essay (2026) and
-the RIKEN *"Jujutsu Kaisen: Abyss of Math"* course. Each lens asks the same
-question -- *can an attacker ever reach Gojo?* -- and reaches its own verdict.
+![gojo_infinity](./banner.png)
+
+> **Gojo Satoru's "Infinity", interrogated by four independent branches of
+> mathematics — and one honest answer per branch.**
+
+A pure, standard-library Python package that takes the *Jujutsu Kaisen* barrier
+technique "Infinity" (Muryōkūsho / Limitless) seriously as a mathematical object
+and asks the same question through four different lenses: *can an attacker ever
+reach Gojo?* It reproduces the argument of Achmad Roykhan Sabiq's Oxford Maths
+essay (2026) — grounded in the 2021 RIKEN × Gege Akutami *"Abyss of Math"*
+collaboration — and extends the Riemannian lens to real 1-D / 2-D / 3-D geodesics.
+
+---
+
+## TL;DR
+
+Four models of "Infinity" give four different verdicts, and **that disagreement
+is the whole point**: the answer depends entirely on which mathematics you use to
+model the barrier. Geometric-series (Zeno) and Lebesgue-measure readings both say
+the barrier is **Fragile** (the attacker arrives in finite time; the barrier is a
+null set of length zero). The Riemannian-geometry reading makes it **Formidable**
+(felt distance to Gojo diverges to `+∞`). A topological cut makes it **Fall**
+(severing continuity disconnects the space; the metric becomes undefined). Every
+headline number is computed exactly — `fractions.Fraction` where it matters,
+`math.inf` for genuine divergence, `None` for genuinely undefined — never faked
+with a large float.
 
 | Lens | Model | Verdict |
 |------|-------|---------|
 | 1 | Geometric series / Zeno's paradox | **Fragile** |
 | 2 | Lebesgue measure | **Fragile** |
-| 3 | Riemannian conformal geometry | **Formidable** |
+| 3 | Riemannian conformal geometry (1/2/3-D) | **Formidable** |
 | 4 | Topology / World-Cutting Slash | **Falls** |
 
-The point of the exercise: *the answer depends entirely on the mathematics you
-choose to model "Infinity" with.* Three of the four models say the barrier can
-be crossed or is negligible; only the Riemannian reading makes it truly
-impassable, and a topological cut removes the metric altogether.
+---
 
-## Package layout
+## The idea
 
-```
-src/gojo_infinity/
-  core/            # PURE math -- stdlib + commons.core ONLY (never adapters)
-    zeno.py        # Lens 1: partial sums, residuals, arrival time
-    measure.py     # Lens 2: covering length, m(Z) = 0
-    riemannian.py  # Lens 3: conformal metric, divergent geodesic (1-D)
-    riemannian_manifold.py     # Lens 3 (2-D): real manifold geodesic solver
-    riemannian_manifold_nd.py  # Lens 3 (n-D): dimension-agnostic solver (1/2/3-D)
-    topology.py    # Lens 4: continuity, severed metric, connectivity
-    verdicts.py    # frozen Verdict dataclass + conclusion table
-  accel/           # OPTIONAL numpy fast paths (lazy try_import; outside core)
-    numpy_backend.py     # vectorised omega/metric/geodesic/cover/zeno mirrors
-    manifold_backend.py  # vectorised batch geodesic integrator (2-D + n-D)
-  adapters/        # may import core; core NEVER imports these
-    viz.py         # deterministic ASCII charts (+ DEFERRED matplotlib PNG, 3-D)
-    animate.py     # DEFERRED matplotlib+Pillow GIFs + ffmpeg MP4 of the approach
-    animate_3d.py  # DEFERRED rotating 3-D geodesic animation (GIF + ffmpeg MP4)
-    animate_lenses.py # DEFERRED four-lens 2x2 composite explainer (GIF + ffmpeg MP4)
-    cli.py         # argparse: zeno/measure/riemannian/manifold/topology/all/animate
-  demo.py          # end-to-end narrated report (headline + lenses + gallery)
-tests/             # pytest suite (pure core tests + optional accel/PNG/GIF tests)
-```
+In the manga, Gojo describes Infinity as follows: between any attacker and Gojo
+there is always some distance; halve it, then halve it again, forever — no attack
+completes the infinite sequence of steps, so Gojo is never reached. This is
+literally **Zeno of Elea's** 2,500-year-old Achilles-and-the-tortoise paradox,
+weaponised.
 
-**Core purity** is a hard invariant and is enforced by
-`tests/test_gojo_core_purity.py`: modules under `core/` import only the standard
-library plus `commons.core`. No core module imports an adapter (`cli`/`viz`/`io`),
-and nothing imports `numpy`/`matplotlib` at module top level. matplotlib is
-reached only lazily inside `adapters/viz.save_convergence_png` via
-`commons.core.optional.try_import` and is **deferred** -- absent it, the function
-raises a clear `OptionalDependencyError` instead of failing to import.
+The essay's thesis is that "is Infinity undefeatable?" is not a single question —
+it is four questions, one per mathematical language:
 
-## The resolved mathematics, per lens
+1. **Convergence.** Does the infinite sequence of halvings actually sum to a
+   finite distance (and a finite *time*)? If so, the attacker arrives.
+2. **Measure.** How "large" is the infinite set of subdivision points? If it has
+   measure zero, the barrier occupies no space at all.
+3. **Metric geometry.** What if Infinity is not a subdivision of distance but a
+   *transformation of the ruler* — a metric that stretches near Gojo? Then the
+   *felt* distance can diverge even though Euclidean position barely moves.
+4. **Topology.** What if you stop attacking Gojo and attack the *space around
+   him* — severing the continuity the metric relies on? (This is how Sukuna's
+   World-Cutting Slash and Mahoraga's adaptation defeat it.)
 
-### Lens 1 -- Geometric series (Zeno) -> Fragile
-The attacker halves the remaining gap forever. Partial sums are computed
-**exactly** with `fractions.Fraction`:
+This package implements all four, plus a modern enhancement: genuine Riemannian
+geodesics on a real conformally-flat manifold in 1, 2, and 3 dimensions.
+
+---
+
+## The mathematics (the heart)
+
+All headline quantities below are machine-checked in the test suite. Lenses 1–2
+are computed with exact `fractions.Fraction`; the Riemannian numbers are pinned in
+`tests/test_riemannian*.py`.
+
+### Lens 1 — Geometric series (Zeno) → Fragile
+
+The attacker halves the remaining gap forever. Partial sums are exact:
 
 ```
 S_n = 1/2 + 1/4 + ... + 1/2^n = 1 - (1/2)^n
@@ -62,359 +79,214 @@ S_1..S_8 = 1/2, 3/4, 7/8, 15/16, 31/32, 63/64, 127/128, 255/256
          = 0.5, 0.75, 0.875, 0.9375, 0.96875, 0.984375, 0.9921875, 0.99609375
 ```
 
-The residual `(1/2)^n` is **strictly positive for every finite n** (verified up
-to and beyond `half_power(1075)`, where an IEEE-754 double would underflow to
-`0.0` -- Fraction does not). Yet the geometric sum `a/(1-r)` with `a = r = 1/2`
-equals **exactly `1`**, and the total arrival time at speed `1/2` is the finite
-value `2`. The attacker arrives: Infinity is **Fragile**.
+The residual `(1/2)^n` is **strictly positive for every finite `n`** — verified
+past `half_power(1075)`, where an IEEE-754 double underflows to `0.0` but a
+`Fraction` does not. Yet the closed-form geometric sum `a/(1-r)` with
+`a = r = 1/2` equals **exactly `1`**, and the total arrival *time* at speed `1/2`
+is the finite value **`2`** (the travel times form their own convergent geometric
+series). The attacker arrives: Infinity is **Fragile**.
 
-### Lens 2 -- Lebesgue measure -> Fragile
+### Lens 2 — Lebesgue measure → Fragile
+
 The subdivision points `Z = { z_n = 1 - 1/2^n } = {1/2, 3/4, 7/8, ...}` form a
 countably infinite set. Cover `z_n` by an interval of width `eps/2^n`; the total
-length telescopes:
+length telescopes (exactly, in `Fraction`):
 
 ```
-sum_{n>=1} eps/2^n = eps * sum_{n>=1} 1/2^n = eps * 1 = eps   (exact, Fraction)
+sum_{n>=1} eps/2^n = eps * sum_{n>=1} 1/2^n = eps * 1 = eps
 ```
 
 So the full cover has length **exactly `eps`** (`outer_measure_upper_bound(eps)
-== eps`), and the finite-term partials rise toward it with tail `eps/2^terms -> 0`.
-Since `eps > 0` is arbitrary, the infimum -- hence `m(Z)` -- is **`0`**. The
-barrier is a null set of total length zero: **Fragile**.
+== eps`), with finite-term partials rising toward it with tail `eps/2^terms → 0`.
+Since `eps > 0` is arbitrary, the infimum — hence the outer measure `m(Z)` — is
+**`0`**. The barrier is a null set of total length zero: **Fragile**.
 
-### Lens 3 -- Riemannian conformal geometry -> Formidable
-Space near Gojo carries a conformal metric `ds = Omega(x) dx`, `g11 = Omega(x)^2`,
-with the RIKEN Gaussian (RBF) kernel:
+### Lens 3 — Riemannian conformal geometry → Formidable
+
+Space near Gojo carries a conformal metric `ds = Ω(x) dx`, `g11 = Ω(x)^2`, built
+from the RIKEN Gaussian (RBF) kernel:
 
 ```
 K(x, y) = exp(-|x - y|^2 / sigma^2)
-Omega(x) = 1 + lambda * K(x, x_gojo) / (x_gojo - x),   x_gojo = 1
+Ω(x)    = 1 + lambda * K(x, x_gojo) / (x_gojo - x),   x_gojo = 1
 ```
 
 `lambda` is **derived, not hardcoded**: `calibrate()` fits it by bisection
-(`commons.core.bisection`) so `g(0.8) = 4.1`, giving `sigma = 0.35`,
-`lambda ~= 0.284118`. The far target is then verified: `g(0.1) ~= 1.0008 ~ 1.0`
-with felt step `ds ~= 0.10`; near the pole `g(0.8) = 4.1000` with `ds ~= 0.20`.
+(`commons.core.bisection`) to hit the essay's Figure-8 target `g(0.8) = 4.1`,
+which gives `sigma = 0.35` and `lambda ≈ 0.284118`. The far target then verifies:
+`g(0.1) ≈ 1.0008 ≈ 1.0` (felt step `ds ≈ 0.10`); near the pole `g(0.8) = 4.1000`
+(felt step `ds ≈ 0.20`).
 
 The felt geodesic to the barrier is an **improper integral that diverges**:
-`geodesic_to_barrier(x0)` returns the literal `math.inf` (never a large finite
-approximation), because the integrand `~ lambda/(x_gojo - x)` has antiderivative
-`-lambda*ln(x_gojo - x) -> +inf`. Each decade of approach adds
-`lambda*ln(10) ~= 0.6542`. A `naive_geodesic_to_barrier` finite midpoint sum is
-kept ONLY as a labelled "float fails here" demo. Every strike crosses infinite
-felt distance: **Formidable**.
+`geodesic_to_barrier(x0)` returns the literal `math.inf` — never a large finite
+approximation — because the integrand `~ lambda/(x_gojo - x)` has antiderivative
+`-lambda·ln(x_gojo - x) → +∞`. Each decade of approach adds
+`lambda·ln(10) ≈ 0.6542`. (A `naive_geodesic_to_barrier` finite midpoint sum is
+retained only as a labelled *"float fails here"* demonstration.) Every strike must
+cross infinite felt distance: **Formidable**.
 
-### Lens 3 (2-D) -- Riemannian manifold geodesics -> Formidable (enhancement)
-An **enhancement beyond the essay's 1-D treatment** (`core/riemannian_manifold.py`):
-a genuine two-dimensional, conformally flat Riemannian manifold around Gojo, with
-a real geodesic solver. Gojo sits at the **origin** of `R^2`; for the radial
-distance `d = |x - g|` the conformal factor is the 2-D radial version of the same
-RIKEN kernel, `sigma` and `lambda`:
+![Lens 3: the conformal factor Ω(x) blowing up toward Gojo at x = 1](../../artifacts/gojo_metric_blowup.png)
+
+*The metric factor `Ω(x)` is flat (`g ≈ 1`) far from Gojo and blows up as
+`x → x_gojo = 1`. A physical step `dx = 0.1` feels like `ds ≈ 0.1` far away but is
+stretched without bound near the barrier.*
+
+#### Lens 3 (2-D) — Riemannian manifold geodesics (enhancement)
+
+Beyond the essay's 1-D treatment, `core/riemannian_manifold.py` builds a genuine
+two-dimensional, conformally-flat Riemannian manifold around Gojo (at the origin
+of `R^2`), with a real geodesic solver. For radial distance `d = |x - g|`:
 
 ```
-Omega(x) = 1 + lambda * exp(-d^2/sigma^2) / d
-g_ij(x)  = Omega(x)^2 * delta_ij          (2x2, symmetric, positive-definite)
+Ω(x)    = 1 + lambda * exp(-d^2/sigma^2) / d
+g_ij(x) = Ω(x)^2 * delta_ij          (2x2, symmetric, positive-definite)
 ```
 
-With `phi = ln(Omega)`, a conformal metric `g_ij = e^{2 phi} delta_ij` has the
-closed-form Christoffel symbols `Gamma^k_ij = d^k_i d_j phi + d^k_j d_i phi -
-delta_ij d^k phi`, so the geodesic equation collapses to
+With `phi = ln(Ω)`, a conformal metric `g_ij = e^{2φ} δ_ij` has closed-form
+Christoffel symbols `Γ^k_ij = δ^k_i ∂_j φ + δ^k_j ∂_i φ − δ_ij ∂^k φ`, so the
+geodesic equation collapses to
 
 ```
 x'' = |x'|^2 grad(phi) - 2 (grad(phi) . x') x'
 ```
 
-integrated by fixed-step **RK4** (`integrate_geodesic`). `grad(phi)` is analytic.
-The results, all machine-checked in `tests/test_riemannian_manifold.py`:
+integrated by fixed-step **RK4** (`integrate_geodesic`); `grad(phi)` is analytic.
+Machine-checked in `tests/test_riemannian_manifold.py`:
 
-- **Christoffel cross-check.** `christoffel_conformal` (closed form) matches
-  `christoffel_general` (the standard `1/2 g^{kl}(d_i g_jl + d_j g_il - d_l g_ij)`
-  from finite differences of the metric) to **max diff ~ 2.6e-10** across sampled
-  points -- the closed form is correct.
-- **Affine invariant.** The metric energy `Omega(x)^2 |v|^2` is conserved along an
-  integrated geodesic to a **relative drift ~ 2.7e-15** (a strong ODE check).
-- **Flat-region sanity.** Far from Gojo (`Omega ~ 1`) a geodesic is straight:
-  turning angle `< 1e-6`, direction preserved.
-- **Parity with the 1-D lens.** A purely radial approach reproduces the existing
-  1-D `geodesic_length` **exactly** (felt length `0.918122` vs `0.918122`,
-  `|diff| ~ 3.6e-13`) and stays radial with **zero tangential drift** -- because
-  the 1-D `gap = x_g - x` equals the radial distance, the two models coincide on
-  rays.
-- **Divergence (FORMIDABLE).** The felt length to reach within `delta` of Gojo is
-  monotone and unbounded (`felt_length_to_reach`), climbing by `lambda*ln 10 ~
-  0.6542` per decade:
+| Property | Result |
+|----------|--------|
+| Christoffel closed-form vs finite-difference `general` form | max diff `~2.6e-10` |
+| Affine invariant `Ω(x)^2 |v|^2` conserved along a geodesic | relative drift `~2.7e-15` |
+| Flat-region geodesic stays straight (far from Gojo) | turning angle `< 1e-6` |
+| Radial approach reproduces the 1-D `geodesic_length` exactly | `0.918122` vs `0.918122`, `|diff| ~3.6e-13` |
+| Grazing ray (impact parameter `0.5`) bends toward Gojo | `-0.8176 rad` (final `v_y < 0`) |
 
-  ```
-   delta    felt length
-  1e-01      1.085273
-  1e-02      1.818231
-  1e-03      2.481322
-  1e-04      3.136427
-  1e-06      4.444938
-  ```
-
-- **Deflection (light-bending analog).** A grazing ray (impact parameter `0.5`)
-  **bends toward Gojo** by `-0.8176 rad` (final `v_y < 0`) -- higher `Omega` near
-  the barrier acts like a denser optical medium.
-
-An optional numpy **batch integrator** (`accel/manifold_backend.py`) advances many
-geodesics at once and is parity-tested against the pure solver; `adapters/viz.py`
-renders the geodesic bundle and the length-divergence curve as PNGs.
-
-### Lens 3 (3-D) -- n-D geodesics + the planarity symmetry -> Formidable
-
-The conformal geodesic mathematics is **dimension-agnostic**: for
-`g_ij = Omega(x)^2 delta_ij` with `phi = ln Omega`, the Christoffel symbols and
-the geodesic right-hand side are the SAME closed forms in every dimension:
+Felt length to reach within `delta` of Gojo is monotone and unbounded, climbing by
+`lambda·ln 10 ≈ 0.6542` per decade:
 
 ```
-Gamma^k_ij = d^k_i d_j phi + d^k_j d_i phi - delta_ij d^k phi
-x'' = |x'|^2 grad(phi) - 2 (grad(phi) . x') x'
+ delta    felt length
+1e-01      1.085273
+1e-02      1.818231
+1e-03      2.481322
+1e-04      3.136427
+1e-06      4.444938
 ```
 
+#### Lens 3 (3-D) — n-D geodesics + the planarity symmetry
+
+The conformal geodesic mathematics is **dimension-agnostic**: the Christoffel and
+geodesic closed forms above are identical in every dimension.
 `core/riemannian_manifold_nd.py` (`ConformalMetricND`) generalises the solver to
-operate on `n`-vectors (plain tuples of length `n`), so the **same code serves
-1-D, 2-D and 3-D** — the dimension is inferred from `len(gojo)` (default: the
-origin of `R^3`). There is exactly **one** copy of the geodesic RHS
-(`conformal_acceleration`): the legacy 2-D `ConformalMetric.geodesic_rhs`
-delegates to it, so 2-D behaviour is unchanged and backward compatible. Gojo
-re-uses the SAME `sigma ~ 0.35`, `lambda ~ 0.284` and `Omega(x) = 1 +
-lambda*exp(-d^2/sigma^2)/d` as the 1-D/2-D lenses. All machine-checked in
+`n`-vectors, so **one code path serves 1-D, 2-D and 3-D** (dimension inferred from
+`len(gojo)`, default: origin of `R^3`). There is exactly **one** copy of the
+geodesic right-hand side (`conformal_acceleration`); the legacy 2-D
+`ConformalMetric.geodesic_rhs` delegates to it. Machine-checked in
 `tests/test_riemannian_manifold_3d.py`:
 
-- **Christoffel cross-check (3-D).** `christoffel_conformal` matches
-  `christoffel_general` (finite differences of `g_ij`) to **max diff ~ 1.4e-10**.
-- **Affine invariant (3-D).** `Omega(x)^2 |v|^2` is conserved along a 3-D geodesic
-  to a **relative drift ~ 5.3e-15**.
-- **Radial parity.** A purely radial 3-D approach reproduces the 1-D lens felt
-  length **exactly** (`0.918122` vs `0.918122`, `|diff| ~ 3.6e-13`) and stays on
-  the axis with zero off-axis drift.
-- **Planarity (the key 3-D symmetry).** A 3-D geodesic stays inside the 2-plane
-  spanned by its initial position, initial velocity and Gojo — because both
-  `grad(phi)` (radial) and `x'` lie in that plane, so it is invariant. The
-  out-of-plane component (position dotted with the plane's unit normal) stays
-  **< 1.1e-14** along the whole trajectory (`orbital_plane_normal` /
-  `max_out_of_plane_drift`).
-- **Deflection (3-D light-bending).** A grazing 3-D ray bends TOWARD Gojo by a
-  turning angle of **~ 0.128 rad**, its final velocity tilting inward.
-- **Divergence.** The radial felt length to within `delta` of Gojo is monotone and
-  unbounded in 3-D too (same `lambda*ln 10` per-decade tail). Formidable.
+- **Christoffel cross-check (3-D):** closed-form vs finite-difference, max diff `~1.4e-10`.
+- **Affine invariant (3-D):** `Ω(x)^2 |v|^2` conserved to relative drift `~5.3e-15`.
+- **Radial parity:** a purely radial 3-D approach reproduces the 1-D felt length
+  exactly (`0.918122`, `|diff| ~3.6e-13`).
+- **Planarity (the key 3-D symmetry):** a 3-D geodesic stays inside the 2-plane
+  spanned by its initial position, initial velocity and Gojo, because both
+  `grad(φ)` (radial) and `x'` lie in that plane. Out-of-plane drift stays
+  `< 1.1e-14` along the whole trajectory.
+- **Deflection (3-D light-bending):** a grazing 3-D ray bends toward Gojo by a
+  turning angle `~0.128 rad`.
+- **Divergence:** radial felt length to within `delta` is monotone and unbounded
+  (same `lambda·ln 10` per-decade tail). Formidable.
 
-The n-D numpy **batch integrator** `accel.manifold_backend.integrate_geodesics_batch_nd`
-advances many 3-D (or any-`D`) geodesics at once and is parity-tested against the
-pure n-D solver (`tests/test_manifold_accel_parity_3d.py`).
-`adapters/viz.save_geodesic_3d_png` renders a bundle of 3-D geodesics bending
-around Gojo (`mpl_toolkits.mplot3d`) to `artifacts/gojo_geodesic_3d.png`.
+![Lens 3 (3-D): a bundle of conformal geodesics bending around Gojo in R^3](../../artifacts/gojo_geodesic_3d.png)
 
-### Lens 4 -- Topology / World-Cutting Slash -> Falls
-The intact metric factor is continuous across the domain (oscillation -> 0). The
-**severed** factor is undefined at the cut `c = 0.5`, so `continuity_at` reports
-`continuous = False` -- the continuity check FAILS after the cut. The geodesic
-integral across the cut is therefore `None` (`severed_geodesic_length` --
-**undefined**, distinct from both `math.inf` and any finite length). And the
-domain `[x0, x1] \ {c}` splits into **exactly 2 connected components**
-`[(0.1, 0.5), (0.5, 0.9)]`. The cut crosses no distance; it tears continuity.
-Infinity **Falls**.
+*A bundle of geodesics bending around Gojo at the origin of `R^3`. Higher `Ω` near
+the barrier acts like a denser optical medium: rays curve inward.*
 
-## Running
+### Lens 4 — Topology / World-Cutting Slash → Falls
 
-Everything runs **offline** -- no network, no `pip install`. Imports resolve via
-the repo's `[tool.pytest.ini_options] pythonpath` (pytest) or an explicit
-`PYTHONPATH` (scripts). Requires Python 3.11+ and the standard library only.
+The intact metric factor `Ω` is continuous across the domain (oscillation → 0).
+The **severed** factor is undefined at the cut `c = 0.5`, so `continuity_at`
+reports `continuous = False` — the continuity check FAILS after the cut. The
+geodesic integral across the cut is therefore `None` (`severed_geodesic_length` —
+**undefined**, a distinct third semantics from both `math.inf` and any finite
+length). And the domain `[x0, x1] \ {c}` splits into **exactly 2 connected
+components** `[(0.1, 0.5), (0.5, 0.9)]`. The cut crosses no distance; it tears
+continuity. Infinity **Falls**.
 
-Run the full package test suite from the repo root
-(`/Users/arhansubasi/mad-man-projects/infinity-lab`):
+---
 
-```bash
-python -m pytest packages/gojo_infinity
+## How it works
+
+### Module map
+
+```
+src/gojo_infinity/
+  core/            # PURE math — stdlib + commons.core ONLY (never adapters)
+    zeno.py                    # Lens 1: partial sums, residuals, arrival time
+    measure.py                 # Lens 2: covering length, m(Z) = 0
+    riemannian.py              # Lens 3 (1-D): conformal metric, divergent geodesic
+    riemannian_manifold.py     # Lens 3 (2-D): real RK4 manifold geodesic solver
+    riemannian_manifold_nd.py  # Lens 3 (n-D): dimension-agnostic solver (1/2/3-D)
+    topology.py                # Lens 4: continuity, severed metric, connectivity
+    verdicts.py                # frozen Verdict dataclass + conclusion table
+  accel/           # OPTIONAL numpy fast paths (lazy try_import; outside core)
+    numpy_backend.py           # vectorised omega/metric/geodesic/cover/zeno mirrors
+    manifold_backend.py        # vectorised batch geodesic integrator (2-D + n-D)
+  adapters/        # may import core; core NEVER imports these
+    viz.py                     # ASCII charts + DEFERRED matplotlib PNG (2-D & 3-D)
+    animate.py                 # DEFERRED GIF/MP4 of the approach (matplotlib+Pillow/ffmpeg)
+    animate_3d.py              # DEFERRED rotating 3-D geodesic animation
+    animate_lenses.py          # DEFERRED four-lens 2x2 composite explainer
+    cli.py                     # argparse: zeno/measure/riemannian/manifold/topology/all/animate
+  demo.py          # end-to-end narrated report (headline + lenses + gallery)
+tests/             # pytest suite (pure-core tests + optional accel/PNG/GIF tests)
 ```
 
-Run the narrated demo end-to-end:
+### Key algorithms
+
+- **Exact arithmetic (Lenses 1–2):** `fractions.Fraction` throughout, so headline
+  numbers carry no floating-point rounding and the strict-positivity certificate
+  survives past IEEE underflow.
+- **Calibration by bisection (Lens 3):** `lambda` is solved from the essay's
+  `g(0.8) = 4.1` target via `commons.core.bisection` — nothing is hardcoded.
+- **Honest infinities:** genuine divergence returns `math.inf`; a genuinely
+  undefined quantity returns `None`; neither is faked with a large finite number.
+- **RK4 geodesics:** fixed-step integration of the closed-form conformal geodesic
+  RHS, with analytic `grad(φ)`, validated by Christoffel cross-checks and
+  affine-energy conservation.
+
+### The core-purity rule (hard invariant)
+
+Modules under `core/` import **only the standard library plus `commons.core`** —
+never an adapter (`cli`/`viz`/`io`), and never `numpy`/`matplotlib` at module top
+level. Adapters may import core; core never imports adapters. This is enforced by
+`tests/test_gojo_core_purity.py`, not by convention. `numpy`/`matplotlib` are
+reached only lazily, inside adapter/accel functions, via
+`commons.core.optional.try_import`; when absent, the guarded function raises a
+clear `OptionalDependencyError` instead of failing to import.
+
+---
+
+## Install & run
+
+Everything in the core runs **offline** — no network, no `pip install`. Requires
+Python 3.11+ and the standard library only. Run from the repo root
+(`infinity-lab/`).
 
 ```bash
+# Full package test suite (offline core)
+python3 -m pytest packages/gojo_infinity
+
+# Narrated demo end-to-end
 PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  python -m gojo_infinity.demo
+  python3 -m gojo_infinity.demo
+
+# Individual lenses via the CLI (zeno | measure | riemannian | manifold | topology | all)
+PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
+  python3 -m gojo_infinity.adapters.cli all --ascii
 ```
 
-Run individual lenses via the CLI adapter (`zeno`, `measure`, `riemannian`,
-`topology`, `all`; add `--ascii` for charts):
-
-```bash
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  python -m gojo_infinity.adapters.cli all --ascii
-```
-
-## Optional acceleration & visualization
-
-The core is stdlib-only. Two **optional** capabilities live *outside* `core/` and
-reach `numpy` / `matplotlib` lazily via `commons.core.optional.try_import` — never
-a top-level import, so `core/` purity is untouched:
-
-- **`gojo_infinity.accel.numpy_backend`** — vectorised numpy fast paths that
-  mirror the exact stdlib core (`omega_values`, `metric_g11_values`,
-  `felt_ds_values`, `geodesic_partial_length` / `_midpoint`, `cover_interval_lengths`,
-  `zeno_partial_sums`, `zeno_residuals`). Parity is asserted against the core:
-  the dyadic cover/Zeno mirrors are **bit-identical**, and the exp/quadrature
-  paths agree to **0–2 ULP**.
-- **`gojo_infinity.accel.manifold_backend`** — a vectorised **batch 2-D geodesic
-  integrator** (`integrate_geodesics_batch`) that advances many initial
-  conditions at once with the same RK4 scheme; parity-tested against the pure
-  `ConformalMetric.integrate_geodesic` to a few ULP.
-- **matplotlib PNG exports** in `adapters/viz.py` — `save_metric_blowup_png`
-  (Lens 3), `save_series_convergence_png` (Lens 1), `save_covering_png` (Lens 2),
-  plus the 2-D `save_geodesic_bundle_png` (geodesics bending around Gojo),
-  `save_length_divergence_png` (felt length vs `delta`), and the 3-D
-  `save_geodesic_3d_png` (a bundle of geodesics bending around Gojo in `R^3`, via
-  `mpl_toolkits.mplot3d`), all headless (`Agg`). Without matplotlib each raises
-  `OptionalDependencyError`.
-- **animated GIF exports** in `adapters/animate.py` (matplotlib
-  `FuncAnimation` + `PillowWriter`, so they need **matplotlib AND Pillow**) —
-  `save_geodesic_approach_gif` (a geodesic travelling and bending around Gojo,
-  visibly slowing as its on-frame felt length climbs) and
-  `save_never_arrives_gif` (an attacker's Zeno steps `x_n = 1 - (1/2)^n`
-  asymptotically approaching Gojo at `x = 1`, residual `(1/2)^n > 0` forever while
-  the felt length diverges). Absent either dependency each raises
-  `OptionalDependencyError`.
-- **rotating 3-D GIF** in `adapters/animate_3d.py` —
-  `save_geodesic_3d_rotating_gif` renders a few conformal geodesics bending around
-  Gojo in `R^3` (via `ConformalMetricND`, `mpl_toolkits.mplot3d`) while the
-  **camera orbits** the scene: the azimuth advances a few degrees each frame and
-  the elevation sweeps gently (`ax.view_init` per frame), so the viewer flies
-  around the geodesics as they progress. Needs **matplotlib AND Pillow**; absent
-  either it raises `OptionalDependencyError`.
-- **four-lens composite explainer** in `adapters/animate_lenses.py` —
-  `save_four_lenses_gif` / `save_four_lenses_mp4` render ONE animation that tells
-  the essay's whole arc: all **four lenses** animate together on a 2x2 grid of
-  subplots over a shared frame timeline (built by one
-  `_build_four_lens_animation`), under a suptitle, and end on a **hold frame**
-  showing the verdict table `Fragile / Fragile / Formidable / Falls`. Each panel
-  draws its lens from the REAL pure core:
-  - **Panel 1 — Geometric series (Zeno) → FRAGILE:** the partial sums
-    `S_n = 1 - (1/2)^n` (from `core.partial_sum`) fill toward the dashed limit at
-    `1` as the frame index advances `n`.
-  - **Panel 2 — Lebesgue measure → FRAGILE:** the covering intervals `I_n` around
-    the points `z_n = 1 - 1/2^n` (`core.subdivision_point`,
-    `core.measure.cover_interval_length`) shrink as the budget `eps` decreases
-    across frames, total-length label `= eps → 0`, illustrating `m(Z) = 0`.
-  - **Panel 3 — Riemannian geometry → FORMIDABLE:** the conformal factor
-    `Omega(x)` (`core.conformal_factor`) with a marker approaching Gojo (`x → 1`)
-    frame by frame and a readout of the felt geodesic length
-    (`core.geodesic_length`) climbing toward `+∞`.
-  - **Panel 4 — Topology → FALLS:** `Omega(x)` shown continuous, then across
-    frames a cut appears at `c` that severs continuity, splitting the domain into
-    two connected components (`core.component_count` 1 → 2, "continuity
-    destroyed").
-
-  The numeric sequences are assembled by the pure `four_lens_frame_data`
-  (stdlib + `core` only), so the panels are testable without any scientific
-  dependency. Needs **matplotlib AND Pillow** (GIF) / **matplotlib AND ffmpeg**
-  (MP4); absent a backend each raises `OptionalDependencyError`.
-- **MP4 exports** via `matplotlib.animation.FFMpegWriter`, which shells out to an
-  **ffmpeg** binary on `PATH` — `save_geodesic_approach_mp4` (the 2-D approach
-  scene) and `save_geodesic_3d_rotating_mp4` (the rotating 3-D scene). They reuse
-  the exact same `FuncAnimation` setups as the GIF savers (only the writer and
-  extension differ), run at `fps = 20` with a reasonable bitrate, and detect
-  ffmpeg at call time (`animate.ffmpeg_is_available()`, which probes
-  `shutil.which("ffmpeg")` **and** matplotlib's registered writer). Absent
-  matplotlib or ffmpeg each raises `OptionalDependencyError` (never a hard
-  import-time requirement).
-
-Both are absent from the stdlib-only interpreter's requirements: their tests
-`pytest.importorskip("numpy")` / `importorskip("matplotlib")` and simply **skip**.
-
-### Create the venv and run the optional tests
-
-```bash
-# From the repo root
-python3 -m venv .venv
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install numpy matplotlib pytest
-
-# Optional accel + PNG tests RUN on the venv interpreter
-.venv/bin/python -m pytest packages/gojo_infinity -q
-
-# On the stdlib-only system interpreter they SKIP (core stays green)
-python3 -m pytest packages/gojo_infinity -q
-```
-
-### Generate the PNGs
-
-```bash
-# Via the CLI adapter (writes one PNG per lens into OUTDIR)
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -m gojo_infinity.adapters.cli all --png artifacts
-
-# Or directly (repo-root sample deliverables)
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -c '
-from gojo_infinity.adapters.viz import save_metric_blowup_png, save_series_convergence_png
-save_metric_blowup_png("artifacts/gojo_metric_blowup.png")
-save_series_convergence_png("artifacts/gojo_series_convergence.png")'
-```
-
-The 2-D manifold charts are written by the `manifold` subcommand:
-
-```bash
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -m gojo_infinity.adapters.cli manifold --png artifacts
-```
-
-### Generate the 3-D PNG, the animated GIFs and the MP4s (via the venv)
-
-The GIF animations need **matplotlib AND Pillow** (both in the `viz` extra plus
-`pillow`); the MP4 exports additionally need an **ffmpeg** binary on `PATH`. All
-render headless on the `Agg` backend. The `animate` subcommand writes the two
-baseline GIFs into `OUTDIR` by default, `--rotate` adds the rotating 3-D GIF,
-`--lenses` adds the four-lens composite explainer GIF, and `--mp4` adds the
-approach, rotating-3-D and (with `--lenses`) four-lens MP4s:
-
-```bash
-# The two baseline approach GIFs into artifacts/
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -m gojo_infinity.adapters.cli animate artifacts
-
-# Also the rotating 3-D GIF, the four-lens explainer and every MP4
-# (MP4s need ffmpeg on PATH)
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -m gojo_infinity.adapters.cli animate artifacts --rotate --lenses --mp4
-
-# Just the four-lens composite explainer (GIF + MP4), directly
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -c '
-from gojo_infinity.adapters.animate_lenses import (
-    save_four_lenses_gif, save_four_lenses_mp4,
-)
-save_four_lenses_gif("artifacts/gojo_four_lenses.gif", frames=44, hold=8, fps=8)
-save_four_lenses_mp4("artifacts/gojo_four_lenses.mp4", frames=44, hold=8, fps=8)'
-
-# The 3-D bundle PNG and the animations directly (repo-root deliverables)
-PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
-  .venv/bin/python -c '
-from gojo_infinity.adapters.viz import save_geodesic_3d_png
-from gojo_infinity.adapters.animate import (
-    save_geodesic_approach_gif, save_never_arrives_gif, save_geodesic_approach_mp4,
-)
-from gojo_infinity.adapters.animate_3d import (
-    save_geodesic_3d_rotating_gif, save_geodesic_3d_rotating_mp4,
-)
-save_geodesic_3d_png("artifacts/gojo_geodesic_3d.png")
-save_geodesic_approach_gif("artifacts/gojo_geodesic_approach.gif", frames=90, fps=20)
-save_never_arrives_gif("artifacts/gojo_never_arrives.gif", max_n=26, fps=6)
-save_geodesic_3d_rotating_gif("artifacts/gojo_geodesic_3d_rotating.gif", frames=72, fps=20)
-save_geodesic_approach_mp4("artifacts/gojo_geodesic_approach.mp4", frames=90, fps=20)
-save_geodesic_3d_rotating_mp4("artifacts/gojo_geodesic_3d_rotating.mp4", frames=72, fps=20)'
-```
-
-Sample outputs are committed at the repo root under
-[`artifacts/`](../../artifacts/) (`gojo_metric_blowup.png`,
-`gojo_series_convergence.png`, `gojo_geodesic_bundle.png`,
-`gojo_length_divergence.png`, `gojo_geodesic_3d.png`,
-`gojo_geodesic_approach.gif`, `gojo_never_arrives.gif`,
-`gojo_geodesic_3d_rotating.gif`, `gojo_geodesic_approach.mp4`,
-`gojo_geodesic_3d_rotating.mp4`, `gojo_four_lenses.gif`,
-`gojo_four_lenses.mp4`).
-
-## Sample output (verbatim headline + conclusion)
+### Sample output (verbatim headline + conclusion)
 
 ```
 MATHEMATICS BEHIND JUJUTSU KAISEN: GOJO SATORU'S INFINITY
@@ -425,10 +297,10 @@ Four lenses, after Achmad Roykhan Sabiq (Oxford Maths Essay 2026).
 Key evidence emitted at runtime: `S_8 = 255/256 = 0.99609375`; geometric sum
 `= 1` exactly; arrival time `= 2`; `m(Z) = 0` with full cover length `= eps`;
 calibrated `lambda = 0.284118`, `g(0.8) = 4.1000`; `geodesic_to_barrier = inf`;
-severed felt length `= None`; domain `-> 2 components`.
+severed felt length `= None`; domain `→ 2 components`.
 
 ```
-CONCLUSION -- four lenses, four verdicts
+CONCLUSION — four lenses, four verdicts
 Lens                     Verdict     Reason
 -------------------------------------------
 Geometric series (Zeno)  Fragile     attacker arrives; crossed series and arrival-time series both -> finite
@@ -442,16 +314,145 @@ of real analysis; these four models illuminate the idea of Infinity,
 they do not govern it.
 ```
 
-## Design guarantees
+### Optional extras (numpy acceleration & matplotlib visualization)
 
-- **Exactness where it matters**: Lens 1 and 2 use `fractions.Fraction`; no
-  floating-point rounding in the headline numbers.
-- **Honest infinities**: divergence returns `math.inf`; an undefined quantity
-  returns `None`. Neither is faked with a large finite number.
-- **Derived, not hardcoded**: the Riemannian `lambda` comes from bisection on the
-  essay's Figure-8 targets.
-- **Immutability**: verdicts and calibration results are `frozen` dataclasses; no
-  shared mutable state.
-- **Optional deps deferred**: numpy/matplotlib are never imported at module load;
-  the PNG exporter guards on `try_import` and raises `OptionalDependencyError`
-  when matplotlib is absent.
+The core is stdlib-only. Optional capabilities live *outside* `core/` and reach
+`numpy` / `matplotlib` / `ffmpeg` lazily — never a top-level import:
+
+- **`gojo_infinity.accel.numpy_backend`** — vectorised numpy fast paths mirroring
+  the stdlib core (`omega_values`, `metric_g11_values`, `felt_ds_values`,
+  `geodesic_partial_length`/`_midpoint`, `cover_interval_lengths`,
+  `zeno_partial_sums`, `zeno_residuals`). The dyadic cover/Zeno mirrors are
+  **bit-identical**; the exp/quadrature paths agree to **0–2 ULP**.
+- **`gojo_infinity.accel.manifold_backend`** — a vectorised **batch geodesic
+  integrator** (`integrate_geodesics_batch`, `integrate_geodesics_batch_nd`) with
+  the same RK4 scheme, parity-tested against the pure solver to a few ULP.
+- **matplotlib PNG exports** in `adapters/viz.py` — `save_metric_blowup_png`
+  (Lens 3), `save_series_convergence_png` (Lens 1), `save_covering_png` (Lens 2),
+  `save_geodesic_bundle_png`, `save_length_divergence_png`, and the 3-D
+  `save_geodesic_3d_png` (`mpl_toolkits.mplot3d`). All headless (`Agg`).
+- **animations** in `adapters/animate*.py` — approach GIF/MP4, "never arrives"
+  GIF, rotating 3-D GIF/MP4, and the four-lens composite explainer GIF/MP4. GIFs
+  need matplotlib **and** Pillow; MP4s additionally need an **ffmpeg** binary on
+  `PATH` (probed at call time).
+
+Create the venv and run the optional tests:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install numpy matplotlib pytest
+
+# Optional accel + PNG + animation tests RUN on the venv interpreter
+.venv/bin/python -m pytest packages/gojo_infinity -q
+
+# On the stdlib-only system interpreter they SKIP (core stays green)
+python3 -m pytest packages/gojo_infinity -q
+```
+
+Generate the figures and animations:
+
+```bash
+# One PNG per lens into OUTDIR
+PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
+  .venv/bin/python -m gojo_infinity.adapters.cli all --png artifacts
+
+# 2-D manifold charts (geodesic bundle + length divergence)
+PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
+  .venv/bin/python -m gojo_infinity.adapters.cli manifold --png artifacts
+
+# Baseline approach GIFs; --rotate adds the rotating 3-D GIF, --lenses the
+# four-lens explainer, --mp4 the MP4s (MP4 needs ffmpeg on PATH)
+PYTHONPATH=packages/commons/src:packages/gojo_infinity/src \
+  .venv/bin/python -m gojo_infinity.adapters.cli animate artifacts --rotate --lenses --mp4
+```
+
+---
+
+## Visual artifacts
+
+All samples are committed at the repo root under
+[`artifacts/`](../../artifacts/), rendered via the `viz`/`animate` adapters (they
+are deliverables, not test output).
+
+![The four-lens composite explainer: all four verdicts on one 2x2 timeline](../../artifacts/gojo_four_lenses.gif)
+
+*The four-lens composite explainer (`gojo_four_lenses.gif`): all four lenses
+animate together on a 2×2 grid over a shared timeline, ending on a hold frame with
+the verdict table `Fragile / Fragile / Formidable / Falls`. Each panel draws from
+the real pure core.*
+
+| Artifact | Shows |
+|----------|-------|
+| `gojo_metric_blowup.png` | Lens 3: `Ω(x)` metric blow-up toward `x_gojo = 1` |
+| `gojo_series_convergence.png` | Lens 1: Zeno partial sums `S_n → 1` with residual |
+| `gojo_cover_convergence.png` | Lens 2: covering intervals telescoping to length `eps` |
+| `gojo_geodesic_bundle.png` | Lens 3 (2-D): geodesics bending around Gojo |
+| `gojo_length_divergence.png` | Lens 3 (2-D): felt length vs `delta` (diverges) |
+| `gojo_geodesic_3d.png` | Lens 3 (3-D): a bundle of geodesics bending in `R^3` |
+| `gojo_geodesic_approach.gif` / `.mp4` | A geodesic travelling and bending around Gojo, slowing as its felt length climbs |
+| `gojo_never_arrives.gif` | Zeno steps `x_n = 1 − (1/2)^n` approaching Gojo forever, residual `> 0` |
+| `gojo_geodesic_3d_rotating.gif` / `.mp4` | Geodesics in `R^3` while the camera orbits (azimuth + elevation sweep) |
+| `gojo_four_lenses.gif` / `.mp4` | Four-lens composite explainer ending on the verdict table |
+
+---
+
+## Testing
+
+```bash
+# Offline core (stdlib-only interpreter): optional numpy/matplotlib tests SKIP
+python3 -m pytest packages/gojo_infinity -q
+# → 155 passed, 8 skipped
+
+# Full suite (venv with numpy + matplotlib + ffmpeg): optional tests RUN
+.venv/bin/python -m pytest packages/gojo_infinity -q
+# → 217 passed
+```
+
+What the tests pin (numeric targets):
+
+- Lens 1: `S_8 = 255/256`; `a/(1-r) = 1` exactly; arrival time `= 2`;
+  `(1/2)^n > 0` past `n = 1075`.
+- Lens 2: full cover length `= eps` exactly (`Fraction`); `m(Z) = 0`.
+- Lens 3: calibrated `lambda ≈ 0.284118`, `g(0.8) = 4.1000`;
+  `geodesic_to_barrier = math.inf`; Christoffel cross-checks (`~1e-10`),
+  affine-energy conservation (`~1e-15`), radial parity `0.918122`, planarity drift
+  `< 1.1e-14`.
+- Lens 4: `severed_geodesic_length = None`; domain → exactly 2 components.
+- Core purity (`test_gojo_core_purity.py`) and accel/manifold parity.
+
+---
+
+## Limitations & honest caveats
+
+- **This is a fictional universe.** "Cursed energy" and authorial intent do not
+  obey the axioms of real analysis. These four models *illuminate* the idea of
+  Infinity; they do not govern it.
+- **The four verdicts genuinely disagree**, and that is intended — each is correct
+  *within its own mathematics*. There is no single "true" answer.
+- **The Riemannian conformal factor is a modelling choice**, calibrated to two
+  figure points from the essay, not a derivation from physics. The RBF kernel
+  comes from machine learning (image/music similarity), which the essay flags as a
+  deliberate irony.
+- The 2-D/3-D manifold geodesics are a faithful mathematical *enhancement* beyond
+  the essay's 1-D treatment, not part of the original text.
+
+---
+
+## References / attribution
+
+- **Source essay:** *"Mathematics Behind Jujutsu Kaisen: Gojo Satoru's Infinity"*
+  by **Achmad Roykhan Sabiq**, Oxford University Mathematics Essay Competition
+  2026 (March 2026). PDF (hosted on Tom Rocks Maths):
+  <https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf>
+  A faithful, section-by-section companion (summary + the reproduced formulas +
+  a section→code mapping, **not** a reproduction of the essay's prose) lives at
+  [`docs/essay-source.md`](../../docs/essay-source.md).
+- The Riemannian lens follows the **2021 RIKEN × Gege Akutami "Abyss of Math"**
+  collaboration (Jump GIGA, Summer 2021).
+- Standard references cited by the essay: Bartle, *The Elements of Integration and
+  Lebesgue Measure*; Bartle & Sherbert, *Introduction to Real Analysis*; Lee,
+  *Introduction to Riemannian Manifolds*; Munkres, *Topology*.
+- *Jujutsu Kaisen* and its characters are © Gege Akutami / Shueisha. This package
+  cites and summarises only; it reproduces no copyrighted essay prose or anime
+  imagery — banners and figures here are our own renders.

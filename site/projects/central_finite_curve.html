@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/central_finite_curve.html" />
+  <title>central_finite_curve — awesome-mad-projects</title>
+  <meta name="description"
+        content="An infinite-but-bounded region of the multiverse carved out as a src-layout geometry package: N=20,000 points in R^8, a Rickness ridge, and a Metropolis portal-gun walk." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="central_finite_curve — awesome-mad-projects" />
+  <meta property="og:description"  content="An infinite-but-bounded region of the multiverse carved out as a src-layout geometry package." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/central_finite_curve.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/central_finite_curve.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="central_finite_curve — awesome-mad-projects" />
+  <meta name="twitter:description" content="The CFC as a near-maximal Rickness ridge in R^8 space." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/central_finite_curve.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>central_finite_curve
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>central_finite_curve</h1>
+          <p class="detail-tagline">An infinite-but-bounded region of the multiverse, carved out as a src-layout geometry package &mdash; N=20,000 points in R&#x2078;, a Rickness ridge, and a Metropolis portal-gun walk.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/central_finite_curve"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/emblems/central_finite_curve.png"
+               alt="central_finite_curve emblem"
+               width="600" height="600" />
+          <figcaption>infinity-lab &mdash; central_finite_curve emblem</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          The show describes the Central Finite Curve as an arc through the multiverse
+          containing all universes where a Rick is the smartest being. This package builds a
+          computational model of that arc: a high-dimensional point cloud in R&#x2078;
+          equipped with a scalar &ldquo;Rickness&rdquo; score, and the CFC defined as the
+          super-level set of near-maximal Rickness.
+        </p>
+        <p>
+          Four algebraic constraints pin approximately four of the eight degrees of freedom,
+          so the CFC is a roughly 4-dimensional sub-manifold of R&#x2078;. A hard-constraint
+          Metropolis walk simulates the Portal Gun moving through the CFC.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Rickness score &amp; CFC super-level set</span>
+          <pre>N = 20,000 points sampled in R^8
+
+Rickness(x) = tanh(std(x)) + normalised_Shannon_entropy(x) - 6 × penalty(x)
+
+Four algebraic constraints: each pins ~1 DOF → CFC is ~4-D sub-manifold
+
+CFC = { x : rickness(x) ≥ max_rickness - ε }
+    = 1,385 universes out of 20,000  (6.925%)
+
+max_rickness ≈ 1.5956
+Walk score range: 1.3957 … 1.6376
+
+Portal-gun walk: hard-constraint Metropolis, 21.8% acceptance, 6001 trajectory points
+Projection to 2-D: deterministic power-iteration PCA (no numpy required for core)</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <ul>
+          <li>The point cloud is generated with a fixed seed for reproducibility. Each
+            dimension represents one abstract property of a universe.</li>
+          <li>The Rickness score combines dispersion (tanh of standard deviation),
+            information content (Shannon entropy), and an algebraic constraint penalty.</li>
+          <li>The Metropolis walk proposes steps in R&#x2078; and accepts only those that
+            stay within the super-level set, simulating constrained travel through the CFC.</li>
+          <li>PCA projection to 2-D uses power iteration rather than numpy&rsquo;s SVD,
+            keeping the core module dependency-free.</li>
+          <li>40 pure-stdlib tests; 72 full tests with numpy check PCA parity to 1e-6.</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/central_finite_curve_projection.png">
+              <source src="../assets/central_finite_curve_four_panels.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Four panels &mdash; composite animation</h4>
+              <p>The CFC super-level set, Rickness distribution, portal-gun walk trajectory,
+                 and PCA projection, animated together.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/central_finite_curve_projection.png">
+              <source src="../assets/central_finite_curve_rotating_3d.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>CFC rotating (3-D PCA projection)</h4>
+              <p>The 1,385-universe CFC rotating in a 3-D PCA subspace of R&#x2078;.
+                 The walk trajectory is highlighted in red.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/central_finite_curve_projection.png">
+              <source src="../assets/central_finite_curve_walk.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Portal-gun walk animation</h4>
+              <p>The Metropolis walk stepping through the CFC universes, accepting 21.8%
+                 of proposed moves over 6,001 steps.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/central_finite_curve_projection.png"
+                 alt="2-D PCA projection of the Central Finite Curve super-level set"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>2-D PCA projection (static)</h4>
+              <p>The CFC as a 2-D PCA projection of the 8-dimensional point cloud. Each
+                 dot is a universe; coloured dots are in the CFC.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd awesome-mad-projects/infinity-lab
+
+pip install -e packages/central_finite_curve
+python -m central_finite_curve
+
+python -m pytest packages/central_finite_curve/tests -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/central_finite_curve"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>
+            Mathematics after <strong>Achmad Roykhan Sabiq</strong>, whose essay for the
+            <em>Oxford Mathematics Essay Competition 2026</em> inspired the infinity-lab work.
+            <a href="https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf"
+               rel="noopener" target="_blank">Essay PDF &#x2197;</a>
+          </p>
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/issues" rel="noopener" target="_blank">Issues &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

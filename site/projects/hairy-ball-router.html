@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/hairy-ball-router.html" />
+  <title>hairy-ball-router — awesome-mad-projects</title>
+  <meta name="description"
+        content="Routes packets across the sphere S² by following a continuous tangent vector field — the Hairy Ball Theorem forces at least one zero, which becomes the packet's final destination." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="hairy-ball-router — awesome-mad-projects" />
+  <meta property="og:description"  content="Packet routing on S² via continuous tangent vector field — the Hairy Ball Theorem, live." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/hairy-ball-router.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/hairy-ball-router.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="hairy-ball-router — awesome-mad-projects" />
+  <meta name="twitter:description" content="Packet routing on S² using the Hairy Ball Theorem. Go." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/hairy-ball-router.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>hairy-ball-router
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-go">Go</span>
+          <h1>hairy-ball-router</h1>
+          <p class="detail-tagline">Routes packets across the sphere S&#xB2; by following a continuous tangent vector field &mdash; the Hairy Ball Theorem forces at least one zero, which becomes the destination sink.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/hairy-ball-router"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/hairy-ball-router.png"
+               alt="hairy-ball-router banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>hairy-ball-router &mdash; spherical packet routing</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          The Hairy Ball Theorem (Brouwer, 1912) states that there is no continuous non-vanishing
+          tangent vector field on a sphere S&#xB2;. In other words: you cannot comb a hairy ball flat
+          without creating at least one whorl or cowlick. Every continuous vector field on S&#xB2; must
+          have at least one zero.
+        </p>
+        <p>
+          This package routes packets by following a continuous tangent vector field on S&#xB2;.
+          The field has exactly one zero (by construction). Every packet follows the field gradient and
+          converges to that zero &mdash; the mandatory &ldquo;cowlick&rdquo; that topology guarantees
+          must exist. The routing algorithm is simply gradient descent on the sphere.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Hairy Ball Theorem &amp; routing</span>
+          <pre>S² = { (x,y,z) : x² + y² + z² = 1 }
+
+Tangent vector field V : S² → TS²  (continuous, one zero at north pole)
+V(θ,φ) = (-sin φ, cos φ, 0)  (standard "comb" with zero at poles)
+
+Routing: dP/dt = V(P)  (follow field, projected onto tangent plane)
+  Packets converge to the zero of V (the sink node)
+
+Hairy Ball Theorem: every continuous V on S² has ‖V(p)‖ = 0 for some p
+  → the sink is mathematically guaranteed to exist</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd hairy-ball-router
+
+go test ./...
+go run .
+
+# Packet routed from (lat=45°, lon=30°) → sink at north pole
+# Steps: 142   Final distance to sink: 0.003 rad</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/hairy-ball-router"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

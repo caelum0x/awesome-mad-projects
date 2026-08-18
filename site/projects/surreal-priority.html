@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/surreal-priority.html" />
+  <title>surreal-priority — awesome-mad-projects</title>
+  <meta name="description"
+        content="Conway's surreal numbers as OS-style process priorities — 1/ω, every dyadic fraction, and ω on one ordered line, driving a deterministic scheduler. Pure Rust, zero dependencies, 16 tests." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="surreal-priority — awesome-mad-projects" />
+  <meta property="og:description"  content="Conway surreal numbers as process priorities: 1/ω, dyadic fractions, and ω on one ordered line." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/surreal-priority.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/surreal-priority.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="surreal-priority — awesome-mad-projects" />
+  <meta name="twitter:description" content="Conway surreal numbers as process priorities. Pure Rust, 16 tests." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/surreal-priority.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>surreal-priority
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-rust">Rust</span>
+          <h1>surreal-priority</h1>
+          <p class="detail-tagline">Conway&rsquo;s surreal numbers as process priorities &mdash; 1/&omega;, every dyadic fraction, and &omega; on one ordered line, driving a deterministic scheduler. Pure Rust, zero dependencies.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/surreal-priority"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/surreal-priority.png"
+               alt="surreal-priority banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>surreal-priority &mdash; &omega;, dyadic fractions, and 1/&omega; on one scheduler</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          Integer process priorities are awkward: you cannot represent a task that should <em>always</em>
+          preempt every other task without reserving a magic constant, and there is no natural
+          &ldquo;idle only&rdquo; priority below 0. Conway&rsquo;s surreal numbers solve this by providing
+          a totally-ordered field that contains every finite priority, &omega; (infinite, beats all finite
+          tasks), and 1/&omega; (infinitesimal, runs only when nothing else can &mdash; yet still strictly
+          positive).
+        </p>
+        <p>
+          This package represents priorities as <code>p = a&middot;&omega; + b + c&middot;(1/&omega;)</code>
+          where a, b, c are <em>dyadic rationals</em> (n / 2&#x1D456;). All comparisons use exact integer
+          arithmetic &mdash; no floating point. A deterministic scheduler picks the highest-priority
+          runnable task each tick and demonstrates that an &omega;-priority task starves all finite tasks,
+          while a 1/&omega;-priority task waits for complete idleness.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Surreal priority representation</span>
+          <pre>Priority p = a·ω + b + c·(1/ω)
+  where a, b, c are dyadic rationals  n / 2^k  (exact integer arithmetic)
+
+Ordering (lexicographic):
+  p &lt; q  iff  (a &lt; q.a)  or  (a == q.a and b &lt; q.b)  or
+              (a == q.a and b == q.b and c &lt; q.c)
+
+Key values:
+  ω-priority  (a=1, b=0, c=0) starves all finite priorities
+  1/ω priority (a=0, b=0, c=1) loses to every positive finite priority
+  Standard priorities: a=0, b=integer, c=0
+
+16 passing tests: dyadic arithmetic, surreal ordering, scheduler behaviour
+All comparisons: exact integer arithmetic — no float in any path</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <ul>
+          <li><code>#![forbid(unsafe_code)]</code> &mdash; fully safe Rust.</li>
+          <li>Zero external dependencies: dyadic rational arithmetic is implemented from scratch
+            using only integer multiplication and comparison.</li>
+          <li>The scheduler is a simple priority queue over <code>Task</code> structs. Each tick
+            it picks the highest-priority runnable task and runs it for one tick.</li>
+          <li><code>cargo run</code> prints an ordering table (1/&omega; &lt; 1 &lt; &omega; &lt; 2&omega;)
+            and a sample scheduler run showing starvation and idle-only behaviour.</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd surreal-priority
+
+cargo test    # 16 tests: dyadic arithmetic, ordering, scheduler
+cargo run     # ordering table + sample scheduler run</pre>
+        </div>
+        <div class="formula">
+          <span class="formula-label">Sample output</span>
+          <pre>Priority ordering:
+  1/ω  &lt;  1  &lt;  3/2  &lt;  2  &lt;  ω  &lt;  2ω
+
+Scheduler run (10 ticks):
+  Tick 1: ω-task A (runs)
+  Tick 2: ω-task A (runs — starving finite tasks)
+  ...
+  Tick 8: finite-task B (runs — A complete)
+  Tick 9: 1/ω-task C (runs — all others done)</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/surreal-priority"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

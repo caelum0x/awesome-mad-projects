@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/calabi_yau_latent.html" />
+  <title>calabi_yau_latent — awesome-mad-projects</title>
+  <meta name="description"
+        content="A latent space with large extended dimensions and compactified periodic ones — a toy Calabi-Yau compactification where the toroidal geometry makes a measurable difference." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="calabi_yau_latent — awesome-mad-projects" />
+  <meta property="og:description"  content="A latent space with compactified periodic dimensions — a toy Calabi–Yau compactification." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/calabi_yau_latent.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/calabi_yau_latent.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="calabi_yau_latent — awesome-mad-projects" />
+  <meta name="twitter:description" content="Toy Calabi–Yau compactification: flat torus with wrap-aware metric." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/calabi_yau_latent.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>calabi_yau_latent
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>calabi_yau_latent</h1>
+          <p class="detail-tagline">A latent space with large extended dimensions and compactified periodic ones &mdash; a toy Calabi&ndash;Yau compactification where the toroidal geometry makes a measurable difference to clustering.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/calabi_yau_latent"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/calabi_yau_latent_torus.png"
+               alt="Calabi-Yau latent space: flat torus with wrap-aware metric, 3 clusters"
+               loading="lazy" width="800" height="600" />
+          <figcaption>calabi_yau_latent &mdash; toroidal cluster geometry</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          String theory compactifies extra dimensions on a Calabi&ndash;Yau manifold &mdash; a compact
+          complex manifold with special geometric properties. This package makes the simplest possible
+          version of that idea computational: a latent space R&#x1D458; &times; T&#x1D45A; where the first
+          k axes are ordinary reals and the last m axes are circles (periodic, radius r&#x2C7C; &asymp; 0.10).
+        </p>
+        <p>
+          The key result: a naive Euclidean metric over-segments clusters that straddle the circular
+          seam (e.g. points at angle 0.02 and 2&pi;&minus;0.02 are actually very close, but naive
+          distance is large). A wrap-aware toroidal metric fixes this &mdash; and the improvement is
+          dramatic and measurable.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> This is a flat torus T&#x1D45A;, not a real Calabi&ndash;Yau
+          manifold. The package clearly labels itself as a toy. Real Calabi&ndash;Yau manifolds have
+          non-trivial holonomy and complex structure; a flat torus has neither. The point is to make
+          the compactification idea tractable, not to simulate string theory.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Toroidal metric vs. naive Euclidean</span>
+          <pre>Compact axis radius: r_j ≈ 0.10
+
+circle_delta(a, b) = min(|a - b|, 2π·r - |a - b|)
+  (wrap-aware distance on a circle of circumference 2π·r)
+
+Seam test pair: a = 0.02,  b = 2π - 0.02
+  Naive distance:    |a - b| > 6.0
+  Toroidal distance: circle_delta(a, b) < 0.1
+  Ratio: > 50×
+
+Clustering demo: 3 clusters planted straddling the seam
+  Naive metric → over-segments (> 3 clusters, low purity)
+  Toroidal metric → recovers exactly 3 clusters, purity ≈ 1.0
+
+All distances computed as fractions.Fraction (exact, no float rounding)
+NumPy parity verified to atol = 1e-12</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <img src="../assets/calabi_yau_latent_torus.png"
+                 alt="Toroidal latent space with 3 clusters correctly recovered by wrap-aware metric"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>Toroidal cluster geometry</h4>
+              <p>Three clusters in R&#x1D458; &times; T&#x1D45A;. The wrap-aware metric correctly
+                 recovers all three; the naive Euclidean metric over-segments near the seam.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd awesome-mad-projects/infinity-lab
+
+pip install -e packages/calabi_yau_latent
+python -m calabi_yau_latent
+
+python -m pytest packages/calabi_yau_latent/tests -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/calabi_yau_latent"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

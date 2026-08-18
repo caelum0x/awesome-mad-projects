@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/padic-embeddings.html" />
+  <title>padic-embeddings — awesome-mad-projects</title>
+  <meta name="description"
+        content="An embedding space governed by the p-adic metric: ultrametric balls, exact Fraction arithmetic, hierarchical clustering by residue classes, and exhaustive ultrametric verification." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="padic-embeddings — awesome-mad-projects" />
+  <meta property="og:description"  content="Embedding space governed by the p-adic metric: ultrametric, exact fractions, hierarchical clustering." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/padic-embeddings.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/padic-embeddings.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="padic-embeddings — awesome-mad-projects" />
+  <meta name="twitter:description" content="p-adic metric embedding space with ultrametric verification." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/padic-embeddings.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>padic-embeddings
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>padic-embeddings</h1>
+          <p class="detail-tagline">An embedding space whose geometry is governed by the p-adic metric instead of the usual Euclidean one &mdash; ultrametric balls, exact arithmetic, and exhaustive triangle-inequality verification.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/padic-embeddings"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/padic_embeddings_distance_matrix.png"
+               alt="p-adic distance matrix heatmap: 10 items under p=2 metric"
+               loading="lazy" width="800" height="600" />
+          <figcaption>padic-embeddings &mdash; p-adic distance matrix (p=2, viridis)</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          Machine learning embeddings almost always use Euclidean distance. But there are other
+          metrics &mdash; and the p-adic metric is one of the most alien: two numbers are
+          &ldquo;close&rdquo; if they share a large power of p as a factor, regardless of how
+          numerically far apart they appear on the number line. It is an <em>ultrametric</em>:
+          every triangle is isosceles, and the strong triangle inequality
+          d(a, c) &le; max(d(a, b), d(b, c)) holds everywhere.
+        </p>
+        <p>
+          This package implements the p-adic valuation and metric exactly using
+          <code>fractions.Fraction</code>, verifies the ultrametric property exhaustively over
+          720 ordered triples (zero violations), and demonstrates hierarchical clustering
+          by p-adic residue classes.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">p-adic valuation &amp; metric</span>
+          <pre>p-adic valuation: v_p(n) = largest k such that p^k | n
+p-adic absolute value: |x|_p = p^(-v_p(x))
+p-adic distance: d_p(a, b) = |a - b|_p
+
+All distances computed as fractions.Fraction (exact, no float rounding)
+
+Ultrametric (strong triangle inequality):
+  d(a, c) ≤ max(d(a, b), d(b, c))
+  Verified exhaustively: 720 ordered triples, 0 violations
+
+Demo items: [1, 3, 5, 8, 16, 17, 24, 32, 48, 64]  under p = 2
+  d_2(1, 17) = 1/16 = 0.0625
+    because 17 - 1 = 16 = 2^4  →  v_2(16) = 4  →  |16|_2 = 1/16
+
+String embedding: SHA-256(item) mod 2^20
+  (deterministic, unlike Python's hash())</pre>
+        </div>
+        <p>
+          Hierarchical clustering under the p-adic metric naturally produces nested balls:
+          residue classes mod p&#x1D458; form balls of radius p&#x207B;&#x1D458;, perfectly nested
+          as k increases. This gives a canonical tree structure over any p-adic dataset.
+        </p>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <img src="../assets/padic_embeddings_distance_matrix.png"
+                 alt="Heatmap of p-adic pairwise distance matrix for 10 sample items under p=2"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>p-adic distance matrix (p=2)</h4>
+              <p>Pairwise p-adic distances for items [1, 3, 5, 8, 16, 17, 24, 32, 48, 64].
+                 Items sharing large powers of 2 appear close (dark) regardless of numeric proximity.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd padic-embeddings
+
+pip install -e .
+python -m padic_embeddings          # demo with p=2
+python -m padic_embeddings --p 3    # demo with p=3
+
+python -m pytest tests/ -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/padic-embeddings"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

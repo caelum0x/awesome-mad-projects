@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/infinite-hotel-scheduler.html" />
+  <title>infinite-hotel-scheduler — awesome-mad-projects</title>
+  <meta name="description"
+        content="Hilbert's Infinite Hotel as a cloud scheduler — a resource allocator that is never full, using countable re-indexing to accommodate any number of new arrivals." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="infinite-hotel-scheduler — awesome-mad-projects" />
+  <meta property="og:description"  content="Hilbert's Infinite Hotel as a cloud scheduler: countable re-indexing, never full. Go." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/infinite-hotel-scheduler.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="infinite-hotel-scheduler — awesome-mad-projects" />
+  <meta name="twitter:description" content="Hilbert Hotel as a cloud scheduler: never full, countable re-indexing." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>infinite-hotel-scheduler
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-go">Go</span>
+          <h1>infinite-hotel-scheduler</h1>
+          <p class="detail-tagline">Hilbert&rsquo;s Infinite Hotel as a cloud scheduler &mdash; a resource allocator that is never full, using countable re-indexing to accommodate any number of new arrivals.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinite-hotel-scheduler"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/infinite-hotel-scheduler.png"
+               alt="infinite-hotel-scheduler banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>infinite-hotel-scheduler &mdash; Hilbert Hotel resource allocation</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          Hilbert&rsquo;s Infinite Hotel has countably infinitely many rooms, all occupied. Yet it can
+          always accommodate a new guest: shift every guest from room n to room n+1, freeing room 1.
+          For a countably infinite coach of new guests: shift existing guests from room n to room 2n,
+          freeing all odd-numbered rooms.
+        </p>
+        <p>
+          This package models a cloud scheduler as the Infinite Hotel. Worker slots are numbered by
+          natural numbers. When all slots appear full, the scheduler re-indexes to create a vacancy.
+          In practice the &ldquo;infinite&rdquo; capacity is bounded by available RAM &mdash; the code
+          explicitly models the limit and refuses to re-index past it, so it behaves correctly in finite
+          memory while demonstrating the paradox for smaller inputs.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Hilbert re-indexing</span>
+          <pre>Single arrival: move guest n → room (n+1)  for all n
+  Room 1 freed. O(N) shift.
+
+Countably infinite arrivals: move guest n → room (2n)
+  All odd rooms freed. O(N) re-index.
+
+Countably many coaches of countably many guests:
+  Cantor pairing: room (coach, seat) → room 2^coach × 3^seat
+  (unique prime factorisation guarantees injectivity)
+
+Practical limit: scheduler enforces a MAX_SLOTS cap beyond which
+  re-indexing is refused and a real "hotel full" error is raised.</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd infinite-hotel-scheduler
+
+go test ./...
+go run .
+
+# Hotel (100 slots): all occupied
+# New arrival → shift all guests up by 1 → slot 1 freed
+# Assigned: job-101 → slot 1  ✓</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinite-hotel-scheduler"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

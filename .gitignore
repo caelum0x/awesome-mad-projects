@@ -15,3 +15,12 @@ achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf
 *.pdf
 
 # Keep our own rendered artifacts (infinity-lab/artifacts, site/assets) committed.
+
+# Third-party / downloaded images (copyright belongs to their owners) — kept local,
+# never published to the site or the repo. Provide LICENSED or original art instead.
+images.jpeg
+iur42wz03zl71.png
+rick_sanchez__rick_and_morty__render_by_ty50ntheskeleton_df8ftht-pre.png
+Rick_Sanchez.webp
+what-is-the-finite-curve-v0-ewwirz7m9ceg1.webp
+*.webp

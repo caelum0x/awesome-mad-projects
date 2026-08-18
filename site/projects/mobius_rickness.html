@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/mobius_rickness.html" />
+  <title>mobius_rickness — awesome-mad-projects</title>
+  <meta name="description"
+        content="The Central Finite Curve as a real zero set on a Möbius strip — a Rick &amp; Morty conceit turned into honest differential geometry, with Gaussian curvature K &lt; 0 everywhere." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="mobius_rickness — awesome-mad-projects" />
+  <meta property="og:description"  content="The Central Finite Curve as a zero set on a Möbius strip — Rick &amp; Morty conceit turned into honest differential geometry." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/emblems/mobius_rickness.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/mobius_rickness.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="mobius_rickness — awesome-mad-projects" />
+  <meta name="twitter:description" content="The Central Finite Curve as a zero set on a Möbius strip — honest differential geometry." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/mobius_rickness.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>mobius_rickness
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-python">Python</span>
+          <h1>mobius_rickness</h1>
+          <p class="detail-tagline">The Central Finite Curve as a real zero set &mdash; a Rick &amp; Morty conceit turned into honest differential geometry, with Gaussian curvature K &lt; 0 strictly everywhere.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/mobius_rickness"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/emblems/mobius_rickness.png"
+               alt="mobius_rickness emblem — Möbius strip with zero-set curve traced on it"
+               width="600" height="600" />
+          <figcaption>infinity-lab &mdash; mobius_rickness emblem</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Rick and Morty</em>, the &ldquo;Central Finite Curve&rdquo; is described as a barrier
+          that carves out all universes where a Rick is the smartest being &mdash; an infinite-but-bounded
+          arc through the multiverse. The show implies it is a kind of loop or ring. This package asks:
+          what is the most geometrically honest realisation of that concept?
+        </p>
+        <p>
+          The answer: a <strong>zero set on a Möbius strip</strong>. A Möbius strip is a ruled surface
+          (made entirely of straight lines) with strictly negative Gaussian curvature K &lt; 0 at every
+          point &mdash; a saddle, not a flat plane. The zero set of a scalar &ldquo;Rickness&rdquo; field
+          on that strip is a closed curve that inherits the strip&rsquo;s non-orientability. It is
+          genuinely infinite in topological content (the curve wraps around twice before closing) while
+          remaining bounded in space.
+        </p>
+        <p>
+          The package provides two independent readings of the same geometry:
+          (1) the pure-core zero-set tracing that runs on stdlib only, and
+          (2) an SCMS (Subspace Constrained Mean Shift) height-ridge, which requires numpy.
+          Both are verified to agree on the strip&rsquo;s curvature signature.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+
+        <h3 style="margin-bottom:12px;font-size:1.05rem;">Reading 1 &mdash; Zero set R&#x207B;&sup1;(0) on a Möbius strip</h3>
+        <p>The Möbius strip is parametrised as a ruled surface with a scalar Rickness field:</p>
+        <div class="formula">
+          <span class="formula-label">Möbius strip parametrisation &amp; Rickness field</span>
+          <pre>Position:
+  x(u,v) = cos(u) · (1 + v · cos(u/2))
+  y(u,v) = sin(u) · (1 + v · cos(u/2))
+  z(u,v) = v · sin(u/2)
+  u ∈ [0, 2π),  v ∈ [-0.5, 0.5]
+
+Rickness field:
+  R(u,v) = cos(u) + 0.4·v·cos(u/2) + 0.2·sin(u)
+
+Zero set (the Central Finite Curve):
+  CFC = { (u,v) : R(u,v) = 0 }
+
+Traced by marching-squares + scan-line bisection.
+Residual |R| &lt; 1.6 × 10⁻¹⁰ on all traced points.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.05rem;">Gaussian curvature K &lt; 0 everywhere</h3>
+        <p>
+          The Möbius strip is a ruled surface. For any ruled surface that is not developable (not flat),
+          the Gaussian curvature is strictly negative at every point. Three independent computation
+          paths all agree:
+        </p>
+        <div class="formula">
+          <span class="formula-label">Gaussian curvature — three independent paths</span>
+          <pre>K = -1 / (4E²)   where E² = |∂r/∂v|² (first fundamental form coefficient)
+
+Method 1: Analytic formula via shape operator
+Method 2: Finite-difference numerical approximation
+Method 3: Complex-step numerical differentiation
+
+All three paths agree to ~7 × 10⁻⁹ across the parameter domain.
+K &lt; 0 strictly everywhere — the strip is a saddle at every point.</pre>
+        </div>
+
+        <h3 style="margin-bottom:12px;margin-top:32px;font-size:1.05rem;">Reading 2 &mdash; SCMS height-ridge (optional numpy)</h3>
+        <p>
+          The SCMS (Subspace Constrained Mean Shift / Eberly) algorithm finds the ridge of the Rickness
+          field &mdash; the locus of local maxima in the directions transverse to the ridge. This is a
+          different object from the zero set.
+        </p>
+        <div class="formula">
+          <span class="formula-label">SCMS ridge vs. zero set</span>
+          <pre>SCMS ridge: locus where ∇R is parallel to the ridge tangent
+  → residual ~3 × 10⁻⁹ after 29 iterations, 500 points
+
+Ridge lies OFF the zero wall:
+  |R| on ridge ∈ [0.60, 1.15]  (not zero)
+
+The zero set and the ridge are two geometrically distinct curves
+on the same surface — both are valid "Central Finite Curves"
+under different readings of the show's conceit.</pre>
+        </div>
+
+        <div class="caveats" style="margin-top:20px;">
+          <p><strong>Key distinction:</strong> The show never specifies whether the CFC is the zero set
+          (where Rick&rsquo;s supremacy transitions from true to false) or the ridge (where Rick&rsquo;s
+          supremacy is locally maximal). Both readings are geometrically honest; they give different curves
+          on the same Möbius strip.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <p>
+          The package is a pure Python src-layout library. The core module
+          (<code>mobius_rickness.core</code>) depends only on the Python standard library.
+          The optional <code>mobius_rickness.ridge</code> module additionally requires numpy for the SCMS
+          algorithm.
+        </p>
+        <ul>
+          <li><strong>Curvature module</strong>: computes K by all three methods independently, then
+            cross-checks them. The package raises an assertion error if any two methods disagree by more
+            than 1e-6.</li>
+          <li><strong>Zero-set tracer</strong>: uses marching squares to find sign changes in R, then
+            refines each crossing with bisection until |R| &lt; 1e-9.</li>
+          <li><strong>SCMS ridge</strong>: implements the Eberly mean-shift iteration on the Rickness
+            field, converging to the ridge locus in 20&ndash;30 iterations.</li>
+          <li><strong>Tests</strong>: 70 pure-stdlib tests verify curvature, zero-set residual, and
+            the non-orientability of the strip. ~109 full tests with numpy add ridge convergence checks.</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="figures">
+        <h2>Figures &amp; animations</h2>
+        <p>
+          Six rendered artifacts covering the zero set, Rickness heatmap, SCMS ridge, and three
+          animations. The four-panel animation is the headline render.
+        </p>
+
+        <div class="artifacts-grid">
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/mobius_strip_curve.png">
+              <source src="../assets/mobius_four_panels.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Four panels &mdash; composite animation</h4>
+              <p>Strip with zero-set curve; Rickness heatmap; SCMS ridge; convergence plot &mdash;
+                 all four views animated side by side.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/mobius_ridge.png">
+              <source src="../assets/mobius_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Zero set, rotating</h4>
+              <p>The Möbius strip rotating in 3-D with the zero-set curve highlighted. Note
+                 the saddle geometry &mdash; K &lt; 0 everywhere, no flat patches.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="../assets/mobius_ridge.png">
+              <source src="../assets/mobius_ridge_convergence.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>SCMS convergence animation</h4>
+              <p>The ridge-finding iteration converging: initial seed points drifting toward
+                 the Rickness ridge over 29 iterations.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/mobius_strip_curve.png"
+                 alt="Möbius strip with zero-set curve traced on it"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>Zero-set curve on the strip</h4>
+              <p>The Central Finite Curve as R&#x207B;&sup1;(0) &mdash; a closed curve that wraps
+                 around the strip twice before closing, due to non-orientability.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/mobius_krick_heatmap.png"
+                 alt="Rickness field R(u,v) as a heatmap on the (u,v) parameter domain"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>Rickness field heatmap</h4>
+              <p>R(u, v) on the parameter domain. The zero contour (the CFC) runs across
+                 the middle. The SCMS ridge sits at the local maximum band.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card">
+            <img src="../assets/mobius_ridge.png"
+                 alt="SCMS height-ridge of the Rickness field on the Möbius strip"
+                 loading="lazy" width="800" height="600" />
+            <figcaption class="cap">
+              <h4>SCMS ridge</h4>
+              <p>The Eberly height-ridge of R &mdash; the locus of transverse maxima. This
+                 is Reading 2, distinct from the zero set above.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="caveats" style="margin-top:32px;">
+          <p><strong>Honest caveats:</strong> The Möbius strip is a genuine ruled surface with K &lt; 0
+          everywhere &mdash; the geometry is honest, the mythology is not. The Rickness field is an
+          ad-hoc scalar chosen to produce a plausible zero set; it is not derived from any physical
+          theory. The SCMS ridge and the zero set are geometrically unrelated curves that happen to live
+          on the same strip. The show&rsquo;s &ldquo;Central Finite Curve&rdquo; is a conceit; this
+          package makes that conceit as mathematically precise as possible without inventing physics.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre># Clone and enter the monorepo
+git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd awesome-mad-projects/infinity-lab
+
+# Install core (stdlib only)
+pip install -e packages/mobius_rickness
+
+# Run the zero-set tracer and print curvature results
+python -m mobius_rickness
+
+# Run the 70 pure-stdlib tests
+python -m pytest packages/mobius_rickness/tests -v
+
+# Run full test suite including SCMS ridge (requires numpy)
+pip install numpy matplotlib
+python -m pytest packages/mobius_rickness/tests -v</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/mobius_rickness"
+             rel="noopener" target="_blank">source &#x2197;</a>
+          <a class="btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/issues"
+             rel="noopener" target="_blank">open an issue &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>
+            Mathematics after <strong>Achmad Roykhan Sabiq</strong>, whose essay for the
+            <em>Oxford Mathematics Essay Competition 2026</em> inspired the infinity-lab work.
+            Attribution and summary only &mdash; no essay prose is reproduced here.
+            <a href="https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf"
+               rel="noopener" target="_blank">Essay PDF &#x2197;</a>
+          </p>
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/issues" rel="noopener" target="_blank">Issues &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

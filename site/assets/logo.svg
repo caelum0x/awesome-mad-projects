@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" fill="none" aria-label="mad·projects">
+  <!-- Möbius ∞ mark — single ink stroke, 44×28 px, centred in 48×48 box -->
+  <g transform="translate(4, 10)">
+    <!-- Lemniscate of Bernoulli as two looping bezier arcs, ink stroke -->
+    <path d="M20,14 C20,7.4 13.6,3 8,3 C2.4,3 0,7 0,14 C0,21 6,25 14,14 C22,3 28,0 34,0 C40,0 42,4 42,11 C42,18 39.6,21.6 34,21.6 C28.4,21.6 22,18 14,7"
+          stroke="#16150f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Accent dot at the crossover -->
+    <circle cx="14" cy="14" r="2.2" fill="#d1341a"/>
+  </g>
+  <!-- Wordmark: mad·projects -->
+  <text x="60" y="32" font-family="Georgia, 'Iowan Old Style', serif" font-size="17" font-weight="700" letter-spacing="-0.02em" fill="#16150f">mad</text>
+  <text x="93" y="32" font-family="Georgia, 'Iowan Old Style', serif" font-size="17" fill="#d1341a">·</text>
+  <text x="101" y="32" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace" font-size="14" fill="#3d3b32" letter-spacing="0.01em">projects</text>
+</svg>

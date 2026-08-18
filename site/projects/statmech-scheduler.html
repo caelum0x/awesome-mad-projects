@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/statmech-scheduler.html" />
+  <title>statmech-scheduler — awesome-mad-projects</title>
+  <meta name="description"
+        content="A simulation-only CPU scheduler that treats tasks as particles with energy and the system as having a temperature — Boltzmann weights, simulated annealing, Go." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="statmech-scheduler — awesome-mad-projects" />
+  <meta property="og:description"  content="CPU scheduler with Boltzmann weights and system temperature. Statistical mechanics meets Go." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/statmech-scheduler.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/statmech-scheduler.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="statmech-scheduler — awesome-mad-projects" />
+  <meta name="twitter:description" content="Statistical mechanics CPU scheduler: Boltzmann weights and system temperature in Go." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/statmech-scheduler.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>statmech-scheduler
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-go">Go</span>
+          <h1>statmech-scheduler</h1>
+          <p class="detail-tagline">A simulation-only CPU scheduler where tasks are particles with energy, the system has a temperature, and scheduling decisions are drawn from Boltzmann weights.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/statmech-scheduler"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/statmech-scheduler.png"
+               alt="statmech-scheduler banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>statmech-scheduler &mdash; Boltzmann-weighted task selection</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          Statistical mechanics describes how particles in a heat bath distribute over energy levels
+          according to the Boltzmann distribution: low-energy states are exponentially more likely at
+          low temperature; at high temperature all states become roughly equally likely (maximum disorder).
+          This package asks: what if a CPU scheduler used that distribution to pick the next task?
+        </p>
+        <p>
+          At low system temperature the scheduler becomes nearly deterministic, always picking the
+          lowest-energy (highest-priority) task. At high temperature it randomises, giving each task
+          a chance proportional to its Boltzmann weight. Cooling over time mimics simulated annealing.
+        </p>
+      </section>
+
+      <section class="detail-section" id="mathematics">
+        <h2>The mathematics</h2>
+        <div class="formula">
+          <span class="formula-label">Boltzmann scheduling</span>
+          <pre>Task i has energy E_i  (lower = higher priority)
+
+Boltzmann weight: w_i = exp(-E_i / T)
+
+Selection probability: P_i = w_i / Σ_j w_j
+
+System temperature T:
+  Low T  → near-deterministic, picks lowest energy task
+  High T → uniform random selection
+  T → 0  → pure priority scheduling</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd statmech-scheduler
+
+go test ./...
+go run .
+
+# Sample output at T=1.0:
+# Task A (E=1.0): selected 61%
+# Task B (E=2.0): selected 22%
+# Task C (E=3.5): selected 17%</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/statmech-scheduler"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

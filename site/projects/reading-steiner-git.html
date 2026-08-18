@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/projects/reading-steiner-git.html" />
+  <title>reading-steiner-git — awesome-mad-projects</title>
+  <meta name="description"
+        content="A Steins;Gate worldline VCS toy: snapshots a sandbox directory and reports a six-decimal Divergence Meter reading for each checkpoint. TypeScript." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <meta property="og:title"        content="reading-steiner-git — awesome-mad-projects" />
+  <meta property="og:description"  content="Steins;Gate VCS toy: sandbox snapshots + divergence meter reading for each worldline checkpoint." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/banners/reading-steiner-git.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/reading-steiner-git.html" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="reading-steiner-git — awesome-mad-projects" />
+  <meta name="twitter:description" content="Steins;Gate VCS toy with divergence meter readings. TypeScript." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/reading-steiner-git.png" />
+
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="../" aria-label="awesome-mad-projects — home">
+        <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="../index.html#featured">Featured</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#opensource">Open source</a></li>
+        <li><a href="../index.html#caveats">Caveats</a></li>
+        <li><a href="../gallery.html">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+        <li>
+          <a class="nav-btn"
+             href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+             rel="noopener" target="_blank">Contribute</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>reading-steiner-git
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-ts">TypeScript</span>
+          <h1>reading-steiner-git</h1>
+          <p class="detail-tagline">A Steins;Gate worldline VCS toy that snapshots a sandbox and reports a six-decimal Divergence Meter reading for each checkpoint &mdash; your commits as worldline transitions.</p>
+          <div class="source-cta">
+            <a class="btn primary"
+               href="https://github.com/caelum0x/awesome-mad-projects/tree/main/reading-steiner-git"
+               rel="noopener" target="_blank">source &#x2197;</a>
+            <a class="btn" href="../index.html#projects">All projects</a>
+          </div>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="../assets/banners/reading-steiner-git.png"
+               alt="reading-steiner-git banner"
+               loading="lazy" width="1200" height="630" />
+          <figcaption>reading-steiner-git &mdash; VCS worldline transitions</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <section class="detail-section" id="idea">
+        <h2>The idea</h2>
+        <p>
+          In <em>Steins;Gate</em>, Okabe Rintaro is the only person who can remember timelines across
+          worldline transitions &mdash; this is his &ldquo;Reading Steiner&rdquo; ability. Each new
+          worldline is labelled by a Divergence Meter reading: a six-decimal number in [0, 2) that
+          identifies the timeline cluster.
+        </p>
+        <p>
+          This package treats version control as worldline transitions: each snapshot (commit) of a
+          sandbox directory is a new worldline, and the snapshot hash is fed through the divergence
+          meter algorithm to produce a six-decimal reading. Rewriting history is branching; restoring
+          an old snapshot is &ldquo;Okabe jumps back.&rdquo;
+        </p>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How it works</h2>
+        <ul>
+          <li>Snapshots a sandbox directory by hashing all file contents with SHA-256.</li>
+          <li>The combined hash is fed through the divergence meter algorithm (same as the
+            divergence-meter package): <code>Fraction(word, 2^63)</code> gives a value in [0, 2).</li>
+          <li>Checkpoints are stored as an atomic-write JSON ledger (no partial writes).</li>
+          <li>The CLI prints the divergence reading for the current sandbox state and
+            the divergence delta from the previous checkpoint.</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="run">
+        <h2>Run it</h2>
+        <div class="run-block">
+          <pre>git clone https://github.com/caelum0x/awesome-mad-projects.git
+cd reading-steiner-git
+
+npm install
+npm run build
+
+# Snapshot your sandbox
+node dist/index.js snapshot ./my-sandbox
+
+# Output:
+# Worldline 0001: 0.847312  [Alpha attractor]
+# (make changes to ./my-sandbox)
+# Worldline 0002: 1.193847  [Beta attractor]
+# Divergence delta: +0.346535</pre>
+        </div>
+        <div class="source-cta">
+          <a class="btn primary"
+             href="https://github.com/caelum0x/awesome-mad-projects/tree/main/reading-steiner-git"
+             rel="noopener" target="_blank">source &#x2197;</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
+          <a href="../api/projects">JSON API &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

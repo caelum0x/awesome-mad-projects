@@ -7,185 +7,191 @@
   <title>Gallery — awesome-mad-projects (infinity-lab artifacts)</title>
   <meta name="description"
         content="The full set of rendered infinity-lab artifacts: Gojo's Infinity, the Möbius / Central Finite Curve zero set, and more." />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Open Graph -->
-  <meta property="og:title"       content="Gallery — awesome-mad-projects" />
-  <meta property="og:description" content="Every rendered infinity-lab artifact: plots, animations, and 3-D studies." />
-  <meta property="og:image"       content="https://mad-projects.com/assets/poster.png" />
-  <meta property="og:type"        content="website" />
+  <meta property="og:title"        content="Gallery — awesome-mad-projects" />
+  <meta property="og:description"  content="Every rendered infinity-lab artifact: plots, animations, and 3-D studies." />
+  <meta property="og:image"        content="https://mad-projects.com/assets/og-card.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type"         content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Gallery — awesome-mad-projects" />
+  <meta name="twitter:description" content="Every rendered infinity-lab artifact: plots, animations, and 3-D studies." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/og-card.png" />
 
   <style>
-    /* ── Design tokens (shared) ────────────────────────────────────── */
+    /* ── Design tokens — ink on cream (shared) ─────────────────────────── */
     :root {
-      --bg:       #080b14;
-      --bg-2:     #0f1220;
-      --panel:    #141826;
-      --border:   rgba(124,156,255,0.16);
-      --border-2: rgba(124,156,255,0.30);
-      --text:     #e7e9f2;
-      --muted:    #8a93b8;
-      --accent:   #7c9cff;
-      --accent-2: #b98cff;
-      --accent-3: #5be7c4;
-      --radius:   14px;
-      --maxw:     1180px;
+      --cream:        #f6f2e9;
+      --cream-2:      #ede9de;
+      --cream-3:      #e5e0d3;
+      --ink:          #16150f;
+      --ink-2:        #3d3b32;
+      --muted:        #6b6760;
+      --rule:         rgba(22,21,15,0.12);
+      --rule-2:       rgba(22,21,15,0.22);
+      --accent:       #d1341a;
+      --accent-pale:  rgba(209,52,26,0.07);
+      --accent-border:rgba(209,52,26,0.30);
+      --radius: 0px;
+      --maxw:   1180px;
       font-synthesis: none;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-        Helvetica, Arial, sans-serif;
-      line-height: 1.6;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Georgia, 'Iowan Old Style', 'Apple Garamond', 'Baskerville',
+        Times, 'Times New Roman', serif;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* Mesh gradient */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: -1;
-      background:
-        radial-gradient(ellipse 1200px 600px at 90% -5%,  rgba(124,156,255,0.11), transparent 60%),
-        radial-gradient(ellipse 700px 500px  at -5% 20%,  rgba(185,140,255,0.07), transparent 55%),
-        var(--bg);
-      pointer-events: none;
-    }
-
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    :focus-visible { outline: 3px solid var(--accent-3); outline-offset: 3px; border-radius: 6px; }
-    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
 
     /* Skip link */
     .skip {
       position: absolute; left: -999px; top: 0;
-      background: var(--accent-3); color: #080b14;
-      padding: 10px 18px; border-radius: 0 0 10px 0;
-      z-index: 200; font-weight: 700;
+      background: var(--accent); color: var(--cream);
+      padding: 8px 16px; z-index: 300; font-size: 0.88rem;
     }
     .skip:focus { left: 0; }
 
-    /* ── Animated gradient text ─────────────────────────────────────── */
-    @keyframes grad-shift {
-      0%   { background-position: 0%   50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0%   50%; }
-    }
-    .grad-text {
-      background: linear-gradient(120deg, var(--accent), var(--accent-2) 40%, var(--accent-3) 70%, var(--accent));
-      background-size: 300%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: grad-shift 7s ease infinite;
-    }
-
-    /* ── Scroll reveal ──────────────────────────────────────────────── */
+    /* ── Scroll reveal ──────────────────────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      transform: translateY(16px);
+      transition: opacity 0.50s ease, transform 0.50s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── Nav ────────────────────────────────────────────────────────── */
+    /* ── Nav ────────────────────────────────────────────────────────────── */
     header.site {
       position: sticky; top: 0; z-index: 100;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      background: rgba(8,11,20,0.75);
-      border-bottom: 1px solid var(--border);
+      background: rgba(246,242,233,0.94);
+      border-bottom: 1px solid var(--rule-2);
+      backdrop-filter: saturate(1.1);
+      -webkit-backdrop-filter: saturate(1.1);
     }
     .nav {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 16px; padding: 14px 24px;
+      gap: 20px; padding: 12px 32px;
       max-width: var(--maxw); margin: 0 auto;
     }
-    .brand { font-weight: 800; letter-spacing: -0.03em; font-size: 1.05rem; }
-    .brand span { color: var(--accent-2); }
-    .nav a.back {
-      color: var(--muted); font-weight: 600; font-size: 0.94rem;
-      display: inline-flex; align-items: center; gap: 6px;
+    .brand-link {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: inherit; flex-shrink: 0;
     }
-    .nav a.back:hover { color: var(--text); text-decoration: none; }
+    .brand-link img { display: block; height: 36px; width: auto; }
+    .nav-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .nav-back {
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    }
+    .nav-back:hover { color: var(--ink); text-decoration: none; }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px;
+      border: 1px solid var(--rule-2);
+      background: var(--cream-2);
+      color: var(--ink-2);
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.82rem; font-weight: 700;
+      text-decoration: none;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .nav-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--cream); text-decoration: none; }
+    .nav-btn.star { border-color: var(--accent-border); color: var(--accent); }
+    .nav-btn.star:hover { background: var(--accent-pale); }
 
-    /* ── Hero ───────────────────────────────────────────────────────── */
+    /* ── Page hero ──────────────────────────────────────────────────────── */
     .page-hero {
-      padding: 60px 0 28px;
-      border-bottom: 1px solid var(--border);
+      padding: 60px 0 32px;
+      border-bottom: 1px solid var(--rule-2);
+    }
+    .section-label {
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.70rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
     }
     .page-hero h1 {
-      font-size: clamp(1.9rem, 4vw, 3rem);
-      letter-spacing: -0.03em; font-weight: 860;
+      font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+      letter-spacing: -0.03em; font-weight: 700;
       margin-bottom: 12px;
     }
-    .page-hero p { color: var(--muted); max-width: 72ch; font-size: 1.05rem; }
+    .page-hero p { color: var(--ink-2); max-width: 72ch; font-size: 1.02rem; }
 
-    /* ── Sections ───────────────────────────────────────────────────── */
-    section.group {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-    }
+    /* ── Sections ───────────────────────────────────────────────────────── */
+    section.group { padding: 44px 0; border-top: 1px solid var(--rule-2); }
     section.group h2 {
-      font-size: 1.4rem; margin-bottom: 6px;
-      letter-spacing: -0.02em; font-weight: 800;
+      font-size: 1.35rem; margin-bottom: 6px;
+      letter-spacing: -0.02em; font-weight: 700;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule);
     }
-    section.group h2::before { content: '▹ '; color: var(--accent-3); }
-    section.group .sub {
-      color: var(--muted); margin-bottom: 22px; max-width: 70ch;
-    }
+    section.group .sub { color: var(--muted); margin-bottom: 22px; max-width: 68ch; font-size: 0.90rem; }
 
-    /* ── Grid ───────────────────────────────────────────────────────── */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 18px; }
+    /* ── Grid ───────────────────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+    }
 
     figure.art {
       margin: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: rgba(20,24,38,0.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: var(--cream);
       display: flex; flex-direction: column;
-      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      transition: background 0.12s;
     }
-    figure.art:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-2);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.48);
-    }
+    figure.art:hover { background: var(--cream-2); }
     figure.art img,
     figure.art video {
       display: block; width: 100%; height: auto;
-      background: #03060c;
+      background: var(--cream-3);
     }
     figure.art figcaption {
-      padding: 10px 14px; font-size: 0.84rem; color: var(--muted);
-      border-top: 1px solid var(--border);
+      padding: 9px 12px; font-size: 0.78rem; color: var(--muted);
+      border-top: 1px solid var(--rule);
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
     }
 
-    /* ── Footer ─────────────────────────────────────────────────────── */
+    /* ── Footer ─────────────────────────────────────────────────────────── */
     footer.site {
-      border-top: 1px solid var(--border);
-      padding: 40px 0 64px; color: var(--muted); font-size: 0.90rem;
+      border-top: 1px solid var(--rule-2);
+      padding: 36px 0 60px; color: var(--muted); font-size: 0.88rem;
     }
-    footer.site p { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-    footer.site a { color: var(--accent); }
+    footer.site p { display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.82rem; }
+    footer.site a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+    footer.site a:hover { color: var(--accent); }
 
-    /* ── Responsive ─────────────────────────────────────────────────── */
+    /* ── Responsive ─────────────────────────────────────────────────────── */
     @media (max-width: 600px) {
-      .page-hero h1 { font-size: 1.8rem; }
+      .page-hero h1 { font-size: 1.75rem; }
+      .wrap { padding: 0 20px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .grad-text { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
-      figure.art:hover { transform: none; }
+      figure.art:hover { background: var(--cream); }
     }
   </style>
 </head>
@@ -194,18 +200,34 @@
 
   <header class="site">
     <div class="nav">
-      <div class="brand">awesome-<span>mad</span>-projects</div>
-      <a class="back" href="index.html">← Back to showcase</a>
+      <a class="brand-link" href="/" aria-label="awesome-mad-projects — home">
+        <img src="assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <div class="nav-right">
+        <a class="nav-back" href="index.html">&#x2190; Back to showcase</a>
+        <a class="nav-btn star"
+           href="https://github.com/caelum0x/awesome-mad-projects"
+           rel="noopener" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          Star
+        </a>
+        <a class="nav-btn"
+           href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+           rel="noopener" target="_blank">Contribute</a>
+      </div>
     </div>
   </header>
 
   <main id="gallery-main">
     <section class="page-hero">
       <div class="wrap">
-        <h1><span class="grad-text">infinity-lab</span> — artifact gallery</h1>
-        <p>Every plot and animation is rendered directly by the Python pipeline. Images are shown as
+        <span class="section-label">infinity-lab artifact gallery</span>
+        <h1>Rendered artifacts</h1>
+        <p>Every plot and animation is rendered directly by the Python pipeline. Images as
            <code>&lt;img&gt;</code>, animations as looping muted <code>&lt;video&gt;</code> (MP4).
-           The largest GIFs are intentionally omitted in favour of their smaller MP4 equivalents.</p>
+           The largest GIFs are omitted in favour of their smaller MP4 equivalents.</p>
       </div>
     </section>
 
@@ -371,10 +393,13 @@
   <footer class="site">
     <div class="wrap">
       <p>
-        <a href="index.html">← Back to the showcase</a>
+        <a href="index.html">&#x2190; Back to the showcase</a>
         &middot;
         <a href="https://github.com/caelum0x/awesome-mad-projects"
            rel="noopener" target="_blank">Source on GitHub</a>
+        &middot;
+        <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
+           rel="noopener" target="_blank">Contribute</a>
         &middot;
         <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a>
       </p>
