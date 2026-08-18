@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infinity-lab"
+version = "0.1.0"
+description = "Monorepo for math projects sharing an internal 'commons' package."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "infinity-lab" }]
+# Core is stdlib-only; numpy/matplotlib are OPTIONAL and import-guarded via
+# commons.core.optional. They are intentionally NOT runtime dependencies.
+dependencies = []
+
+[project.optional-dependencies]
+viz = ["numpy>=1.24", "matplotlib>=3.7"]
+test = ["pytest>=7.0"]
+
+# Metadata only. This file is NOT required to run the tests: pytest resolves
+# imports via the [tool.pytest.ini_options] pythonpath below with no install.
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+# Zero-install, zero-network import wiring: each package's src dir is prepended
+# to sys.path so `import commons`, `import gojo_infinity`, `import mobius_rickness`,
+# `import central_finite_curve` work from the repo root with no editable install.
+pythonpath = [
+    "packages/commons/src",
+    "packages/gojo_infinity/src",
+    "packages/mobius_rickness/src",
+    "packages/central_finite_curve/src",
+    "packages/divergence_meter/src",
+    "packages/padic_embeddings/src",
+    "packages/madoka_entropy/src",
+    "packages/calabi_yau_latent/src",
+    "packages/domain_expansion/src",
+]
+testpaths = [
+    "tests",
+    "packages/commons/tests",
+    "packages/gojo_infinity/tests",
+    "packages/mobius_rickness/tests",
+    "packages/central_finite_curve/tests",
+    "packages/divergence_meter/tests",
+    "packages/padic_embeddings/tests",
+    "packages/madoka_entropy/tests",
+    "packages/calabi_yau_latent/tests",
+    "packages/domain_expansion/tests",
+]
+addopts = "-ra"

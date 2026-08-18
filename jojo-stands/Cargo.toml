@@ -1,0 +1,20 @@
+[package]
+name = "jojo-stands"
+version = "0.1.0"
+edition = "2021"
+description = "A tick-based simulation of a scheduler whose in-memory processes wield JoJo Stand abilities."
+license = "MIT"
+
+[[bin]]
+name = "jojo-stands"
+path = "src/main.rs"
+
+[lib]
+name = "jojo_stands"
+path = "src/lib.rs"
+
+# No external dependencies: the entire simulation is pure, in-memory, std-only Rust.
+[dependencies]
+
+[profile.release]
+opt-level = 2

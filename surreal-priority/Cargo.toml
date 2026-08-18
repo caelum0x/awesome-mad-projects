@@ -1,0 +1,17 @@
+[package]
+name = "surreal-priority"
+version = "0.1.0"
+edition = "2021"
+description = "Surreal numbers as process priorities, with a scheduler simulation"
+license = "MIT"
+
+[[bin]]
+name = "surreal-priority"
+path = "src/main.rs"
+
+[lib]
+name = "surreal_priority"
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 3

@@ -1,0 +1,19 @@
+[package]
+name = "equivalent-exchange-fs"
+version = "0.1.0"
+edition = "2021"
+description = "A userspace, sandbox-only object store that enforces conservation of mass (Fullmetal Alchemist's Law of Equivalent Exchange)."
+license = "MIT"
+
+# Zero external dependencies on purpose: this prototype builds fully offline.
+
+[[bin]]
+name = "eqx"
+path = "src/main.rs"
+
+[lib]
+name = "equivalent_exchange_fs"
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 2

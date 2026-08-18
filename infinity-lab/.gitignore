@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual env (recreate with `make venv`)
+.venv/
+
+# Keep artifacts/ committed (they are deliverables) — do NOT ignore them

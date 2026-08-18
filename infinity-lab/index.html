@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>infinity-lab &mdash; turning anime &amp; pure-math ideas into tested code</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --panel: #171a23;
+  --panel-2: #1e2230;
+  --ink: #e8eaf0;
+  --muted: #9aa3b2;
+  --accent: #7cc4ff;
+  --accent-2: #ffc16b;
+  --accent-3: #b39dff;
+  --line: #2a2f3d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 40px 20px 64px; }
+
+/* Hero */
+header.hero {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 26px;
+  margin-bottom: 12px;
+}
+header.hero .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  color: var(--accent-3);
+  margin: 0 0 10px;
+}
+header.hero h1 {
+  margin: 0 0 12px;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+header.hero p.lede { margin: 0 0 10px; color: var(--ink); max-width: 780px; font-size: 18px; }
+header.hero p.honest { margin: 0 0 18px; color: var(--muted); max-width: 780px; font-style: italic; }
+nav.links a {
+  display: inline-block;
+  margin: 4px 10px 4px 0;
+  padding: 8px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 14px;
+}
+nav.links a.primary { background: var(--accent); color: #0b0d12; border-color: var(--accent); font-weight: 600; }
+
+/* Generic section */
+section { margin-top: 44px; }
+section > h2 {
+  font-size: 24px;
+  margin: 0 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+section > p.section-sub { color: var(--muted); margin: 8px 0 24px; max-width: 820px; }
+
+/* Explainer videos, side by side */
+.explainers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 22px;
+}
+figure.explainer {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+figure.explainer .media { background: #0b0d12; padding: 10px; }
+figure.explainer video { width: 100%; height: auto; border-radius: 8px; display: block; }
+figure.explainer figcaption { padding: 14px 18px 18px; }
+figure.explainer figcaption h3 { margin: 0 0 6px; font-size: 17px; color: var(--accent-2); }
+figure.explainer figcaption p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Project cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+article.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+}
+article.card h3 { margin: 0 0 8px; font-size: 18px; }
+article.card p { margin: 0 0 14px; color: var(--muted); font-size: 14px; flex: 1; }
+article.card .tag {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--accent-3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+}
+article.card a.card-link { font-weight: 600; font-size: 14px; }
+article.card .soon { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+/* Stills */
+.stills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+figure.still {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+figure.still .media { background: #0b0d12; padding: 10px; }
+figure.still img { width: 100%; height: auto; border-radius: 8px; display: block; }
+figure.still figcaption { padding: 12px 16px 16px; color: var(--muted); font-size: 14px; }
+figure.still figcaption strong { color: var(--ink); }
+
+/* Caveats callout */
+.callout {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent-2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0 0;
+}
+.callout h3 { margin: 0 0 10px; font-size: 16px; }
+.callout ul { margin: 0; padding-left: 20px; color: var(--muted); }
+.callout li { margin-bottom: 8px; }
+
+footer.foot {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+footer.foot a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">infinity-lab</p>
+    <h1>Turning anime, pop-culture and pure-math ideas into real, tested code.</h1>
+    <p class="lede">A small monorepo that takes fictional and folk-mathematical
+    claims &mdash; Gojo&rsquo;s <em>Infinity</em>, the <em>Central Finite Curve</em>
+    &mdash; seriously enough to build them, run them, and test them as honest
+    mathematics.</p>
+    <p class="honest">Where the math genuinely holds, the code proves it; where it
+    can&rsquo;t hold, the code says so plainly instead of pretending.</p>
+    <figure class="poster">
+      <img src="artifacts/poster.png" alt="infinity-lab poster: one headline still from each project"
+           style="width:100%;height:auto;border-radius:8px;" loading="lazy">
+      <figcaption>One headline still from each project &mdash; real renders from the tested cores.</figcaption>
+    </figure>
+    <nav class="links">
+      <a class="primary" href="gallery/index.html">Full gallery</a>
+      <a href="docs/essay-source.md">The essay companion</a>
+      <a href="packages/gojo_infinity/README.md">gojo_infinity</a>
+      <a href="packages/mobius_rickness/README.md">mobius_rickness</a>
+      <a href="packages/central_finite_curve/README.md">central_finite_curve</a>
+      <a href="#attribution">Attribution</a>
+    </nav>
+  </header>
+
+  <section id="explainers">
+    <h2>Two explainers</h2>
+    <p class="section-sub">Two short animations, each built from the actual code in
+    this repo. They play offline, straight from <code>artifacts/</code>.</p>
+    <div class="explainers">
+      <figure class="explainer">
+        <div class="media">
+          <video src="artifacts/gojo_four_lenses.mp4" controls loop muted playsinline preload="metadata" aria-label="Gojo's Infinity through four mathematical lenses">
+            Your browser cannot play <code>gojo_four_lenses.mp4</code>.
+          </video>
+        </div>
+        <figcaption>
+          <h3>Gojo&rsquo;s Infinity &mdash; four lenses at once</h3>
+          <p>The same barrier read four ways &mdash; geometric series, Lebesgue
+          measure, a Riemannian conformal metric, and a topological cut &mdash;
+          reaching four verdicts: Fragile, Fragile, Formidable, Falls. The
+          disagreement between them is the whole point.</p>
+        </figcaption>
+      </figure>
+      <figure class="explainer">
+        <div class="media">
+          <video src="artifacts/mobius_four_panels.mp4" controls loop muted playsinline preload="metadata" aria-label="The Central Finite Curve on a Mobius strip in four panels">
+            Your browser cannot play <code>mobius_four_panels.mp4</code>.
+          </video>
+        </div>
+        <figcaption>
+          <h3>M&ouml;bius-Rickness &mdash; the Central Finite Curve in four panels</h3>
+          <p>The strip, the weighted field <code>K&middot;R</code>, its zero
+          contour, and the ridge &mdash; showing the Central Finite Curve located
+          two independent ways: as the exact zero set
+          <code>R<sup>&minus;1</sup>(0)</code> and as the SCMS ridge of maximal
+          Rickness.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <p class="section-sub">Three packages, one shared stdlib-only
+    <code>commons</code> core. Each card links to that package&rsquo;s README.</p>
+    <div class="cards">
+      <article class="card">
+        <span class="tag">gojo_infinity</span>
+        <h3>Gojo&rsquo;s Infinity</h3>
+        <p>Four mathematical lenses judge one barrier and disagree &mdash;
+        <strong>Fragile / Fragile / Formidable / Falls</strong>. Includes real
+        1-, 2- and 3-D geodesics on a conformally-flat manifold, integrated with
+        an RK4 solver, where the felt length to the barrier diverges.</p>
+        <a class="card-link" href="packages/gojo_infinity/README.md">Read the package README &rarr;</a>
+      </article>
+      <article class="card">
+        <span class="tag">mobius_rickness</span>
+        <h3>M&ouml;bius-Rickness</h3>
+        <p>The Central Finite Curve realised two ways at once: as the exact zero
+        set <code>R<sup>&minus;1</sup>(0)</code> of a sign-changing Rickness field
+        on a M&ouml;bius strip, <strong>and</strong> as the SCMS / Eberly ridge of
+        maximal Rickness &mdash; the same feature from two different mathematics.</p>
+        <a class="card-link" href="packages/mobius_rickness/README.md">Read the package README &rarr;</a>
+      </article>
+      <article class="card">
+        <span class="tag">central_finite_curve</span>
+        <h3>Central Finite Curve engine</h3>
+        <p>An engine that walks the Rickness ridge &mdash; the near-maximal band
+        &mdash; across a simulated multiverse, tracing &lsquo;the one arc of
+        realities where a Rick exists&rsquo; as a computed path rather than a
+        single static surface.</p>
+        <a class="card-link" href="packages/central_finite_curve/README.md">Read the package README &rarr;</a>
+        <span class="soon">New package &mdash; its artifacts appear after <code>make artifacts</code>.</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="stills">
+    <h2>Headline stills</h2>
+    <p class="section-sub">Two rendered figures &mdash; see the
+    <a href="gallery/index.html">full gallery</a> for every figure and animation,
+    each captioned with its formula and verdict.</p>
+    <div class="stills">
+      <figure class="still">
+        <div class="media">
+          <img src="artifacts/gojo_geodesic_3d.png" alt="A bundle of geodesics bending toward Gojo at the origin in three dimensions" loading="lazy">
+        </div>
+        <figcaption><strong>Lens 3 in R&sup3;.</strong> A bundle of true geodesics
+        travelling in <code>+x</code> and bending toward Gojo at the origin &mdash;
+        one dimension-agnostic code path serves 1-, 2- and 3-D. Verdict:
+        Formidable.</figcaption>
+      </figure>
+      <figure class="still">
+        <div class="media">
+          <img src="artifacts/mobius_strip_curve.png" alt="A Mobius strip with the traced Central Finite Curve zero set overlaid" loading="lazy">
+        </div>
+        <figcaption><strong>The Central Finite Curve.</strong> The ruled M&ouml;bius
+        strip (<code>K &lt; 0</code> throughout) with the traced zero set
+        <code>R<sup>&minus;1</sup>(0)</code> overlaid &mdash; the wall separating
+        Rick-positive from Rick-negative universes.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="caveats">
+    <h2>Honest caveats</h2>
+    <p class="section-sub">The parts where the mathematics can&rsquo;t hold &mdash;
+    stated up front, because the code says so too.</p>
+    <div class="callout">
+      <h3>Where the math bends, and where it breaks</h3>
+      <ul>
+        <li>The M&ouml;bius strip is a <strong>ruled surface</strong>, so its
+        Gaussian curvature is strictly negative (<code>K &lt; 0</code>)
+        everywhere on the interior &mdash; it never vanishes. That is precisely
+        why the Central Finite Curve has to be <em>R&rsquo;s zero set</em>
+        (<code>K&middot;R = 0 &hArr; R = 0</code>): the curvature can&rsquo;t
+        supply the sign change, so <code>R</code> does.</li>
+        <li>Gojo&rsquo;s Infinity is only <em>fragile at true infinity</em>: every
+        <em>finite</em> Zeno residual <code>(1/2)<sup>n</sup> &gt; 0</code> is
+        strictly positive, and the Formidable reading rests on an
+        <em>improper</em> integral that diverges only in the limit &mdash; not at
+        any finite step.</li>
+        <li>Applying real analysis to a fictional universe has limits.
+        &lsquo;Cursed energy&rsquo; and authorial intent are <strong>not governed
+        by real analysis</strong>. These models illuminate the ideas of Infinity
+        and the Central Finite Curve &mdash; they do not govern them.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="attribution">
+    <h2>Attribution</h2>
+    <div class="callout">
+      <h3>Sources &amp; credit</h3>
+      <ul>
+        <li>Gojo lenses after Achmad Roykhan Sabiq, Oxford University Mathematics
+        Essay Competition 2026. Original PDF:
+        <a href="https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf">tomrocksmaths.com</a>.
+        This site is an original summary/companion and does <strong>not</strong>
+        reproduce the essay&rsquo;s prose &mdash; see
+        <a href="docs/essay-source.md">docs/essay-source.md</a> for the
+        section-by-section companion.</li>
+        <li>Jujutsu Kaisen and its characters are &copy; Gege Akutami / Shueisha;
+        Rick &amp; Morty is &copy; its respective rights holders. Used here for
+        commentary and mathematical illustration only.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>infinity-lab &mdash; self-contained landing page (inline CSS, no external
+    CDNs, relative paths). Opens offline with zero network. Rebuild the
+    <a href="gallery/index.html">full gallery</a> with
+    <code>python3 gallery/build_gallery.py</code>; regenerate every artifact with
+    <code>make artifacts</code>.</p>
+  </footer>
+
+</div>
+</body>
+</html>

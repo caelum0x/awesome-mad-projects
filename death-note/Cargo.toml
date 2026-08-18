@@ -1,0 +1,17 @@
+[package]
+name = "deathnote"
+version = "0.1.0"
+edition = "2021"
+description = "A SAFE sandbox 'Death Note' process reaper. It reaps ONLY the harmless sleep processes it spawned itself."
+license = "MIT"
+
+# No external dependencies on purpose: this is a self-contained, offline-runnable
+# prototype that only uses the Rust standard library plus a few shell utilities
+# (sleep, ps, kill, id) that ship with every Unix system.
+
+[[bin]]
+name = "deathnote"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 2

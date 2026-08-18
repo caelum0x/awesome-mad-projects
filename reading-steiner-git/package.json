@@ -1,0 +1,29 @@
+{
+  "name": "reading-steiner-git",
+  "version": "1.0.0",
+  "description": "Reading Steiner Git - a worldline version-control toy inspired by Steins;Gate. Operates only on a sandbox directory inside this project.",
+  "type": "commonjs",
+  "bin": {
+    "steiner": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "steiner": "node dist/cli.js",
+    "demo": "node dist/demo.js",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "keywords": [
+    "steins-gate",
+    "reading-steiner",
+    "version-control",
+    "worldline",
+    "toy-vcs",
+    "content-addressable"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

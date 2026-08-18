@@ -1,0 +1,17 @@
+{
+  "name": "category-api",
+  "version": "1.0.0",
+  "description": "A category-theory-structured HTTP/handler layer in TypeScript, with the category, functor, and naturality laws enforced by runnable tests.",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "demo": "node dist/demo.js",
+    "test": "node dist/laws.js",
+    "start": "npm run build && npm run test && npm run demo"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "@types/node": "^20.14.0"
+  }
+}

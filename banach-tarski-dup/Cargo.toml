@@ -1,0 +1,17 @@
+[package]
+name = "banach-tarski-dup"
+version = "0.1.0"
+edition = "2021"
+description = "A constructive, honest demonstration of the Banach-Tarski paradox on the free group F2"
+license = "MIT"
+
+[[bin]]
+name = "bt-dup"
+path = "src/main.rs"
+
+[lib]
+name = "banach_tarski_dup"
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 2

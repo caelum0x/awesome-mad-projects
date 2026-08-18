@@ -1,0 +1,20 @@
+[package]
+name = "at-field"
+version = "0.1.0"
+edition = "2021"
+description = "AT Field: process isolation modeled as an Evangelion-style ego boundary (pure userspace simulation)."
+license = "MIT"
+
+[[bin]]
+name = "at-field"
+path = "src/main.rs"
+
+[lib]
+name = "at_field"
+path = "src/lib.rs"
+
+# No external dependencies: this is a self-contained simulation.
+[dependencies]
+
+[profile.release]
+opt-level = 2

@@ -1,0 +1,16 @@
+# Cloudflare Pages config for the awesome-mad-projects showcase site.
+# The static site lives in ./site and any Cloudflare Pages Functions (Workers)
+# live in ./site/functions (e.g. GET /api/projects).
+#
+# Deploy:
+#   npx wrangler pages deploy site --project-name awesome-mad-projects
+# Local preview (runs Functions too):
+#   npx wrangler pages dev site
+#
+# Custom domain (mad-projects.com): Cloudflare dashboard -> Workers & Pages ->
+# awesome-mad-projects -> Custom domains -> Set up a domain -> mad-projects.com.
+# Because the domain is already on Cloudflare, DNS + SSL are configured in one click.
+
+name = "awesome-mad-projects"
+pages_build_output_dir = "site"
+compatibility_date = "2026-08-18"

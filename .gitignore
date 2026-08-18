@@ -1,0 +1,17 @@
+# Build outputs / dependencies (do not publish)
+**/__pycache__/
+*.pyc
+**/.pytest_cache/
+**/.venv/
+**/venv/
+**/node_modules/
+**/target/
+**/dist/
+.DS_Store
+
+# Third-party essay — copyright belongs to the author (Achmad Roykhan Sabiq).
+# The code cites it; we do not redistribute it.
+achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf
+*.pdf
+
+# Keep our own rendered artifacts (infinity-lab/artifacts, site/assets) committed.
