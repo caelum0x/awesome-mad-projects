@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/gallery.html" />
+  <title>Gallery — awesome-mad-projects (infinity-lab artifacts)</title>
+  <meta name="description"
+        content="The full set of rendered infinity-lab artifacts: Gojo's Infinity, the Möbius / Central Finite Curve zero set, and more." />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Gallery — awesome-mad-projects" />
+  <meta property="og:description" content="Every rendered infinity-lab artifact: plots, animations, and 3-D studies." />
+  <meta property="og:image"       content="https://mad-projects.com/assets/poster.png" />
+  <meta property="og:type"        content="website" />
+
+  <style>
+    /* ── Design tokens (shared) ────────────────────────────────────── */
+    :root {
+      --bg:       #080b14;
+      --bg-2:     #0f1220;
+      --panel:    #141826;
+      --border:   rgba(124,156,255,0.16);
+      --border-2: rgba(124,156,255,0.30);
+      --text:     #e7e9f2;
+      --muted:    #8a93b8;
+      --accent:   #7c9cff;
+      --accent-2: #b98cff;
+      --accent-3: #5be7c4;
+      --radius:   14px;
+      --maxw:     1180px;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Mesh gradient */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 1200px 600px at 90% -5%,  rgba(124,156,255,0.11), transparent 60%),
+        radial-gradient(ellipse 700px 500px  at -5% 20%,  rgba(185,140,255,0.07), transparent 55%),
+        var(--bg);
+      pointer-events: none;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    :focus-visible { outline: 3px solid var(--accent-3); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    /* Skip link */
+    .skip {
+      position: absolute; left: -999px; top: 0;
+      background: var(--accent-3); color: #080b14;
+      padding: 10px 18px; border-radius: 0 0 10px 0;
+      z-index: 200; font-weight: 700;
+    }
+    .skip:focus { left: 0; }
+
+    /* ── Animated gradient text ─────────────────────────────────────── */
+    @keyframes grad-shift {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
+    }
+    .grad-text {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2) 40%, var(--accent-3) 70%, var(--accent));
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: grad-shift 7s ease infinite;
+    }
+
+    /* ── Scroll reveal ──────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Nav ────────────────────────────────────────────────────────── */
+    header.site {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(8,11,20,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 24px;
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .brand { font-weight: 800; letter-spacing: -0.03em; font-size: 1.05rem; }
+    .brand span { color: var(--accent-2); }
+    .nav a.back {
+      color: var(--muted); font-weight: 600; font-size: 0.94rem;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .nav a.back:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Hero ───────────────────────────────────────────────────────── */
+    .page-hero {
+      padding: 60px 0 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -0.03em; font-weight: 860;
+      margin-bottom: 12px;
+    }
+    .page-hero p { color: var(--muted); max-width: 72ch; font-size: 1.05rem; }
+
+    /* ── Sections ───────────────────────────────────────────────────── */
+    section.group {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+    section.group h2 {
+      font-size: 1.4rem; margin-bottom: 6px;
+      letter-spacing: -0.02em; font-weight: 800;
+    }
+    section.group h2::before { content: '▹ '; color: var(--accent-3); }
+    section.group .sub {
+      color: var(--muted); margin-bottom: 22px; max-width: 70ch;
+    }
+
+    /* ── Grid ───────────────────────────────────────────────────────── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 18px; }
+
+    figure.art {
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(20,24,38,0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex; flex-direction: column;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    figure.art:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-2);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.48);
+    }
+    figure.art img,
+    figure.art video {
+      display: block; width: 100%; height: auto;
+      background: #03060c;
+    }
+    figure.art figcaption {
+      padding: 10px 14px; font-size: 0.84rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 64px; color: var(--muted); font-size: 0.90rem;
+    }
+    footer.site p { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    footer.site a { color: var(--accent); }
+
+    /* ── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .page-hero h1 { font-size: 1.8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .grad-text { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      figure.art:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#gallery-main">Skip to gallery</a>
+
+  <header class="site">
+    <div class="nav">
+      <div class="brand">awesome-<span>mad</span>-projects</div>
+      <a class="back" href="index.html">← Back to showcase</a>
+    </div>
+  </header>
+
+  <main id="gallery-main">
+    <section class="page-hero">
+      <div class="wrap">
+        <h1><span class="grad-text">infinity-lab</span> — artifact gallery</h1>
+        <p>Every plot and animation is rendered directly by the Python pipeline. Images are shown as
+           <code>&lt;img&gt;</code>, animations as looping muted <code>&lt;video&gt;</code> (MP4).
+           The largest GIFs are intentionally omitted in favour of their smaller MP4 equivalents.</p>
+      </div>
+    </section>
+
+    <!-- Poster -->
+    <section class="group" aria-labelledby="group-poster">
+      <div class="wrap">
+        <h2 id="group-poster">infinity-lab &mdash; poster</h2>
+        <p class="sub">The composite title card for the monorepo.</p>
+        <div class="grid">
+          <figure class="art reveal">
+            <img src="assets/poster.png" loading="lazy" width="1200" height="675"
+                 alt="infinity-lab poster combining the headline plots into one title card." />
+            <figcaption>poster.png</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gojo -->
+    <section class="group" aria-labelledby="group-gojo">
+      <div class="wrap">
+        <h2 id="group-gojo">gojo_infinity</h2>
+        <p class="sub">Four independent mathematical lenses on whether an attacker can ever reach Gojo.</p>
+        <div class="grid">
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/gojo_geodesic_3d.png">
+              <source src="assets/gojo_four_lenses.mp4" type="video/mp4" />
+            </video>
+            <figcaption>gojo_four_lenses.mp4 &mdash; the four lenses side by side.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/gojo_geodesic_3d.png">
+              <source src="assets/gojo_geodesic_3d_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption>gojo_geodesic_3d_rotating.mp4 &mdash; rotating geodesic bundle.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/gojo_geodesic_3d.png">
+              <source src="assets/gojo_geodesic_approach.mp4" type="video/mp4" />
+            </video>
+            <figcaption>gojo_geodesic_approach.mp4 &mdash; approaching, never arriving.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_geodesic_3d.png" loading="lazy"
+                 alt="3-D plot of geodesics bending around Gojo's singular metric." />
+            <figcaption>gojo_geodesic_3d.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_geodesic_bundle.png" loading="lazy"
+                 alt="Bundle of geodesic paths approaching the singularity." />
+            <figcaption>gojo_geodesic_bundle.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_metric_blowup.png" loading="lazy"
+                 alt="Plot of the metric coefficient blowing up near the boundary." />
+            <figcaption>gojo_metric_blowup.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_length_divergence.png" loading="lazy"
+                 alt="Path length diverging as the target is approached." />
+            <figcaption>gojo_length_divergence.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_series_convergence.png" loading="lazy"
+                 alt="Partial sums of a convergent series versus step count." />
+            <figcaption>gojo_series_convergence.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/gojo_cover_convergence.png" loading="lazy"
+                 alt="Cover figure showing convergence behaviour." />
+            <figcaption>gojo_cover_convergence.png</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobius -->
+    <section class="group" aria-labelledby="group-mobius">
+      <div class="wrap">
+        <h2 id="group-mobius">mobius_rickness</h2>
+        <p class="sub">The Central Finite Curve as a real zero set &mdash; a ruled surface with K &lt; 0 everywhere.</p>
+        <div class="grid">
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/mobius_strip_curve.png">
+              <source src="assets/mobius_four_panels.mp4" type="video/mp4" />
+            </video>
+            <figcaption>mobius_four_panels.mp4 &mdash; strip, ridge, heatmap, convergence.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/mobius_ridge.png">
+              <source src="assets/mobius_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption>mobius_rotating.mp4 &mdash; the saddle, rotating.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/mobius_ridge.png">
+              <source src="assets/mobius_ridge_convergence.mp4" type="video/mp4" />
+            </video>
+            <figcaption>mobius_ridge_convergence.mp4 &mdash; ridge convergence.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/mobius_strip_curve.png" loading="lazy"
+                 alt="The zero-set curve drawn on the Möbius-style strip." />
+            <figcaption>mobius_strip_curve.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/mobius_ridge.png" loading="lazy"
+                 alt="Ridge profile of the ruled surface." />
+            <figcaption>mobius_ridge.png</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/mobius_krick_heatmap.png" loading="lazy"
+                 alt="Heatmap of the curvature field across the surface." />
+            <figcaption>mobius_krick_heatmap.png</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Central Finite Curve -->
+    <section class="group" aria-labelledby="group-cfc">
+      <div class="wrap">
+        <h2 id="group-cfc">central_finite_curve</h2>
+        <p class="sub">An infinite-but-bounded arc: every reality where a Rick is the smartest being.</p>
+        <div class="grid">
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/central_finite_curve_projection.png">
+              <source src="assets/central_finite_curve_rotating_3d.mp4" type="video/mp4" />
+            </video>
+            <figcaption>central_finite_curve_rotating_3d.mp4 &mdash; rotating projection.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/central_finite_curve_projection.png">
+              <source src="assets/central_finite_curve_four_panels.mp4" type="video/mp4" />
+            </video>
+            <figcaption>central_finite_curve_four_panels.mp4 &mdash; four views.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/central_finite_curve_projection.png">
+              <source src="assets/central_finite_curve_walk.mp4" type="video/mp4" />
+            </video>
+            <figcaption>central_finite_curve_walk.mp4 &mdash; a walk along the arc.</figcaption>
+          </figure>
+          <figure class="art reveal">
+            <img src="assets/central_finite_curve_projection.png" loading="lazy"
+                 alt="2-D projection of the central finite curve." />
+            <figcaption>central_finite_curve_projection.png</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>
+        <a href="index.html">← Back to the showcase</a>
+        &middot;
+        <a href="https://github.com/caelum0x/awesome-mad-projects"
+           rel="noopener" target="_blank">Source on GitHub</a>
+        &middot;
+        <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/gallery.js" defer></script>
+</body>
+</html>

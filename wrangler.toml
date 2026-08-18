@@ -1,16 +1,22 @@
-# Cloudflare Pages config for the awesome-mad-projects showcase site.
-# The static site lives in ./site and any Cloudflare Pages Functions (Workers)
-# live in ./site/functions (e.g. GET /api/projects).
+# Cloudflare Worker + Static Assets deploy for the awesome-mad-projects site.
 #
-# Deploy:
-#   npx wrangler pages deploy site --project-name awesome-mad-projects
-# Local preview (runs Functions too):
-#   npx wrangler pages dev site
+# This matches a `npx wrangler deploy` build command (Workers Builds). The static
+# site in ./site is served via the Assets binding; the small Worker in
+# ./worker/index.js adds the GET /api/projects JSON endpoint (everything else is
+# served directly from ./site).
+#
+# Deploy (from repo root):
+#   npx wrangler deploy
+# Local preview:
+#   npx wrangler dev
 #
 # Custom domain (mad-projects.com): Cloudflare dashboard -> Workers & Pages ->
-# awesome-mad-projects -> Custom domains -> Set up a domain -> mad-projects.com.
-# Because the domain is already on Cloudflare, DNS + SSL are configured in one click.
+# awesome-mad-projects -> Settings -> Domains & Routes -> Add -> mad-projects.com.
 
 name = "awesome-mad-projects"
-pages_build_output_dir = "site"
+main = "worker/index.js"
 compatibility_date = "2026-08-18"
+
+[assets]
+directory = "./site"
+binding = "ASSETS"

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/" />
+  <title>awesome-mad-projects — fictional math, turned into real code</title>
+  <meta name="description"
+        content="A portfolio of 22 anime and pop-culture × mathematics projects, implemented as real, tested code in Python, Rust, Go, and TypeScript." />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="awesome-mad-projects" />
+  <meta property="og:description" content="Turning fictional and folk-math claims into real, tested code." />
+  <meta property="og:image"       content="https://mad-projects.com/assets/poster.png" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://mad-projects.com/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="awesome-mad-projects" />
+  <meta name="twitter:description" content="Turning fictional and folk-math claims into real, tested code." />
+  <meta name="twitter:image"       content="https://mad-projects.com/assets/poster.png" />
+
+  <style>
+    /* ── Design tokens ──────────────────────────────────────────────── */
+    :root {
+      --bg:       #080b14;
+      --bg-2:     #0f1220;
+      --panel:    #141826;
+      --panel-2:  #1a1f32;
+      --border:   rgba(124,156,255,0.16);
+      --border-2: rgba(124,156,255,0.30);
+      --text:     #e7e9f2;
+      --muted:    #8a93b8;
+      --accent:   #7c9cff;
+      --accent-2: #b98cff;
+      --accent-3: #5be7c4;
+      --py:  #4b8bbe;
+      --rs:  #e06c3b;
+      --go:  #37b6c4;
+      --ts:  #4f79d6;
+      --radius: 14px;
+      --maxw:   1180px;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+        Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Mesh gradient background on body */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 1400px 700px at 85% -5%,  rgba(124,156,255,0.13), transparent 60%),
+        radial-gradient(ellipse 1000px 600px at -10% 15%, rgba(185,140,255,0.09), transparent 55%),
+        radial-gradient(ellipse 600px 400px at 50% 90%,   rgba(91,231,196,0.05),  transparent 55%),
+        var(--bg);
+      pointer-events: none;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    :focus-visible {
+      outline: 3px solid var(--accent-3);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    /* ── Skip link ─────────────────────────────────────────────────── */
+    .skip {
+      position: absolute; left: -999px; top: 0;
+      background: var(--accent-3); color: #080b14;
+      padding: 10px 18px; border-radius: 0 0 10px 0;
+      z-index: 200; font-weight: 700;
+    }
+    .skip:focus { left: 0; }
+
+    /* ── Animated gradient text ─────────────────────────────────────── */
+    @keyframes grad-shift {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
+    }
+    .grad-text {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2) 40%, var(--accent-3) 70%, var(--accent));
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: grad-shift 7s ease infinite;
+    }
+
+    /* ── Scroll-reveal ─────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Nav ────────────────────────────────────────────────────────── */
+    header.site {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(8,11,20,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 24px;
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .brand {
+      font-weight: 800; letter-spacing: -0.03em; font-size: 1.05rem;
+      white-space: nowrap;
+    }
+    .brand .brand-mad { color: var(--accent-2); }
+    .nav ul { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+    .nav a { color: var(--muted); font-weight: 600; font-size: 0.94rem; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Hero (3-D WebGL) ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Canvas behind everything */
+    .hero-canvas-wrap {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    #hero-canvas {
+      display: block; width: 100%; height: 100%;
+      pointer-events: auto; /* allow orbit drag */
+    }
+
+    /* Gradient overlay for text readability */
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(
+        108deg,
+        rgba(8,11,20,0.92) 0%,
+        rgba(8,11,20,0.72) 42%,
+        rgba(8,11,20,0.30) 75%,
+        rgba(8,11,20,0.10) 100%
+      );
+    }
+
+    /* Hero content sits above canvas + overlay */
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 52px;
+      align-items: center;
+      padding: 88px 24px 72px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .eyebrow {
+      display: inline-block; font-size: 0.78rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent-3);
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+      line-height: 1.05; margin-bottom: 18px;
+      letter-spacing: -0.035em; font-weight: 860;
+    }
+    .hero p.thesis {
+      font-size: 1.18rem; color: var(--muted);
+      margin-bottom: 28px; max-width: 46ch;
+    }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 0.97rem;
+      border: 1px solid var(--border-2);
+      background: rgba(20,24,38,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--text);
+      transition: transform 0.14s ease, border-color 0.14s ease,
+                  box-shadow 0.14s ease, background 0.14s ease;
+    }
+    .btn:hover {
+      text-decoration: none; transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(124,156,255,0.2);
+    }
+    .btn.primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      border-color: transparent; color: #080b14;
+    }
+    .btn.primary:hover { box-shadow: 0 8px 28px rgba(124,156,255,0.4); }
+
+    .stats { display: flex; gap: 32px; margin-top: 36px; flex-wrap: wrap; }
+    .stat b {
+      display: block; font-size: 1.9rem; font-weight: 860;
+      letter-spacing: -0.03em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .stat span { color: var(--muted); font-size: 0.85rem; }
+
+    /* Hero poster fallback (shown when canvas unavailable / prefers-reduced-motion) */
+    .hero-poster {
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 28px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(124,156,255,0.08);
+      transition: opacity 0.6s ease;
+    }
+    .hero-poster img { display: block; width: 100%; height: auto; }
+    .hero-poster figcaption {
+      padding: 10px 14px; font-size: 0.80rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    /* When canvas is active, the poster becomes decorative / fades */
+    .hero.canvas-active .hero-poster {
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    /* ── Sections ───────────────────────────────────────────────────── */
+    section.block {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-head { max-width: 66ch; margin-bottom: 32px; }
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      margin-bottom: 10px; letter-spacing: -0.025em; font-weight: 800;
+    }
+    .section-head p { color: var(--muted); }
+
+    /* ── Featured media ─────────────────────────────────────────────── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .media-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      background: rgba(20,24,38,0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex; flex-direction: column;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .media-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-2);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+    .media-card video { display: block; width: 100%; height: auto; background: #03060c; }
+    .media-card .cap { padding: 13px 16px; }
+    .media-card .cap h4 { margin-bottom: 4px; font-size: 1rem; letter-spacing: -0.01em; }
+    .media-card .cap p { color: var(--muted); font-size: 0.87rem; }
+    .featured-lead { margin-top: 44px; }
+
+    /* ── Project clusters & cards ───────────────────────────────────── */
+    .cluster { margin-bottom: 52px; }
+    .cluster-title {
+      font-size: 1.22rem; margin-bottom: 6px;
+      letter-spacing: -0.01em; font-weight: 800;
+    }
+    .cluster-title::before { content: '▹ '; color: var(--accent-3); }
+    .cluster-blurb { color: var(--muted); margin-bottom: 22px; max-width: 72ch; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+      gap: 18px;
+    }
+
+    /* Glassmorphism card */
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(20,24,38,0.68);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124,156,255,0.45);
+      box-shadow:
+        0 20px 44px rgba(0,0,0,0.52),
+        0 0 28px rgba(124,156,255,0.10);
+    }
+    .card-cover {
+      display: block; width: 100%;
+      height: 130px; object-fit: cover;
+      border-radius: 0; /* card clips it */
+      background: var(--panel);
+    }
+    .card-body {
+      padding: 16px 18px 18px;
+      display: flex; flex-direction: column; gap: 10px;
+      flex: 1;
+    }
+    .card-head {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .card-name {
+      font-size: 0.98rem; font-weight: 750; letter-spacing: -0.01em;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    }
+    .card-tagline { color: var(--muted); font-size: 0.88rem; flex: 1; }
+
+    /* GitHub source link — always visible */
+    .card-github {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 700; color: var(--accent);
+      padding: 5px 10px; border-radius: 7px;
+      border: 1px solid rgba(124,156,255,0.25);
+      background: rgba(124,156,255,0.07);
+      align-self: flex-start;
+      transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+    }
+    .card-github:hover {
+      text-decoration: none;
+      background: rgba(124,156,255,0.18);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .card-github svg { flex-shrink: 0; }
+
+    .badge {
+      font-size: 0.70rem; font-weight: 800; letter-spacing: 0.05em;
+      text-transform: uppercase; padding: 3px 9px;
+      border-radius: 999px; white-space: nowrap;
+      border: 1px solid var(--border); color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+    .badge.lang-python { color: #cfe6ff; border-color: rgba(75,139,190,0.6);  background: rgba(75,139,190,0.14); }
+    .badge.lang-rust   { color: #ffd6c2; border-color: rgba(224,108,59,0.6);  background: rgba(224,108,59,0.14); }
+    .badge.lang-go     { color: #c8f4fa; border-color: rgba(55,182,196,0.6);  background: rgba(55,182,196,0.14); }
+    .badge.lang-ts     { color: #d3ddff; border-color: rgba(79,121,214,0.6);  background: rgba(79,121,214,0.14); }
+
+    /* ── Caveats ────────────────────────────────────────────────────── */
+    .caveats {
+      background: linear-gradient(160deg, rgba(224,108,59,0.05), rgba(20,24,38,0.4));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(224,108,59,0.2);
+      border-radius: var(--radius); padding: 30px 32px;
+    }
+    .caveats ul { margin-top: 18px; padding-left: 22px; }
+    .caveats li { margin-bottom: 14px; color: var(--muted); line-height: 1.65; }
+    .caveats li b { color: var(--text); }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 44px 0 68px; color: var(--muted); font-size: 0.90rem;
+    }
+    footer.site .cols {
+      display: flex; justify-content: space-between;
+      gap: 28px; flex-wrap: wrap;
+    }
+    footer.site a { color: var(--accent); }
+    .attrib { max-width: 58ch; }
+    .attrib p { margin-bottom: 10px; }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; }
+
+    /* ── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 64px 20px 52px;
+      }
+      .hero-poster { display: none; } /* canvas already fills hero on mobile */
+      .nav ul { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .stats { gap: 20px; }
+      .cta-row .btn { font-size: 0.88rem; padding: 10px 16px; }
+    }
+
+    /* ── Reduced motion overrides ────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .grad-text { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card:hover, .btn:hover, .media-card:hover { transform: none; }
+      /* Static hero: hide canvas, keep poster visible */
+      #hero-canvas { display: none; }
+      .hero.canvas-active .hero-poster { opacity: 1; pointer-events: auto; }
+      .hero { min-height: auto; padding: 56px 0; }
+      .hero-overlay { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+
+  <!-- ── Sticky nav ─────────────────────────────────────────────────── -->
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <div class="brand">awesome-<span class="brand-mad">mad</span>-projects</div>
+      <ul>
+        <li><a href="#featured">Featured</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#caveats">Caveats</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="https://github.com/caelum0x/awesome-mad-projects"
+               rel="noopener" target="_blank">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ── HERO ─────────────────────────────────────────────────────── -->
+    <section class="hero" id="hero" aria-label="Hero">
+      <!-- 3-D WebGL canvas (background layer) -->
+      <div class="hero-canvas-wrap" aria-hidden="true">
+        <canvas id="hero-canvas"
+          aria-hidden="true"
+          title="Interactive 3-D scene: Möbius strip, torus, and converging geodesics. Drag to orbit.">
+        </canvas>
+      </div>
+      <!-- Gradient overlay for readability -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Text content (above canvas) -->
+      <div class="hero-inner">
+        <div class="hero-text">
+          <span class="eyebrow">Anime &amp; pop-culture &times; mathematics, in real code</span>
+          <h1><span class="grad-text">awesome-mad-projects</span></h1>
+          <p class="thesis">
+            Turning fictional and folk-math claims into real, tested code &mdash;
+            22&nbsp;prototypes across Python, Rust, Go, and TypeScript, where a
+            genuine theorem, metric, or geometry does the work.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#projects">Browse the projects</a>
+            <a class="btn" href="gallery.html">Full gallery</a>
+            <a class="btn"
+               href="https://github.com/caelum0x/awesome-mad-projects"
+               rel="noopener" target="_blank">View source</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b id="hero-count">22</b><span>projects</span></div>
+            <div class="stat"><b>4</b><span>languages</span></div>
+            <div class="stat"><b>3</b><span>clusters</span></div>
+          </div>
+        </div>
+
+        <!-- Poster shown when WebGL/motion unavailable; dims to decorative when canvas runs -->
+        <figure class="hero-poster" id="hero-poster" aria-hidden="true">
+          <img src="assets/poster.png" width="1200" height="675"
+               alt="infinity-lab poster: composited plots of Gojo's Infinity geodesics, the Möbius/Central Finite Curve zero set, and metric blow-ups." />
+          <figcaption>
+            The infinity-lab poster &mdash; four mathematical lenses on infinity, curvature,
+            and compactification.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ── FEATURED ──────────────────────────────────────────────────── -->
+    <section class="block" id="featured">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>Featured</h2>
+          <p>Rendered straight from the code. Two multi-panel explainers and three rotating
+             3-D studies, all produced by the infinity-lab pipeline.
+             Video is muted, looping, and lazy by default.</p>
+        </div>
+
+        <div class="featured-grid">
+          <figure class="media-card reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/gojo_geodesic_3d.png">
+              <source src="assets/gojo_four_lenses.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <figcaption class="cap">
+              <h4>Gojo's Infinity &mdash; four lenses</h4>
+              <p>The same question &mdash; <em>can an attacker ever reach Gojo?</em> &mdash;
+                answered four ways: convergent series, diverging path length, a blowing-up
+                metric, and geodesics that never arrive.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/mobius_strip_curve.png">
+              <source src="assets/mobius_four_panels.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <figcaption class="cap">
+              <h4>Möbius / Central Finite Curve &mdash; four panels</h4>
+              <p>A Rick &amp; Morty conceit made honest: the Central Finite Curve as a real
+                zero set, shown as strip, ridge, heatmap, and convergence together.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="section-head featured-lead reveal">
+          <h2 style="font-size:1.35rem;">Rotating studies</h2>
+          <p>Drag-free 3-D turntables of the three headline surfaces.</p>
+        </div>
+
+        <div class="featured-grid">
+          <figure class="media-card reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/gojo_geodesic_3d.png">
+              <source src="assets/gojo_geodesic_3d_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Gojo geodesic bundle, rotating</h4>
+              <p>Geodesics approaching the singular metric from every direction &mdash; the
+                length integral diverges before contact.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/mobius_ridge.png">
+              <source src="assets/mobius_rotating.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Möbius zero set, rotating</h4>
+              <p>The ruled surface whose Gaussian curvature K is strictly negative &mdash;
+                you can see the saddle at every point.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="media-card reveal">
+            <video controls loop muted playsinline preload="metadata"
+                   poster="assets/central_finite_curve_projection.png">
+              <source src="assets/central_finite_curve_rotating_3d.mp4" type="video/mp4" />
+            </video>
+            <figcaption class="cap">
+              <h4>Central Finite Curve, rotating</h4>
+              <p>An infinite-but-bounded arc: every reality where a Rick is the smartest
+                being, projected into three dimensions.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ──────────────────────────────────────────────────── -->
+    <section class="block" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>Projects &mdash; all <span id="project-count">22</span></h2>
+          <p>Grouped into three clusters. Every card links to its source on GitHub.
+             The same data is served as JSON at
+             <code><a href="api/projects">/api/projects</a></code> by a Cloudflare Pages Function.</p>
+        </div>
+        <div id="clusters">
+          <noscript>
+            <p style="color:var(--muted)">Enable JavaScript to render the project grid, or view the
+              machine-readable list at <a href="projects.json">projects.json</a> and the full
+              <a href="gallery.html">gallery</a>.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CAVEATS ───────────────────────────────────────────────────── -->
+    <section class="block" id="caveats">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2>Honest caveats</h2>
+          <p>Where the math can't hold, the code says so. These are analogies and simulations,
+            not claims about reality.</p>
+        </div>
+        <div class="caveats reveal">
+          <ul>
+            <li><b>The ruled surface has K &lt; 0 everywhere.</b> The Möbius / Central-Finite-Curve
+              zero set is a genuine ruled surface, so its Gaussian curvature is strictly negative.
+              It is a beautiful saddle, not a magical loop &mdash; the geometry is honest,
+              the mythology is not.</li>
+            <li><b>True infinity is fragile.</b> The infinite-hotel scheduler and Gojo's
+              &ldquo;Infinity&rdquo; only work as limits and countable re-indexings. Push them to
+              literal, actualized infinity in finite memory and they break &mdash; the code models
+              the paradox, it does not resolve it.</li>
+            <li><b>Cursed energy is not governed by real analysis.</b> Domain Expansion, Unlimited
+              Void, and the Stand system dramatize constraint solving, container isolation, and
+              scheduling. They are safe, sandboxed simulations over process tables the tools create
+              and own &mdash; no anime physics is claimed.</li>
+            <li><b>Thermodynamic and paradox pieces are caricatures.</b> Madoka's karmic entropy,
+              Zeno's transport, and Banach&ndash;Tarski's duplication capture one true idea each
+              (an entropy budget, a geometric series, a free-group paradox) and deliberately ignore
+              the rest of the physics.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>
+            Mathematics after <strong>Achmad Roykhan Sabiq</strong>, whose essay for the
+            <em>Oxford Mathematics Essay Competition 2026</em> inspired the infinity-lab work.
+            Attribution and summary only &mdash; no essay prose is reproduced here.
+            <a href="https://tomrocksmaths.com/wp-content/uploads/2026/06/achmad-roykhan-sabiq_essay_competition_2026-achmad-roykhan-sabiq.pdf"
+               rel="noopener" target="_blank">Essay PDF ↗</a>
+          </p>
+          <p>
+            Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a>
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="gallery.html">Full gallery ↗</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">Repository ↗</a>
+          <a href="api/projects">JSON API ↗</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Inline JSON island (offline / file:// fallback) -->
+  <script type="application/json" id="projects-data">
+{
+  "meta": {
+    "title": "awesome-mad-projects",
+    "thesis": "Turning fictional and folk-math claims into real, tested code.",
+    "repo": "https://github.com/caelum0x/awesome-mad-projects",
+    "count": 22
+  },
+  "clusters": [
+    {
+      "id": "infinity-geometry",
+      "title": "Infinity & Geometry — the infinity-lab monorepo",
+      "blurb": "A Python monorepo that treats infinity, curvature, and compactification as objects you can compute with.",
+      "projects": [
+        {
+          "name": "gojo_infinity",
+          "slug": "gojo_infinity",
+          "tagline": "Gojo Satoru's \"Infinity\" examined through four independent mathematical lenses — can an attacker ever reach him?",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/gojo_infinity"
+        },
+        {
+          "name": "mobius_rickness",
+          "slug": "mobius_rickness",
+          "tagline": "The Central Finite Curve as a real zero set — a Rick & Morty conceit turned into honest differential geometry.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/mobius_rickness"
+        },
+        {
+          "name": "central_finite_curve",
+          "slug": "central_finite_curve",
+          "tagline": "An infinite-but-bounded region of the multiverse, carved out as a src-layout geometry package.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/central_finite_curve"
+        },
+        {
+          "name": "calabi_yau_latent",
+          "slug": "calabi_yau_latent",
+          "tagline": "A latent space with large extended dimensions and compactified periodic ones — a toy Calabi–Yau compactification.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/calabi_yau_latent"
+        },
+        {
+          "name": "domain_expansion",
+          "slug": "domain_expansion",
+          "tagline": "Domain Expansion as a coupled constraint solver: power is the stability and well-posedness of the constraint system.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/domain_expansion"
+        }
+      ]
+    },
+    {
+      "id": "math-in-code",
+      "title": "Math in code",
+      "blurb": "Standalone prototypes where a real theorem or metric does the work.",
+      "projects": [
+        {
+          "name": "divergence-meter",
+          "slug": "divergence-meter",
+          "tagline": "A Steins;Gate worldline-divergence number, classified into an attractor field and rendered on a nixie-tube display.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/divergence-meter"
+        },
+        {
+          "name": "padic-embeddings",
+          "slug": "padic-embeddings",
+          "tagline": "An embedding space whose geometry is governed by the p-adic metric instead of the usual Euclidean one.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/padic-embeddings"
+        },
+        {
+          "name": "madoka-entropy",
+          "slug": "madoka-entropy",
+          "tagline": "A closed system of magical girls, a global entropy budget, and the incubators who harvest the difference.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/madoka-entropy"
+        },
+        {
+          "name": "surreal-priority",
+          "slug": "surreal-priority",
+          "tagline": "Conway's surreal numbers as process priorities, driving a deterministic scheduler simulation.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/surreal-priority"
+        },
+        {
+          "name": "statmech-scheduler",
+          "slug": "statmech-scheduler",
+          "tagline": "A simulation-only CPU scheduler that treats tasks as particles with energy and the system as having a temperature.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/statmech-scheduler"
+        },
+        {
+          "name": "hairy-ball-router",
+          "slug": "hairy-ball-router",
+          "tagline": "Routes packets across the sphere S² by following a continuous tangent vector field — the Hairy Ball Theorem, live.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/hairy-ball-router"
+        },
+        {
+          "name": "banach-tarski-dup",
+          "slug": "banach-tarski-dup",
+          "tagline": "The combinatorial heart of the Banach–Tarski paradox on the free group F2, constructively and exactly.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/banach-tarski-dup"
+        },
+        {
+          "name": "zeno-protocol",
+          "slug": "zeno-protocol",
+          "tagline": "Delivers a message by moving half the remaining distance every tick — transport built on Zeno's dichotomy paradox.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/zeno-protocol"
+        },
+        {
+          "name": "infinite-hotel-scheduler",
+          "slug": "infinite-hotel-scheduler",
+          "tagline": "Hilbert's Infinite Hotel as a cloud scheduler — a resource allocator that is never full.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinite-hotel-scheduler"
+        },
+        {
+          "name": "category-api",
+          "slug": "category-api",
+          "tagline": "An HTTP/handler layer modeled as a category, with the relevant laws actually enforced by property-based tests.",
+          "language": "TypeScript",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/category-api"
+        },
+        {
+          "name": "reading-steiner-git",
+          "slug": "reading-steiner-git",
+          "tagline": "A Steins;Gate worldline VCS toy that snapshots a sandbox and reports a six-decimal Divergence Meter reading.",
+          "language": "TypeScript",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/reading-steiner-git"
+        }
+      ]
+    },
+    {
+      "id": "systems-anime",
+      "title": "Systems & anime (safe userspace)",
+      "blurb": "OS-flavored prototypes that stay entirely inside a sandbox they create and own.",
+      "projects": [
+        {
+          "name": "death-note",
+          "slug": "death-note",
+          "tagline": "A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named target dies.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/death-note"
+        },
+        {
+          "name": "jojo-stands",
+          "slug": "jojo-stands",
+          "tagline": "A tick-based OS-scheduler simulation whose in-memory processes are granted JoJo Stand abilities.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/jojo-stands"
+        },
+        {
+          "name": "unlimited-void",
+          "slug": "unlimited-void",
+          "tagline": "Gojo's Unlimited Void modeled as a container-runtime primitive over a simulated process table.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/unlimited-void"
+        },
+        {
+          "name": "at-field",
+          "slug": "at-field",
+          "tagline": "Process isolation modeled as an Evangelion AT Field — the boundary that keeps one process distinct and inviolable.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/at-field"
+        },
+        {
+          "name": "equivalent-exchange-fs",
+          "slug": "equivalent-exchange-fs",
+          "tagline": "A filesystem enforcing the Law of Equivalent Exchange: to obtain, something of equal value must be lost.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/equivalent-exchange-fs"
+        },
+        {
+          "name": "vanguard-anticheat",
+          "slug": "vanguard-anticheat",
+          "tagline": "The honest subset of a game anti-cheat, entirely in safe userspace over a sandbox it creates and owns.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/vanguard-anticheat"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
+  <!-- Three.js (vendored, no CDN) -->
+  <script src="assets/vendor/three.min.js"></script>
+  <!-- 3-D hero (uses THREE global) -->
+  <script src="assets/hero3d.js"></script>
+  <!-- Data-driven project grid -->
+  <script src="assets/app.js"></script>
+</body>
+</html>

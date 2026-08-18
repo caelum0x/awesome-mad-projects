@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "title": "awesome-mad-projects",
+    "thesis": "Turning fictional and folk-math claims into real, tested code.",
+    "repo": "https://github.com/caelum0x/awesome-mad-projects",
+    "count": 22
+  },
+  "clusters": [
+    {
+      "id": "infinity-geometry",
+      "title": "Infinity & Geometry — the infinity-lab monorepo",
+      "blurb": "A Python monorepo that treats infinity, curvature, and compactification as objects you can compute with.",
+      "projects": [
+        {
+          "name": "gojo_infinity",
+          "slug": "gojo_infinity",
+          "tagline": "Gojo Satoru's \"Infinity\" examined through four independent mathematical lenses — can an attacker ever reach him?",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/gojo_infinity"
+        },
+        {
+          "name": "mobius_rickness",
+          "slug": "mobius_rickness",
+          "tagline": "The Central Finite Curve as a real zero set — a Rick & Morty conceit turned into honest differential geometry.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/mobius_rickness"
+        },
+        {
+          "name": "central_finite_curve",
+          "slug": "central_finite_curve",
+          "tagline": "An infinite-but-bounded region of the multiverse, carved out as a src-layout geometry package.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/central_finite_curve"
+        },
+        {
+          "name": "calabi_yau_latent",
+          "slug": "calabi_yau_latent",
+          "tagline": "A latent space with large extended dimensions and compactified periodic ones — a toy Calabi–Yau compactification.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/calabi_yau_latent"
+        },
+        {
+          "name": "domain_expansion",
+          "slug": "domain_expansion",
+          "tagline": "Domain Expansion as a coupled constraint solver: power is the stability and well-posedness of the constraint system.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/domain_expansion"
+        }
+      ]
+    },
+    {
+      "id": "math-in-code",
+      "title": "Math in code",
+      "blurb": "Standalone prototypes where a real theorem or metric does the work.",
+      "projects": [
+        {
+          "name": "divergence-meter",
+          "slug": "divergence-meter",
+          "tagline": "A Steins;Gate worldline-divergence number, classified into an attractor field and rendered on a nixie-tube display.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/divergence-meter"
+        },
+        {
+          "name": "padic-embeddings",
+          "slug": "padic-embeddings",
+          "tagline": "An embedding space whose geometry is governed by the p-adic metric instead of the usual Euclidean one.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/padic-embeddings"
+        },
+        {
+          "name": "madoka-entropy",
+          "slug": "madoka-entropy",
+          "tagline": "A closed system of magical girls, a global entropy budget, and the incubators who harvest the difference.",
+          "language": "Python",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/madoka-entropy"
+        },
+        {
+          "name": "surreal-priority",
+          "slug": "surreal-priority",
+          "tagline": "Conway's surreal numbers as process priorities, driving a deterministic scheduler simulation.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/surreal-priority"
+        },
+        {
+          "name": "statmech-scheduler",
+          "slug": "statmech-scheduler",
+          "tagline": "A simulation-only CPU scheduler that treats tasks as particles with energy and the system as having a temperature.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/statmech-scheduler"
+        },
+        {
+          "name": "hairy-ball-router",
+          "slug": "hairy-ball-router",
+          "tagline": "Routes packets across the sphere S² by following a continuous tangent vector field — the Hairy Ball Theorem, live.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/hairy-ball-router"
+        },
+        {
+          "name": "banach-tarski-dup",
+          "slug": "banach-tarski-dup",
+          "tagline": "The combinatorial heart of the Banach–Tarski paradox on the free group F2, constructively and exactly.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/banach-tarski-dup"
+        },
+        {
+          "name": "zeno-protocol",
+          "slug": "zeno-protocol",
+          "tagline": "Delivers a message by moving half the remaining distance every tick — transport built on Zeno's dichotomy paradox.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/zeno-protocol"
+        },
+        {
+          "name": "infinite-hotel-scheduler",
+          "slug": "infinite-hotel-scheduler",
+          "tagline": "Hilbert's Infinite Hotel as a cloud scheduler — a resource allocator that is never full.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinite-hotel-scheduler"
+        },
+        {
+          "name": "category-api",
+          "slug": "category-api",
+          "tagline": "An HTTP/handler layer modeled as a category, with the relevant laws actually enforced by property-based tests.",
+          "language": "TypeScript",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/category-api"
+        },
+        {
+          "name": "reading-steiner-git",
+          "slug": "reading-steiner-git",
+          "tagline": "A Steins;Gate worldline VCS toy that snapshots a sandbox and reports a six-decimal Divergence Meter reading.",
+          "language": "TypeScript",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/reading-steiner-git"
+        }
+      ]
+    },
+    {
+      "id": "systems-anime",
+      "title": "Systems & anime (safe userspace)",
+      "blurb": "OS-flavored prototypes that stay entirely inside a sandbox they create and own.",
+      "projects": [
+        {
+          "name": "death-note",
+          "slug": "death-note",
+          "tagline": "A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named target dies.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/death-note"
+        },
+        {
+          "name": "jojo-stands",
+          "slug": "jojo-stands",
+          "tagline": "A tick-based OS-scheduler simulation whose in-memory processes are granted JoJo Stand abilities.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/jojo-stands"
+        },
+        {
+          "name": "unlimited-void",
+          "slug": "unlimited-void",
+          "tagline": "Gojo's Unlimited Void modeled as a container-runtime primitive over a simulated process table.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/unlimited-void"
+        },
+        {
+          "name": "at-field",
+          "slug": "at-field",
+          "tagline": "Process isolation modeled as an Evangelion AT Field — the boundary that keeps one process distinct and inviolable.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/at-field"
+        },
+        {
+          "name": "equivalent-exchange-fs",
+          "slug": "equivalent-exchange-fs",
+          "tagline": "A filesystem enforcing the Law of Equivalent Exchange: to obtain, something of equal value must be lost.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/equivalent-exchange-fs"
+        },
+        {
+          "name": "vanguard-anticheat",
+          "slug": "vanguard-anticheat",
+          "tagline": "The honest subset of a game anti-cheat, entirely in safe userspace over a sandbox it creates and owns.",
+          "language": "Rust",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/vanguard-anticheat"
+        }
+      ]
+    }
+  ]
+}
