@@ -31,7 +31,7 @@
     figureIndex += 1;
     var figNum = 'Fig. ' + (figureIndex < 10 ? '0' : '') + figureIndex;
 
-    var detailUrl = 'projects/' + p.slug + '.html';
+    var detailUrl = 'projects/' + p.slug;
 
     // Cover image wrapped in a link to the detail page
     var coverImg = el('img', {
