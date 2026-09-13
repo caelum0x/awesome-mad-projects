@@ -10,6 +10,20 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Consolidate legacy static-file URLs that Google discovered before the
+    // extensionless canonicals shipped. Keep the query string, but issue a
+    // permanent redirect so ranking signals move to one URL.
+    if (
+      (request.method === "GET" || request.method === "HEAD") &&
+      url.pathname.endsWith(".html")
+    ) {
+      const canonical = new URL(url);
+      canonical.pathname = url.pathname.endsWith("/index.html")
+        ? url.pathname.slice(0, -"index.html".length) || "/"
+        : url.pathname.slice(0, -".html".length) || "/";
+      return Response.redirect(canonical.toString(), 301);
+    }
+
     if (url.pathname === "/api/projects") {
       if (request.method === "OPTIONS") {
         return new Response(null, { status: 204, headers: cors() });
