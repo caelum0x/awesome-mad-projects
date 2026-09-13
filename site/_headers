@@ -17,6 +17,12 @@
 /*.html
   Cache-Control: no-cache
 
+/projects/*
+  Cache-Control: no-cache
+
+/gallery
+  Cache-Control: no-cache
+
 /
   Cache-Control: no-cache
 

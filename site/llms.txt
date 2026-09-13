@@ -1,0 +1,27 @@
+# Mad Projects
+
+> Mad Projects turns mathematical ideas from anime, games, and pop culture into runnable, tested simulations.
+
+Each project separates the fictional premise from the mathematical or systems model. When a premise is impossible or unsafe, the implementation uses a labeled simulation and states the limitation.
+
+## Canonical pages
+
+- [Project directory](https://mad-projects.com/): Browse the full collection and its mathematical themes.
+- [Gallery](https://mad-projects.com/gallery): View generated figures and animations from the projects.
+- [AT Field](https://mad-projects.com/projects/at-field): An explanation of Evangelion's Absolute Terror Field and a safe Rust process-isolation simulation.
+- [Central Finite Curve simulation](https://mad-projects.com/projects/central_finite_curve): A Python model of a constrained region in an eight-dimensional simulated universe space.
+- [Möbius Rickness](https://mad-projects.com/projects/mobius_rickness): Two differential-geometric readings of the Central Finite Curve on a Möbius strip: a zero set and an SCMS ridge.
+- [Madoka Entropy](https://mad-projects.com/projects/madoka-entropy): A simulation of local entropy decrease with a larger global cost.
+- [XML sitemap](https://mad-projects.com/sitemap.xml): Complete public page inventory.
+- [Source repository](https://github.com/caelum0x/awesome-mad-projects): Code, tests, documentation, and license.
+
+## Term definitions
+
+- In Neon Genesis Evangelion, AT Field means Absolute Terror Field, the boundary of self that separates and protects an individual consciousness. The Rust project models this as an in-memory process and message-isolation boundary.
+- “Central Finite Curve” comes from Rick and Morty. This repository does not claim that a real multiverse curve exists. It provides explicit mathematical models whose assumptions and outputs you can inspect.
+
+## Accuracy notes
+
+- Treat project results as software simulations or mathematical demonstrations under stated assumptions, not evidence that a fictional mechanism exists.
+- Use each project page and linked source code for its exact model, equations, test claims, and limitations.
+- Check the canonical page before citing test counts, performance, generated artifacts, or implementation status because those values can change.

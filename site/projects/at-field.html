@@ -3,28 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href="https://mad-projects.com/projects/at-field.html" />
-  <title>at-field — awesome-mad-projects</title>
+  <link rel="canonical" href="https://mad-projects.com/projects/at-field" />
+  <title>What Is an AT Field? Evangelion Meaning &amp; Rust Model</title>
   <meta name="description"
-        content="Process isolation modeled as an Evangelion AT Field — the boundary that keeps one process distinct and inviolable. Memory barriers, isolation tokens, safe Rust." />
+        content="AT Field means Absolute Terror Field in Evangelion. Learn its physical and psychological meaning, then explore a safe Rust process-isolation model." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="at-field — awesome-mad-projects" />
-  <meta property="og:description"  content="Process isolation as an Evangelion AT Field: boundary, individuation, inviolability. Safe Rust." />
+  <meta property="og:title"        content="What Is an AT Field? Evangelion Meaning &amp; Rust Model" />
+  <meta property="og:description"  content="Explore Evangelion's Absolute Terror Field as a safe Rust model of isolation boundaries and field penetration." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/at-field.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:type"         content="website" />
-  <meta property="og:url"          content="https://mad-projects.com/projects/at-field.html" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/at-field" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="at-field — awesome-mad-projects" />
-  <meta name="twitter:description" content="AT Field as process isolation boundary in safe Rust." />
+  <meta name="twitter:title"       content="What Is an AT Field? Evangelion Meaning &amp; Rust Model" />
+  <meta name="twitter:description" content="Evangelion's Absolute Terror Field modeled as process isolation in safe Rust." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/at-field.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "AT Field",
+        "description": "A safe Rust simulation that models Evangelion's Absolute Terror Field as a process isolation boundary.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/at-field",
+        "url": "https://mad-projects.com/projects/at-field"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an AT Field?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Neon Genesis Evangelion, an AT Field, or Absolute Terror Field, is the boundary of self that separates and protects an individual consciousness."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does AT Field stand for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "AT Field stands for Absolute Terror Field. In Evangelion, it names both a defensive barrier and the boundary that separates one individual self from another."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is an AT Field physical or psychological?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is both within Evangelion's fiction: Angels and Evangelions manifest the AT Field as a physical defensive barrier, while the story also uses it as the psychological boundary of the individual self."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is an AT Field neutralized?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Evangelion units can project their own AT Fields to neutralize an opposing field, allowing an attack to reach the protected target."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does this Rust project model an AT Field?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The project represents an AT Field as an isolation boundary around an in-memory actor. Signals can be blocked, resisted, or allowed through according to the field and simulation rules."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -37,11 +98,11 @@
         <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
       </a>
       <ul>
-        <li><a href="../index.html#featured">Featured</a></li>
-        <li><a href="../index.html#projects">Projects</a></li>
-        <li><a href="../index.html#opensource">Open source</a></li>
-        <li><a href="../index.html#caveats">Caveats</a></li>
-        <li><a href="../gallery.html">Gallery</a></li>
+        <li><a href="/#featured">Featured</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#opensource">Open source</a></li>
+        <li><a href="/#caveats">Caveats</a></li>
+        <li><a href="/gallery">Gallery</a></li>
         <li>
           <a class="nav-btn star"
              href="https://github.com/caelum0x/awesome-mad-projects"
@@ -62,7 +123,7 @@
   </header>
 
   <div class="breadcrumb">
-    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>at-field
+    <a href="../">home</a><span>/</span><a href="/#projects">projects</a><span>/</span>at-field
   </div>
 
   <main id="main">
@@ -70,13 +131,13 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>at-field</h1>
+          <h1>AT Field: Absolute Terror Field in Rust</h1>
           <p class="detail-tagline">Process isolation modeled as an Evangelion AT Field &mdash; the absolute boundary that keeps one process distinct and inviolable. Memory barriers, isolation tokens, safe Rust.</p>
           <div class="source-cta">
             <a class="btn primary"
                href="https://github.com/caelum0x/awesome-mad-projects/tree/main/at-field"
                rel="noopener" target="_blank">source &#x2197;</a>
-            <a class="btn" href="../index.html#projects">All projects</a>
+            <a class="btn" href="/#projects">All projects</a>
           </div>
         </div>
         <figure class="hero-img-frame">
@@ -91,7 +152,7 @@
     <div class="wrap">
 
       <section class="detail-section" id="idea">
-        <h2>The idea</h2>
+        <h2>What is an AT Field?</h2>
         <p>
           In <em>Neon Genesis Evangelion</em>, the AT Field (Absolute Terror Field) is the boundary
           of self &mdash; the barrier that makes each consciousness distinct and inviolable. Without
@@ -120,6 +181,44 @@
           <li>The collapse can be triggered deliberately, demonstrating what happens to isolation
             when boundaries dissolve.</li>
         </ul>
+      </section>
+
+      <section class="detail-section" id="faq">
+        <h2>AT Field FAQ</h2>
+        <h3>What is an AT Field?</h3>
+        <p>
+          In <em>Neon Genesis Evangelion</em>, an AT Field, or Absolute Terror Field, is the
+          boundary of self that separates and protects an individual consciousness.
+        </p>
+        <h3>What does AT Field stand for?</h3>
+        <p>
+          AT Field stands for <strong>Absolute Terror Field</strong>. In the story, the term names
+          both a defensive barrier and the boundary that separates one individual self from another.
+        </p>
+        <h3>Is an AT Field physical or psychological?</h3>
+        <p>
+          It is both within Evangelion&rsquo;s fiction. Angels and Evangelions manifest the field as a
+          physical defensive barrier, while the story also uses it as the psychological boundary of
+          the individual self.
+        </p>
+        <h3>How is an AT Field neutralized?</h3>
+        <p>
+          Evangelion units can project their own AT Fields to neutralize an opposing field, allowing
+          an attack to reach the protected target.
+        </p>
+        <h3>How does this Rust project model an AT Field?</h3>
+        <p>
+          The project represents an AT Field as an isolation boundary around an in-memory actor.
+          Signals can be blocked, resisted, or allowed through according to the field and
+          simulation rules.
+        </p>
+        <p>
+          Further reading: the
+          <a href="https://evangelion.fandom.com/wiki/Absolute_Terror_Field" rel="noopener" target="_blank">Evangelion Wiki overview</a>
+          and the
+          <a href="https://www.evamonkey.com/platinum-booklets/glossary.php" rel="noopener" target="_blank">Platinum Booklet glossary</a>.
+          The Rust analogy on this page is specific to this project.
+        </p>
       </section>
 
       <section class="detail-section" id="run">
@@ -153,7 +252,7 @@ cargo run
           <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
         </div>
         <div class="footer-links">
-          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="/gallery">Full gallery &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
           <a href="../api/projects">JSON API &#x2197;</a>

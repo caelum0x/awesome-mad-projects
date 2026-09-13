@@ -3,28 +3,65 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="canonical" href="https://mad-projects.com/projects/madoka-entropy.html" />
-  <title>madoka-entropy — awesome-mad-projects</title>
+  <link rel="canonical" href="https://mad-projects.com/projects/madoka-entropy" />
+  <title>Madoka Entropy Explained | Python Simulation</title>
   <meta name="description"
-        content="A closed system of magical girls, a global entropy budget, and the incubators who harvest the difference — dS_total ≥ 0 verified across 60 seeds × 150 steps with zero violations." />
+        content="Explore Madoka Magica's entropy premise through a Python simulation that tests a closed magical-girl system across 9,000 steps with zero invariant violations." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="madoka-entropy — awesome-mad-projects" />
-  <meta property="og:description"  content="Puella Magi Madoka as a thermodynamic system: karmic entropy budget, zero second-law violations." />
+  <meta property="og:title"        content="Madoka Entropy Explained Through a Python Simulation" />
+  <meta property="og:description"  content="Test Madoka Magica's fictional entropy premise as a closed Python system with an explicit second-law invariant." />
   <meta property="og:image"        content="https://mad-projects.com/assets/emblems/madoka-entropy.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:type"         content="website" />
-  <meta property="og:url"          content="https://mad-projects.com/projects/madoka-entropy.html" />
+  <meta property="og:url"          content="https://mad-projects.com/projects/madoka-entropy" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="madoka-entropy — awesome-mad-projects" />
-  <meta name="twitter:description" content="Madoka entropy budget: dS_total ≥ 0 verified, zero second-law violations." />
+  <meta name="twitter:title"       content="Madoka Entropy Explained Through a Python Simulation" />
+  <meta name="twitter:description" content="A caveated Python model of Madoka Magica's fictional entropy budget and second-law invariant." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/madoka-entropy.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Madoka Entropy",
+        "description": "A Python simulation of a fictional magical-girl entropy budget with a tested second-law invariant.",
+        "programmingLanguage": "Python",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/madoka-entropy",
+        "url": "https://mad-projects.com/projects/madoka-entropy"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does entropy mean in Madoka Magica?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In the story, Kyubey says emotional energy from magical girls can counter the universe's entropy. This project treats that premise as a fictional scalar model, not real thermodynamics."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Madoka Entropy simulation test the second law?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each simulated wish lowers local entropy but raises global entropy by a larger amount. Tests check that total entropy never decreases across 60 seeds and 150 steps per seed."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -37,11 +74,11 @@
         <img src="../assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
       </a>
       <ul>
-        <li><a href="../index.html#featured">Featured</a></li>
-        <li><a href="../index.html#projects">Projects</a></li>
-        <li><a href="../index.html#opensource">Open source</a></li>
-        <li><a href="../index.html#caveats">Caveats</a></li>
-        <li><a href="../gallery.html">Gallery</a></li>
+        <li><a href="/#featured">Featured</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#opensource">Open source</a></li>
+        <li><a href="/#caveats">Caveats</a></li>
+        <li><a href="/gallery">Gallery</a></li>
         <li>
           <a class="nav-btn star"
              href="https://github.com/caelum0x/awesome-mad-projects"
@@ -62,7 +99,7 @@
   </header>
 
   <div class="breadcrumb">
-    <a href="../">home</a><span>/</span><a href="../index.html#projects">projects</a><span>/</span>madoka-entropy
+    <a href="../">home</a><span>/</span><a href="/#projects">projects</a><span>/</span>madoka-entropy
   </div>
 
   <main id="main">
@@ -70,13 +107,13 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-python">Python</span>
-          <h1>madoka-entropy</h1>
+          <h1>Madoka Entropy: a Python thermodynamics simulation</h1>
           <p class="detail-tagline">A closed system of magical girls, a global entropy budget, and the incubators who harvest the difference &mdash; &Delta;S&#x209C;&#x2092;&#x209C;&#x2090;&#x2097; &ge; 0 verified across 60 seeds &times; 150 steps with zero violations.</p>
           <div class="source-cta">
             <a class="btn primary"
                href="https://github.com/caelum0x/awesome-mad-projects/tree/main/madoka-entropy"
                rel="noopener" target="_blank">source &#x2197;</a>
-            <a class="btn" href="../index.html#projects">All projects</a>
+            <a class="btn" href="/#projects">All projects</a>
           </div>
         </div>
         <figure class="hero-img-frame">
@@ -109,6 +146,21 @@
           thermodynamics. The karmic rule dS = (k&minus;1)&middot;x &gt; 0 is chosen to always satisfy
           the second law &mdash; it is a consistency constraint, not a physical derivation.</p>
         </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Madoka entropy questions</h2>
+        <h3>What does entropy mean in Madoka Magica?</h3>
+        <p>
+          In the story, Kyubey says emotional energy from magical girls can counter the universe&rsquo;s
+          entropy. This project treats that premise as a fictional scalar model, not real
+          thermodynamics.
+        </p>
+        <h3>How does the Madoka Entropy simulation test the second law?</h3>
+        <p>
+          Each simulated wish lowers local entropy but raises global entropy by a larger amount.
+          Tests check that total entropy never decreases across 60 seeds and 150 steps per seed.
+        </p>
       </section>
 
       <section class="detail-section" id="mathematics">
@@ -145,7 +197,7 @@ Invariant verification: 60 seeds × 150 steps = 9,000 steps
                  alt="Total entropy rising monotonically over 120 simulation steps; individual girl contributions stacked"
                  loading="lazy" width="800" height="600" />
             <figcaption class="cap">
-              <h4>Entropy over time</h4>
+              <h3>Entropy over time</h3>
               <p>Total entropy rising monotonically (seed=42, 120 steps, 5 girls). Each girl&rsquo;s
                  contribution is stacked; witch events appear as vertical jumps.</p>
             </figcaption>
@@ -182,7 +234,7 @@ python -m pytest tests/ -v</pre>
           <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
         </div>
         <div class="footer-links">
-          <a href="../gallery.html">Full gallery &#x2197;</a>
+          <a href="/gallery">Full gallery &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
           <a href="../api/projects">JSON API &#x2197;</a>

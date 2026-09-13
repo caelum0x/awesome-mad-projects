@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/" />
-  <title>Anime &amp; Pop-Culture Math, Turned Into Real Code — Mad Projects</title>
+  <title>Anime Math &amp; Pop-Culture Ideas in Code — Mad Projects</title>
   <meta name="description"
-        content="22 open-source projects turning anime &amp; pop-culture math into real, tested code — Gojo's Infinity, the Central Finite Curve, Banach–Tarski, Steins;Gate &amp; more." />
+        content="Explore 22 open-source projects that turn anime and pop-culture math into tested code, from Gojo's Infinity to the Central Finite Curve and Banach–Tarski." />
   <meta name="color-scheme" content="light" />
 
   <!-- Favicons -->
@@ -68,7 +68,7 @@
               "name": "gojo_infinity",
               "description": "Gojo Satoru's Infinity examined through four independent mathematical lenses — can an attacker ever reach him?",
               "programmingLanguage": "Python",
-              "url": "https://mad-projects.com/projects/gojo_infinity.html",
+              "url": "https://mad-projects.com/projects/gojo_infinity",
               "codeRepository": "https://github.com/caelum0x/awesome-mad-projects"
             },
             {
@@ -77,7 +77,7 @@
               "name": "mobius_rickness / central_finite_curve",
               "description": "Rick & Morty's Central Finite Curve as a real zero set — a pop-culture conceit turned into honest differential geometry.",
               "programmingLanguage": "Python",
-              "url": "https://mad-projects.com/projects/central_finite_curve.html",
+              "url": "https://mad-projects.com/projects/central_finite_curve",
               "codeRepository": "https://github.com/caelum0x/awesome-mad-projects"
             },
             {
@@ -86,7 +86,7 @@
               "name": "divergence-meter",
               "description": "A Steins;Gate worldline-divergence number, classified into an attractor field and rendered on a nixie-tube display.",
               "programmingLanguage": "Python",
-              "url": "https://mad-projects.com/projects/divergence-meter.html",
+              "url": "https://mad-projects.com/projects/divergence-meter",
               "codeRepository": "https://github.com/caelum0x/awesome-mad-projects"
             },
             {
@@ -95,7 +95,7 @@
               "name": "banach-tarski-dup",
               "description": "The Banach–Tarski paradox as executable code — duplicating a sphere via non-measurable set decomposition.",
               "programmingLanguage": "Rust",
-              "url": "https://mad-projects.com/projects/banach-tarski-dup.html",
+              "url": "https://mad-projects.com/projects/banach-tarski-dup",
               "codeRepository": "https://github.com/caelum0x/awesome-mad-projects"
             }
           ]
@@ -358,7 +358,7 @@
     .media-card:hover { border-color: var(--rule-2); }
     .media-card video { display: block; width: 100%; height: auto; background: var(--cream-3); }
     .media-card .cap { padding: 12px 14px; border-top: 1px solid var(--rule); }
-    .media-card .cap h4 { margin-bottom: 4px; font-size: 0.96rem; }
+    .media-card .cap h3 { margin-bottom: 4px; font-size: 0.96rem; }
     .media-card .cap p { color: var(--muted); font-size: 0.84rem; line-height: 1.6; }
     .featured-lead { margin-top: 44px; }
 
@@ -380,6 +380,22 @@
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
       display: flex; flex-direction: column; gap: 10px;
+    }
+    .project-directory {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+    }
+    .project-directory h3 { font-size: 1rem; margin-bottom: 10px; }
+    .project-directory ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 6px 18px;
+      list-style: none;
+    }
+    .project-directory a {
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.82rem;
     }
     .filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .filter-label {
@@ -515,7 +531,7 @@
       font-size: 0.70rem; font-weight: 700; letter-spacing: 0.10em;
       color: var(--accent); margin-bottom: 10px; text-transform: uppercase;
     }
-    .oss-step h4 { font-size: 0.97rem; font-weight: 700; margin-bottom: 7px; }
+    .oss-step h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 7px; }
     .oss-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
     .oss-step a { color: var(--accent); }
 
@@ -575,7 +591,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#opensource">Open source</a></li>
         <li><a href="#caveats">Caveats</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="/gallery">Gallery</a></li>
         <li>
           <a class="nav-btn star"
              href="https://github.com/caelum0x/awesome-mad-projects"
@@ -629,7 +645,7 @@
             <a class="btn"
                href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md"
                rel="noopener" target="_blank">Contribute</a>
-            <a class="btn" href="gallery.html">Gallery</a>
+            <a class="btn" href="/gallery">Gallery</a>
           </div>
           <div class="stats">
             <div class="stat"><b id="hero-count">22</b><span>projects</span></div>
@@ -668,7 +684,7 @@
               Your browser does not support the video tag.
             </video>
             <figcaption class="cap">
-              <h4>Gojo's Infinity &mdash; four lenses</h4>
+              <h3>Gojo's Infinity &mdash; four lenses</h3>
               <p>Can an attacker ever reach Gojo? Answered four ways: convergent series,
                  diverging path length, a blowing-up metric, and geodesics that never arrive.</p>
             </figcaption>
@@ -681,7 +697,7 @@
               Your browser does not support the video tag.
             </video>
             <figcaption class="cap">
-              <h4>Möbius / Central Finite Curve &mdash; four panels</h4>
+              <h3>Möbius / Central Finite Curve &mdash; four panels</h3>
               <p>A Rick &amp; Morty conceit made honest: the Central Finite Curve as a real
                  zero set, shown as strip, ridge, heatmap, and convergence.</p>
             </figcaption>
@@ -700,7 +716,7 @@
               <source src="assets/gojo_geodesic_3d_rotating.mp4" type="video/mp4" />
             </video>
             <figcaption class="cap">
-              <h4>Gojo geodesic bundle, rotating</h4>
+              <h3>Gojo geodesic bundle, rotating</h3>
               <p>Geodesics approaching the singular metric &mdash; the length integral diverges before contact.</p>
             </figcaption>
           </figure>
@@ -711,7 +727,7 @@
               <source src="assets/mobius_rotating.mp4" type="video/mp4" />
             </video>
             <figcaption class="cap">
-              <h4>Möbius zero set, rotating</h4>
+              <h3>Möbius zero set, rotating</h3>
               <p>The ruled surface whose Gaussian curvature K is strictly negative &mdash;
                  a saddle at every point.</p>
             </figcaption>
@@ -723,7 +739,7 @@
               <source src="assets/central_finite_curve_rotating_3d.mp4" type="video/mp4" />
             </video>
             <figcaption class="cap">
-              <h4>Central Finite Curve, rotating</h4>
+              <h3><a href="/projects/central_finite_curve">Central Finite Curve, rotating</a></h3>
               <p>An infinite-but-bounded arc: every reality where a Rick is the smartest being.</p>
             </figcaption>
           </figure>
@@ -771,6 +787,36 @@
         <div id="clusters">
           <!-- Rendered by app.js from projects.json -->
         </div>
+
+        <!-- Static internal links keep every detail page discoverable even when
+             a crawler does not execute the JavaScript-rendered card grid. -->
+        <nav class="project-directory" aria-label="Project detail pages">
+          <h3>Project directory</h3>
+          <ul>
+            <li><a href="/projects/gojo_infinity">Gojo Infinity</a></li>
+            <li><a href="/projects/mobius_rickness">Möbius Rickness</a></li>
+            <li><a href="/projects/central_finite_curve">Central Finite Curve</a></li>
+            <li><a href="/projects/calabi_yau_latent">Calabi–Yau Latent</a></li>
+            <li><a href="/projects/domain_expansion">Domain Expansion</a></li>
+            <li><a href="/projects/divergence-meter">Divergence Meter</a></li>
+            <li><a href="/projects/padic-embeddings">p-adic Embeddings</a></li>
+            <li><a href="/projects/madoka-entropy">Madoka Entropy</a></li>
+            <li><a href="/projects/surreal-priority">Surreal Priority</a></li>
+            <li><a href="/projects/statmech-scheduler">Statmech Scheduler</a></li>
+            <li><a href="/projects/hairy-ball-router">Hairy Ball Router</a></li>
+            <li><a href="/projects/banach-tarski-dup">Banach–Tarski Duplication</a></li>
+            <li><a href="/projects/zeno-protocol">Zeno Protocol</a></li>
+            <li><a href="/projects/infinite-hotel-scheduler">Infinite Hotel Scheduler</a></li>
+            <li><a href="/projects/category-api">Category API</a></li>
+            <li><a href="/projects/reading-steiner-git">Reading Steiner Git</a></li>
+            <li><a href="/projects/death-note">Death Note</a></li>
+            <li><a href="/projects/jojo-stands">JoJo Stands</a></li>
+            <li><a href="/projects/unlimited-void">Unlimited Void</a></li>
+            <li><a href="/projects/at-field">AT Field</a></li>
+            <li><a href="/projects/equivalent-exchange-fs">Equivalent Exchange FS</a></li>
+            <li><a href="/projects/vanguard-anticheat">Vanguard Anticheat</a></li>
+          </ul>
+        </nav>
       </div>
     </section>
 
@@ -803,7 +849,7 @@
         <div class="oss-steps reveal">
           <div class="oss-step">
             <div class="oss-step-num">Step 01</div>
-            <h4>Fork the repository</h4>
+            <h3>Fork the repository</h3>
             <p>
               <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Fork on GitHub</a>
               and clone locally. The repo is a monorepo &mdash; each project lives in its own
@@ -812,7 +858,7 @@
           </div>
           <div class="oss-step">
             <div class="oss-step-num">Step 02</div>
-            <h4>Add your project</h4>
+            <h3>Add your project</h3>
             <p>
               Create a folder with a <code>README.md</code> and a test suite.
               Add an entry in <code>site/projects.json</code> and a cover image
@@ -823,7 +869,7 @@
           </div>
           <div class="oss-step">
             <div class="oss-step-num">Step 03</div>
-            <h4>Open a pull request</h4>
+            <h3>Open a pull request</h3>
             <p>
               Submit your PR against <code>main</code>. If you have an idea but
               no code yet, open an
@@ -901,7 +947,7 @@
           <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
         </div>
         <div class="footer-links">
-          <a href="gallery.html">Full gallery &#x2197;</a>
+          <a href="/gallery">Full gallery &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects/blob/main/CONTRIBUTING.md" rel="noopener" target="_blank">CONTRIBUTING &#x2197;</a>
           <a href="https://github.com/caelum0x/awesome-mad-projects/issues" rel="noopener" target="_blank">Issues &#x2197;</a>

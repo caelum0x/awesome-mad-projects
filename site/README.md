@@ -16,7 +16,7 @@ site/
 │   └── api/
 │       └── projects.js     # Pages Function → GET /api/projects (JSON + CORS)
 ├── _headers                # caching + security headers (CSP, nosniff, immutable assets)
-├── _redirects              # /gallery → /gallery.html, /repo → GitHub
+├── _redirects              # /repo → GitHub
 └── README.md               # this file
 ```
 
