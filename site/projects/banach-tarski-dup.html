@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/banach-tarski-dup" />
-  <title>banach-tarski-dup — awesome-mad-projects</title>
+  <title>What Is the Banach–Tarski Paradox? (with runnable code)</title>
   <meta name="description"
-        content="The Banach-Tarski paradox on the free group F2, implemented exactly as a paradoxical decomposition that runs without floating point." />
+        content="The Banach–Tarski paradox turns one ball into two. This runnable Rust demo builds the free group F₂ paradoxical decomposition at its combinatorial core." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="banach-tarski-dup — awesome-mad-projects" />
-  <meta property="og:description"  content="Banach-Tarski paradox on the free group F2: constructive paradoxical decomposition in Rust." />
+  <meta property="og:title"        content="Banach–Tarski Duplicator" />
+  <meta property="og:description"  content="The Banach–Tarski paradox turns one ball into two. This runnable Rust demo builds the free group F₂ paradoxical decomposition at its combinatorial core." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/banach-tarski-dup.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/banach-tarski-dup" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="banach-tarski-dup — awesome-mad-projects" />
-  <meta name="twitter:description" content="Banach-Tarski paradoxical decomposition on F2. Pure Rust." />
+  <meta name="twitter:title"       content="Banach–Tarski Duplicator" />
+  <meta name="twitter:description" content="The Banach–Tarski paradox turns one ball into two. This runnable Rust demo builds the free group F₂ paradoxical decomposition at its combinatorial core." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/banach-tarski-dup.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "What Is the Banach–Tarski Paradox?",
+        "description": "The Banach–Tarski paradox turns one ball into two. This runnable Rust demo builds the free group F₂ paradoxical decomposition at its combinatorial core.",
+        "image": "https://mad-projects.com/assets/banners/banach-tarski-dup.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/banach-tarski-dup",
+        "url": "https://mad-projects.com/projects/banach-tarski-dup",
+        "keywords": "Banach-Tarski paradox, free group F2, paradoxical decomposition, Axiom of Choice, non-measurable sets, group theory"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Banach–Tarski Duplicator",
+        "description": "A pure-Rust, exact word-on-group implementation of the paradoxical decomposition of the free group F₂.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/banach-tarski-dup",
+        "url": "https://mad-projects.com/projects/banach-tarski-dup"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Banach–Tarski Duplicator", "item": "https://mad-projects.com/projects/banach-tarski-dup" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Banach–Tarski paradox?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a theorem that a solid ball in three-dimensional space can be cut into finitely many pieces and reassembled, using only rotations and translations, into two balls each identical to the original. The pieces are non-measurable, so no rule about volume is actually violated."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this code physically duplicate a sphere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It operates purely on the free group F₂, manipulating reduced words in the generators a and b combinatorially. It demonstrates the algebraic paradoxical decomposition that underlies the theorem, not real geometry, floating point, or physical matter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the paradox require the Axiom of Choice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Choice is needed to pick one representative from each of uncountably many orbits when the F₂ decomposition is transferred onto the sphere. That selection is exactly what produces non-measurable sets. Without the Axiom of Choice the sets would be measurable and the paradox would collapse."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>banach-tarski-dup</h1>
+          <h1>Banach&ndash;Tarski Duplicator</h1>
           <p class="detail-tagline">The combinatorial heart of the Banach&ndash;Tarski paradox on the free group F&#x2082;, constructively and exactly &mdash; no floating point, no physical matter, just word combinatorics.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,16 +157,75 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          The Banach&ndash;Tarski paradox states that a solid ball in R&#xB3; can be decomposed into
-          finitely many pieces and reassembled (using only rigid motions) into two balls each the same
-          size as the original. The paradox relies on the Axiom of Choice and uses non-measurable sets
-          &mdash; the pieces have no well-defined volume.
+          The Banach&ndash;Tarski paradox is the most famous &ldquo;impossible&rdquo; result in
+          modern mathematics: a solid ball in three-dimensional space (R&#xB3;) can be cut into a
+          finite number of pieces and, using only rigid motions &mdash; rotations and translations,
+          no stretching &mdash; reassembled into <em>two</em> balls, each exactly the same size as the
+          one you started with. One ball becomes two, out of nothing. It sounds like a magic trick or a
+          violation of conservation of volume, and that reaction is precisely what makes it worth
+          understanding.
         </p>
         <p>
-          The combinatorial core of the paradox lives on the free group F&#x2082; (with generators a
-          and b), where a paradoxical decomposition is explicit and constructive. This package
-          implements that decomposition as a pure Rust word-on-group computation: no geometry, no
-          floating point, no physical matter &mdash; just the algebra that makes the paradox tick.
+          The resolution is that the pieces are not ordinary shapes. They are <strong>non-measurable
+          sets</strong>: infinitely intricate point-clouds that have no well-defined volume at all. If
+          the pieces had volumes, those volumes would have to add up, and duplication would be
+          impossible. Because they don&rsquo;t, there is no arithmetic to contradict. The paradox is a
+          statement about the limits of the concept of &ldquo;volume,&rdquo; not about physical matter.
+        </p>
+        <p>
+          Constructing those non-measurable pieces on the actual sphere requires the Axiom of Choice
+          and is not something you can print to a terminal. But the combinatorial <em>engine</em> that
+          drives the whole construction lives one level down, in the algebra of the
+          <strong>free group F&#x2082;</strong>, and that part is completely explicit, finite to inspect,
+          and exact. This project implements that engine in pure Rust.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is a paradoxical decomposition?</h2>
+        <p>
+          The free group F&#x2082; is generated by two symbols, <code>a</code> and <code>b</code>,
+          together with their inverses <code>a&#x207B;&#xB9;</code> and <code>b&#x207B;&#xB9;</code>. Its
+          elements are all &ldquo;reduced words&rdquo; &mdash; finite strings of these four symbols with
+          no adjacent cancelling pair such as <code>a a&#x207B;&#xB9;</code>. There are infinitely many
+          such words, and every element except the empty word begins with exactly one of the four
+          generators.
+        </p>
+        <p>
+          That single fact &mdash; every non-identity word has a unique first letter &mdash; is what
+          makes F&#x2082; <em>paradoxical</em>. Split the group into four buckets by first letter:
+          S(a), S(a&#x207B;&#xB9;), S(b), S(b&#x207B;&#xB9;). Now do something that looks harmless:
+          left-multiply the bucket S(a&#x207B;&#xB9;) by <code>a</code>. Multiplying by <code>a</code>
+          cancels the leading <code>a&#x207B;&#xB9;</code> of every word in that bucket, and the result
+          is <em>every word that does not start with a</em> &mdash; that is, S(a&#x207B;&#xB9;)
+          &cup; S(b) &cup; S(b&#x207B;&#xB9;) plus the identity. So
+          S(a) &cup; a&middot;S(a&#x207B;&#xB9;) reconstitutes the whole group. The same works for the
+          <code>b</code> pair independently.
+        </p>
+        <p>
+          The upshot: from four disjoint pieces of one copy of F&#x2082;, you can rebuild <em>two</em>
+          complete copies of F&#x2082; using only left-multiplication (the group-theoretic analogue of a
+          rigid motion). No element is created or destroyed &mdash; they are only relabelled by shifting a
+          leading letter. This is the paradoxical decomposition, and it is entirely constructive.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The program never touches a sphere, real coordinates, or floating point. It represents each
+          group element as a reduced word and implements the two operations the proof needs: reduction
+          (cancelling adjacent inverse pairs) and left-multiplication by a generator. It then enumerates
+          all words up to a bounded length and <em>verifies</em>, element by element, that
+          S(a) &cup; a&middot;S(a&#x207B;&#xB9;) and S(b) &cup; b&middot;S(b&#x207B;&#xB9;) each cover
+          the entire enumerated group with no overlaps.
+        </p>
+        <p>
+          Because everything is symbolic string manipulation over a finite enumeration, the result is
+          exact and reproducible &mdash; there is no rounding error and nothing probabilistic. What you
+          see confirmed in the output is the genuine algebraic heart of Banach&ndash;Tarski, isolated
+          from the non-constructive machinery (orbits and the Axiom of Choice) needed to lift it onto a
+          physical ball.
         </p>
       </section>
 
@@ -147,6 +270,38 @@ cargo run
              rel="noopener" target="_blank">source &#x2197;</a>
         </div>
       </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Banach&ndash;Tarski questions</h2>
+        <h3>What is the Banach&ndash;Tarski paradox?</h3>
+        <p>
+          It is a theorem that a solid ball in three-dimensional space can be cut into finitely many
+          pieces and reassembled, using only rotations and translations, into two balls each identical
+          to the original. The pieces are non-measurable, so no rule about volume is actually violated.
+        </p>
+        <h3>Does this code physically duplicate a sphere?</h3>
+        <p>
+          No. It operates purely on the free group F&#x2082;, manipulating reduced words in the
+          generators <code>a</code> and <code>b</code> combinatorially. It demonstrates the algebraic
+          paradoxical decomposition that underlies the theorem &mdash; not real geometry, floating point,
+          or physical matter.
+        </p>
+        <h3>Why does the paradox require the Axiom of Choice?</h3>
+        <p>
+          Choice is needed to pick one representative from each of uncountably many orbits when the
+          F&#x2082; decomposition is transferred onto the sphere. That selection is exactly what produces
+          non-measurable sets. Without the Axiom of Choice the sets would be measurable and the paradox
+          would collapse.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> this project implements the <em>combinatorial</em> core of
+        Banach&ndash;Tarski on the free group F&#x2082; only &mdash; it manipulates words, not points of a
+        real ball. The full geometric duplication additionally requires embedding F&#x2082; as rotations
+        of the sphere and invoking the Axiom of Choice to build non-measurable sets, which is inherently
+        non-constructive and cannot be printed to a terminal. Nothing here creates matter or volume.</p>
+      </div>
 
     </div>
   </main>

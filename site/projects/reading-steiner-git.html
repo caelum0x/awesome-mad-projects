@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/reading-steiner-git" />
-  <title>reading-steiner-git — awesome-mad-projects</title>
+  <title>How Git Snapshots Work (a Steins;Gate Worldline VCS)</title>
   <meta name="description"
-        content="A Steins;Gate worldline VCS toy: snapshots a sandbox directory and reports a six-decimal Divergence Meter reading for each checkpoint. TypeScript." />
+        content="How content-addressable version control works: hash a directory snapshot, watch small edits avalanche the digest into a new worldline reading. Runnable TypeScript." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="reading-steiner-git — awesome-mad-projects" />
-  <meta property="og:description"  content="Steins;Gate VCS toy: sandbox snapshots + divergence meter reading for each worldline checkpoint." />
+  <meta property="og:title"        content="Reading Steiner Git" />
+  <meta property="og:description"  content="How content-addressable version control works: hash a directory snapshot, watch small edits avalanche the digest into a new worldline reading. Runnable TypeScript." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/reading-steiner-git.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/reading-steiner-git" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="reading-steiner-git — awesome-mad-projects" />
-  <meta name="twitter:description" content="Steins;Gate VCS toy with divergence meter readings. TypeScript." />
+  <meta name="twitter:title"       content="Reading Steiner Git" />
+  <meta name="twitter:description" content="How content-addressable version control works: hash a directory snapshot, watch small edits avalanche the digest into a new worldline reading. Runnable TypeScript." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/reading-steiner-git.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Reading Steiner Git",
+        "description": "How content-addressable version control works: hash a directory snapshot, watch small edits avalanche the digest into a new worldline reading. Runnable TypeScript.",
+        "image": "https://mad-projects.com/assets/banners/reading-steiner-git.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/reading-steiner-git",
+        "url": "https://mad-projects.com/projects/reading-steiner-git",
+        "keywords": "content-addressable storage, version control, Git internals, SHA-256, snapshot hashing, avalanche effect, Steins;Gate, divergence meter, TypeScript"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Reading Steiner Git",
+        "description": "A content-addressable version-control toy that hashes a sandbox directory snapshot and reports a six-decimal divergence reading for each checkpoint.",
+        "programmingLanguage": "TypeScript",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/reading-steiner-git",
+        "url": "https://mad-projects.com/projects/reading-steiner-git"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Reading Steiner Git", "item": "https://mad-projects.com/projects/reading-steiner-git" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is content-addressable version control?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a system that identifies each snapshot by a hash of its contents rather than by a sequential name. If the contents are identical, the address is identical; if anything changes, the address changes. Git works this way, addressing blobs, trees, and commits by their SHA hashes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does a one-character edit change the entire hash?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cryptographic hashes have the avalanche property: flipping a single input bit flips about half the output bits. So a tiny file edit produces a completely different digest, which is what makes the worldline reading jump between checkpoints."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this actually Git?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It borrows Git's core idea, content addressing of directory snapshots, but it is a small standalone toy that stores checkpoints in an atomic-write JSON ledger and maps each digest to a six-decimal divergence reading. The Steins;Gate worldline framing is fictional."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-ts">TypeScript</span>
-          <h1>reading-steiner-git</h1>
+          <h1>Reading Steiner Git</h1>
           <p class="detail-tagline">A Steins;Gate worldline VCS toy that snapshots a sandbox and reports a six-decimal Divergence Meter reading for each checkpoint &mdash; your commits as worldline transitions.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -96,26 +160,80 @@
           In <em>Steins;Gate</em>, Okabe Rintaro is the only person who can remember timelines across
           worldline transitions &mdash; this is his &ldquo;Reading Steiner&rdquo; ability. Each new
           worldline is labelled by a Divergence Meter reading: a six-decimal number in [0, 2) that
-          identifies the timeline cluster.
+          identifies the timeline cluster the story currently occupies.
         </p>
         <p>
-          This package treats version control as worldline transitions: each snapshot (commit) of a
-          sandbox directory is a new worldline, and the snapshot hash is fed through the divergence
-          meter algorithm to produce a six-decimal reading. Rewriting history is branching; restoring
-          an old snapshot is &ldquo;Okabe jumps back.&rdquo;
+          This package treats version control as worldline transitions. Each snapshot (commit) of a
+          sandbox directory is a new worldline, and the snapshot hash is fed through the divergence-meter
+          algorithm to produce a six-decimal reading. Rewriting history is branching into a new worldline;
+          restoring an old snapshot is &ldquo;Okabe jumps back.&rdquo; The fun of the framing is that it
+          maps almost exactly onto how a real content-addressable version-control system already behaves.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>Content addressing: how Git really identifies a snapshot</h2>
+        <p>
+          Most people think of Git as storing diffs, but underneath it is a
+          <strong>content-addressable store</strong>. Every object &mdash; a file&rsquo;s contents (a
+          <em>blob</em>), a directory listing (a <em>tree</em>), and a commit &mdash; is named by a hash
+          of its own bytes. Save the same file twice and it gets the same address exactly once; change a
+          single byte and it gets a brand-new address. A tree hashes the names and hashes of its children,
+          and a commit hashes the tree plus metadata, so a commit id is effectively a fingerprint of the
+          entire project state at that moment.
+        </p>
+        <p>
+          Two consequences fall out of this design, and both drive this project. First,
+          <strong>integrity</strong>: because an object&rsquo;s name is derived from its contents, you
+          cannot alter the contents without changing the name &mdash; tampering is self-evident. Second,
+          the <strong>avalanche effect</strong>: cryptographic hashes are built so that flipping one input
+          bit flips roughly half the output bits. A one-character edit anywhere in the sandbox yields a
+          totally different digest, with no visible relationship to the previous one. That is precisely the
+          behaviour a &ldquo;divergence&rdquo; reading wants: adjacent worldlines that look unrelated.
         </p>
       </section>
 
       <section class="detail-section" id="how-it-works">
-        <h2>How it works</h2>
+        <h2>How this project demonstrates it</h2>
         <ul>
-          <li>Snapshots a sandbox directory by hashing all file contents with SHA-256.</li>
-          <li>The combined hash is fed through the divergence meter algorithm (same as the
-            divergence-meter package): <code>Fraction(word, 2^63)</code> gives a value in [0, 2).</li>
-          <li>Checkpoints are stored as an atomic-write JSON ledger (no partial writes).</li>
-          <li>The CLI prints the divergence reading for the current sandbox state and
-            the divergence delta from the previous checkpoint.</li>
+          <li>Snapshots a sandbox directory by hashing all file contents with SHA-256 &mdash; the same
+            content-addressing idea Git uses for blobs and trees.</li>
+          <li>The combined snapshot hash is fed through the divergence-meter algorithm (identical to the
+            divergence-meter package): the leading bytes become a 64-bit word and
+            <code>Fraction(word, 2^63)</code> yields an exact value in [0, 2), formatted to six decimals.</li>
+          <li>Checkpoints are stored as an atomic-write JSON ledger, so a crash mid-write can never leave a
+            half-written, corrupt history &mdash; the file is either the old state or the new one.</li>
+          <li>The CLI prints the divergence reading for the current sandbox state and the divergence delta
+            from the previous checkpoint, making the avalanche effect visible: small edits, large jumps.</li>
         </ul>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Reading Steiner Git questions</h2>
+        <h3>What is content-addressable version control?</h3>
+        <p>
+          It is a system that identifies each snapshot by a hash of its contents rather than by a
+          sequential name. If the contents are identical the address is identical; if anything changes the
+          address changes. Git works this way, addressing blobs, trees, and commits by their SHA hashes.
+        </p>
+        <h3>Why does a one-character edit change the entire hash?</h3>
+        <p>
+          Cryptographic hashes have the avalanche property: flipping a single input bit flips about half
+          the output bits. So a tiny file edit produces a completely different digest, which is what makes
+          the worldline reading jump between checkpoints.
+        </p>
+        <h3>Is this actually Git?</h3>
+        <p>
+          No. It borrows Git&rsquo;s core idea &mdash; content addressing of directory snapshots &mdash;
+          but it is a small standalone toy that stores checkpoints in an atomic-write JSON ledger and maps
+          each digest to a six-decimal divergence reading.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the Steins;Gate worldline story is fiction and this is not a
+          drop-in replacement for Git &mdash; there is no networking, no packfiles, and no merge algorithm.
+          What is real is the content-addressing principle: snapshots named by their own hash, with edits
+          rippling through the digest exactly as they do in Git&rsquo;s object model.</p>
+        </div>
       </section>
 
       <section class="detail-section" id="run">

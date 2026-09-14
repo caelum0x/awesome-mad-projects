@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/zeno-protocol" />
-  <title>zeno-protocol — awesome-mad-projects</title>
+  <title>Zeno's Dichotomy Paradox in Code</title>
   <meta name="description"
-        content="A message transport built on Zeno's dichotomy paradox, moving half the remaining distance each tick until the convergent series arrives." />
+        content="Zeno said motion is impossible: you must cross infinitely many halves first. This Go demo moves half the distance each tick—the series still sums to 1." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="zeno-protocol — awesome-mad-projects" />
-  <meta property="og:description"  content="Message transport built on Zeno's dichotomy: half the remaining distance each tick, series sums to 1." />
+  <meta property="og:title"        content="Zeno Protocol" />
+  <meta property="og:description"  content="Zeno said motion is impossible: you must cross infinitely many halves first. This Go demo moves half the distance each tick—the series still sums to 1." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/zeno-protocol.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/zeno-protocol" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="zeno-protocol — awesome-mad-projects" />
-  <meta name="twitter:description" content="Zeno dichotomy transport: half the distance each tick. Go." />
+  <meta name="twitter:title"       content="Zeno Protocol" />
+  <meta name="twitter:description" content="Zeno said motion is impossible: you must cross infinitely many halves first. This Go demo moves half the distance each tick—the series still sums to 1." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/zeno-protocol.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Zeno's Dichotomy Paradox in Code",
+        "description": "Zeno said motion is impossible: you must cross infinitely many halves first. This Go demo moves half the distance each tick—the series still sums to 1.",
+        "image": "https://mad-projects.com/assets/banners/zeno-protocol.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/zeno-protocol",
+        "url": "https://mad-projects.com/projects/zeno-protocol",
+        "keywords": "Zeno's paradox, dichotomy paradox, geometric series, convergence, infinite series, calculus"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Zeno Protocol",
+        "description": "A Go message transport that moves half the remaining distance each tick, illustrating a convergent geometric series.",
+        "programmingLanguage": "Go",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/zeno-protocol",
+        "url": "https://mad-projects.com/projects/zeno-protocol"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Zeno Protocol", "item": "https://mad-projects.com/projects/zeno-protocol" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Zeno's dichotomy paradox?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zeno argued that to travel any distance you must first cover half of it, then half of what remains, and so on forever. Because that is an infinite number of steps, he concluded motion could never be completed—or even begin."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the paradox resolved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The infinite geometric series 1/2 + 1/4 + 1/8 + ... converges to exactly 1. Infinitely many shrinking steps add up to a finite total, so the full distance is crossed in finite time. The 'infinity' is in the counting, not the distance or duration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many ticks until the packet arrives?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Algebraically the packet never lands exactly on the destination, so delivery is declared once it is within a tolerance ε of the target. That happens after ⌈log₂(1/ε)⌉ ticks—for example 30 ticks when ε = 1e-9."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-go">Go</span>
-          <h1>zeno-protocol</h1>
+          <h1>Zeno Protocol: the dichotomy paradox as a transport</h1>
           <p class="detail-tagline">Delivers a message by moving half the remaining distance every tick &mdash; transport built on Zeno&rsquo;s dichotomy paradox. The series sums to 1; the message always arrives in finite time.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,17 +157,62 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          Zeno&rsquo;s dichotomy paradox says: to reach a destination, you must first reach the
-          halfway point; but before that, the quarter point; and so on forever &mdash; so motion is
-          impossible. The resolution: the infinite series 1/2 + 1/4 + 1/8 + &hellip; sums to exactly
-          1. The message arrives in finite time.
+          Around 450 BCE the philosopher Zeno of Elea posed a puzzle that has bothered thinkers ever
+          since. To walk to a wall, he argued, you must first reach the point halfway there. But before
+          you can reach the halfway point, you must reach the point a quarter of the way. And before
+          <em>that</em>, an eighth. This regress never ends: there are infinitely many &ldquo;first&rdquo;
+          sub-journeys to complete. Since you cannot finish infinitely many things, Zeno concluded that
+          motion is impossible &mdash; even though we plainly walk to walls all the time.
         </p>
         <p>
-          This package implements that literally as a message-transport protocol: each tick, the
-          packet moves exactly half the remaining distance. The packet never reaches the destination
-          algebraically, but a convergence threshold &epsilon; determines when the delivery is
-          &ldquo;close enough&rdquo; to declare arrival. The total number of ticks is
-          log&sub2;(1/&epsilon;).
+          The puzzle is not really about walls. It is about whether an infinite <em>number</em> of steps
+          can add up to a finite total. For two thousand years the paradox had no clean answer; the modern
+          resolution comes from the theory of convergent series. The distances 1/2, 1/4, 1/8, &hellip;
+          form a geometric sequence whose sum is exactly 1. Infinitely many terms, finite total, finite
+          time. The infinity lives in how we <em>count</em> the trip, not in the trip itself.
+        </p>
+        <p>
+          This package makes the paradox tangible by implementing it as a message-transport protocol.
+          Each tick, the packet advances by exactly half of whatever distance still separates it from the
+          destination. Watching the position climb 0.5, 0.75, 0.875, 0.9375&hellip; you can see the
+          infinite series converging in real numbers, one line at a time.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is a convergent geometric series?</h2>
+        <p>
+          A geometric series is a sum whose terms shrink by a constant ratio r each step:
+          <code>a + ar + ar&#xB2; + ar&#xB3; + &hellip;</code>. When the ratio satisfies
+          |r| &lt; 1, the terms fall away fast enough that the whole infinite sum settles on a finite
+          value, given by the closed form <code>a / (1 &minus; r)</code>. Here the first step is
+          a = 1/2 and the ratio is r = 1/2, so the total is (1/2) / (1 &minus; 1/2) = 1 &mdash; exactly the
+          full distance.
+        </p>
+        <p>
+          The same closed form explains the position after a finite number of ticks. After n ticks the
+          packet has covered <code>P&#x2099; = 1 &minus; (1/2)&#x207F;</code> of the distance, with a
+          remaining gap of (1/2)&#x207F; that halves every tick. It approaches 1 but never equals it;
+          this is the formal meaning of a <em>limit</em>. In everyday physics the gap simply becomes
+          smaller than any measurable quantity, which is why real walking &ldquo;completes&rdquo; the
+          journey.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          Because the exact destination is a limit rather than a value the packet ever reaches, the
+          protocol needs a stopping rule. It defines a convergence tolerance &epsilon; and declares the
+          message &ldquo;delivered&rdquo; once the remaining gap drops below it. Since the gap is
+          (1/2)&#x207F; after n ticks, solving (1/2)&#x207F; &le; &epsilon; gives
+          n = &lceil;log&#x2082;(1/&epsilon;)&rceil; ticks &mdash; a small, predictable number even for a
+          very tight tolerance (30 ticks for &epsilon; = 10&#x207B;&#x2079;).
+        </p>
+        <p>
+          Running the program prints each tick&rsquo;s position and the distance moved, so you can watch a
+          textbook geometric series unfold and converge. It turns an abstract argument about infinity into
+          a finite, terminating computation &mdash; the practical rebuttal to Zeno.
         </p>
       </section>
 
@@ -146,6 +255,37 @@ go run .
              rel="noopener" target="_blank">source &#x2197;</a>
         </div>
       </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Zeno paradox questions</h2>
+        <h3>What is Zeno&rsquo;s dichotomy paradox?</h3>
+        <p>
+          Zeno argued that to travel any distance you must first cover half of it, then half of what
+          remains, and so on forever. Because that is an infinite number of steps, he concluded motion
+          could never be completed &mdash; or even begin.
+        </p>
+        <h3>How is the paradox resolved?</h3>
+        <p>
+          The infinite geometric series 1/2 + 1/4 + 1/8 + &hellip; converges to exactly 1. Infinitely
+          many shrinking steps add up to a finite total, so the full distance is crossed in finite time.
+          The &ldquo;infinity&rdquo; is in the counting, not in the distance or the duration.
+        </p>
+        <h3>How many ticks until the packet arrives?</h3>
+        <p>
+          Algebraically the packet never lands exactly on the destination, so delivery is declared once it
+          is within a tolerance &epsilon; of the target. That happens after
+          &lceil;log&#x2082;(1/&epsilon;)&rceil; ticks &mdash; for example 30 ticks when
+          &epsilon; = 10&#x207B;&#x2079;.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> the &ldquo;transport&rdquo; framing is a teaching device, not a
+        real networking protocol &mdash; actual packets travel at a fixed speed, not by halving a remaining
+        distance, and would never deliberately require infinite steps. The mathematics of the convergent
+        series is exact and correct; the delivery story is a fictional wrapper chosen to make the paradox
+        runnable.</p>
+      </div>
 
     </div>
   </main>

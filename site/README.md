@@ -56,12 +56,13 @@ as Pages Functions (Workers), so `GET /api/projects` works on the live site.
    - **Build output directory:** `site`
 4. Save and deploy. Every push to the default branch triggers a new deployment.
 
-### Pages Functions (Workers)
+### API endpoint (Worker)
 
-`site/functions/api/projects.js` uses the standard Pages Functions signature
-(`export async function onRequest(context) { ... }`). Cloudflare deploys everything
-under `site/functions/` as Workers automatically — no `wrangler.toml` required — so
-`GET /api/projects` returns `projects.json` as `application/json` with permissive CORS.
+`GET /api/projects` is served by the Worker in `worker/index.js` (configured via
+`wrangler.toml`), which returns `site/projects.json` as `application/json` with
+permissive CORS. The Worker also 301-redirects legacy `*.html` URLs to their
+extensionless canonicals; everything else is served directly from the static
+assets in `site/`.
 
 ## Notes
 

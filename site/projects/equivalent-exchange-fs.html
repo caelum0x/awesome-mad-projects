@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/equivalent-exchange-fs" />
-  <title>equivalent-exchange-fs — awesome-mad-projects</title>
+  <title>Conservation Laws as a Filesystem Invariant (Equivalent Exchange)</title>
   <meta name="description"
-        content="A Rust in-memory filesystem that enforces equivalent exchange, with every change checked against a tested conservation invariant." />
+        content="A runnable Rust in-memory filesystem where every write must be balanced by an equal delete—Fullmetal Alchemist's Equivalent Exchange as a checked conservation invariant." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="equivalent-exchange-fs — awesome-mad-projects" />
-  <meta property="og:description"  content="Filesystem enforcing conservation: write N bytes, delete N bytes. In-memory VFS, Rust." />
+  <meta property="og:title"        content="Conservation Laws as a Filesystem Invariant (Equivalent Exchange)" />
+  <meta property="og:description"  content="A runnable Rust in-memory filesystem where every write must be balanced by an equal delete—Fullmetal Alchemist's Equivalent Exchange as a checked conservation invariant." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/equivalent-exchange-fs.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/equivalent-exchange-fs" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="equivalent-exchange-fs — awesome-mad-projects" />
-  <meta name="twitter:description" content="Conservation law filesystem: write N bytes, delete N bytes. Rust." />
+  <meta name="twitter:title"       content="Conservation Laws as a Filesystem Invariant (Equivalent Exchange)" />
+  <meta name="twitter:description" content="A runnable Rust in-memory filesystem where every write must be balanced by an equal delete—Fullmetal Alchemist's Equivalent Exchange as a checked conservation invariant." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/equivalent-exchange-fs.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Conservation Laws as a Filesystem Invariant (Equivalent Exchange)",
+        "description": "A runnable Rust in-memory filesystem where every write must be balanced by an equal delete—Fullmetal Alchemist's Equivalent Exchange as a checked conservation invariant.",
+        "image": "https://mad-projects.com/assets/banners/equivalent-exchange-fs.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/equivalent-exchange-fs",
+        "url": "https://mad-projects.com/projects/equivalent-exchange-fs",
+        "keywords": "invariant, conservation law, transactional invariant, double-entry accounting, filesystem, in-memory VFS, equivalent exchange, conserved quantity, Rust"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Equivalent Exchange FS",
+        "description": "An in-memory Rust filesystem that enforces a conserved total-byte-count invariant transactionally—every write must be balanced by an equal delete.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/equivalent-exchange-fs",
+        "url": "https://mad-projects.com/projects/equivalent-exchange-fs"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Equivalent Exchange FS", "item": "https://mad-projects.com/projects/equivalent-exchange-fs" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an invariant in software?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An invariant is a condition that must always hold true for a data structure to be considered valid—before and after every operation on it. Here the invariant is that the total number of bytes stored never changes, so any operation that would break it is rejected."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is this like double-entry accounting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Double-entry bookkeeping requires every debit to be matched by an equal credit, so the books always balance. This filesystem applies the same rule to bytes: every gain (a write of N bytes) must be paired with an equal loss (a sacrifice of N bytes), so the total is conserved—Equivalent Exchange as a balanced ledger."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why enforce conservation transactionally?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because a write-plus-sacrifice must either both happen or neither happen. If only half completed, the total byte count would drift and the invariant would break. Treating the pair as one atomic transaction that is checked before it commits keeps the conserved quantity exact after every operation."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>equivalent-exchange-fs</h1>
+          <h1>Conservation Laws as a Filesystem Invariant (Equivalent Exchange)</h1>
           <p class="detail-tagline">A filesystem enforcing the Law of Equivalent Exchange: to obtain, something of equal value must be lost. Write N bytes &rarr; delete N bytes. Conservation invariant verified by tests. Rust.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,15 +157,52 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          In <em>Fullmetal Alchemist</em>, the Law of Equivalent Exchange governs alchemy:
-          to obtain something, something of equal value must be sacrificed. This package applies
-          that law to a virtual filesystem: the total number of bytes stored is invariant.
-          To write N bytes of new data, you must simultaneously delete N bytes of existing data.
+          In <em>Fullmetal Alchemist</em>, the Law of Equivalent Exchange governs alchemy: to obtain
+          something, something of equal value must be sacrificed. That is a fiction &mdash; but it is
+          almost word-for-word the definition of a <strong>conservation law</strong>, one of the most
+          useful ideas in computer science. This package turns the anime&rsquo;s law into a working
+          filesystem where a single quantity, the total number of bytes stored, can never change. To
+          write N bytes of new data, you must simultaneously sacrifice N bytes of existing data.
         </p>
         <p>
-          The filesystem is fully in-memory; no real disk I/O occurs. The conservation invariant
-          is checked after every mutation and enforced by the type system where possible. Tests
-          verify that no sequence of operations can change the total byte count.
+          The filesystem is fully in-memory; no real disk I/O occurs. The conservation rule is checked
+          on every mutation and enforced by the type system where possible, so an operation that would
+          break the balance is rejected rather than half-applied. Tests verify that no sequence of
+          operations can change the total byte count.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the alchemy framing is a metaphor, and a byte count is
+          not literally a physical conserved quantity &mdash; the conservation here is a rule the code
+          chooses to enforce, not a law of nature. It is also an in-memory model, not a production
+          filesystem; real filesystems intentionally let total usage grow and shrink.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>Invariants and conservation, explained</h2>
+        <p>
+          An <strong>invariant</strong> is a property that must hold true for a data structure to be
+          considered valid &mdash; before an operation starts and after it finishes. Good systems are
+          built around invariants because they turn &ldquo;don&rsquo;t corrupt the data&rdquo; into a
+          concrete, checkable condition. A <strong>conserved quantity</strong> is a particularly
+          strict kind of invariant: not merely &ldquo;valid&rdquo; but &ldquo;unchanged.&rdquo; Here
+          the conserved quantity is the total byte count, and the invariant is simply that it equals
+          the sum of the sizes of all stored files at all times.
+        </p>
+        <p>
+          The classic real-world analogue is <strong>double-entry accounting</strong>. Every debit
+          must be matched by an equal credit, so the books always balance; you cannot create money out
+          of nowhere, only move it. This filesystem is a ledger for bytes: every gain (a write) must be
+          paired with an equal loss (a sacrifice), so the sum is preserved. The same discipline shows
+          up in physics conservation laws, in reference counting, and in any system where a total must
+          stay fixed.
+        </p>
+        <p>
+          Crucially, a write-plus-sacrifice has to be <strong>transactional</strong> &mdash; the pair
+          either both happens or neither does. If the write landed but the sacrifice did not, the total
+          would drift and the invariant would break. Treating the pair as one atomic operation, checked
+          <em>before</em> it commits, is what keeps the conserved quantity exact rather than
+          approximately-right-most-of-the-time.
         </p>
       </section>
 
@@ -123,6 +224,48 @@ Operations:
   delete(path):        returns bytes to a "void pool" — not writeable
   void_exchange(n):    writes n bytes from void pool (sacrifices void capacity)</pre>
         </div>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <ul>
+          <li>State is a pair <code>(files, total_bytes)</code>, and the invariant
+            <code>total_bytes = &Sigma; |content(f)|</code> is asserted after every mutation.</li>
+          <li><code>write(path, data)</code> requires a matching <code>sacrifice(path', n)</code> with
+            <code>n = |data|</code>: it adds the new bytes and removes an equal number from the
+            sacrifice target, so the total is unchanged &mdash; the balanced-ledger rule in code.</li>
+          <li>A write with no valid sacrifice is rejected outright rather than partially applied,
+            demonstrating the transactional, check-before-commit discipline.</li>
+          <li><code>delete</code> returns bytes to a non-writeable &ldquo;void pool,&rdquo; and
+            <code>void_exchange(n)</code> can only mint new bytes by spending equal void capacity, so
+            even reclaiming space obeys conservation.</li>
+          <li>Tests exhaustively confirm the invariant holds: no sequence of operations can move the
+            total byte count off its initial value.</li>
+        </ul>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Equivalent Exchange filesystem questions</h2>
+        <h3>What is an invariant in software?</h3>
+        <p>
+          An invariant is a condition that must always hold for a data structure to be valid &mdash;
+          before and after every operation on it. Here the invariant is that the total number of bytes
+          stored never changes, so any operation that would break it is rejected.
+        </p>
+        <h3>How is this like double-entry accounting?</h3>
+        <p>
+          Double-entry bookkeeping requires every debit to be matched by an equal credit, so the books
+          always balance. This filesystem applies the same rule to bytes: every gain (a write of N
+          bytes) must be paired with an equal loss (a sacrifice of N bytes), so the total is conserved
+          &mdash; Equivalent Exchange as a balanced ledger.
+        </p>
+        <h3>Why enforce conservation transactionally?</h3>
+        <p>
+          Because a write-plus-sacrifice must either both happen or neither happen. If only half
+          completed, the total byte count would drift and the invariant would break. Treating the pair
+          as one atomic transaction that is checked before it commits keeps the conserved quantity
+          exact after every operation.
+        </p>
       </section>
 
       <section class="detail-section" id="run">

@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/hairy-ball-router" />
-  <title>hairy-ball-router — awesome-mad-projects</title>
+  <title>Hairy Ball Theorem Explained (and Used for Routing)</title>
   <meta name="description"
-        content="A packet router over S² that follows a tangent vector field until the Hairy Ball Theorem's forced zero becomes the destination." />
+        content="You can't comb a hairy ball flat: every tangent field on a sphere has a zero. This Go router follows such a field on S² straight to that forced cowlick." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="hairy-ball-router — awesome-mad-projects" />
-  <meta property="og:description"  content="Packet routing on S² via continuous tangent vector field — the Hairy Ball Theorem, live." />
+  <meta property="og:title"        content="Hairy Ball Router" />
+  <meta property="og:description"  content="You can't comb a hairy ball flat: every tangent field on a sphere has a zero. This Go router follows such a field on S² straight to that forced cowlick." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/hairy-ball-router.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/hairy-ball-router" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="hairy-ball-router — awesome-mad-projects" />
-  <meta name="twitter:description" content="Packet routing on S² using the Hairy Ball Theorem. Go." />
+  <meta name="twitter:title"       content="Hairy Ball Router" />
+  <meta name="twitter:description" content="You can't comb a hairy ball flat: every tangent field on a sphere has a zero. This Go router follows such a field on S² straight to that forced cowlick." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/hairy-ball-router.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Hairy Ball Theorem Explained (and Used for Routing)",
+        "description": "You can't comb a hairy ball flat: every tangent field on a sphere has a zero. This Go router follows such a field on S² straight to that forced cowlick.",
+        "image": "https://mad-projects.com/assets/banners/hairy-ball-router.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/hairy-ball-router",
+        "url": "https://mad-projects.com/projects/hairy-ball-router",
+        "keywords": "Hairy Ball Theorem, tangent vector field, 2-sphere, Euler characteristic, Poincaré-Hopf, topology"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Hairy Ball Router",
+        "description": "A Go packet router that follows a continuous tangent vector field on the 2-sphere toward its topologically forced zero.",
+        "programmingLanguage": "Go",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/hairy-ball-router",
+        "url": "https://mad-projects.com/projects/hairy-ball-router"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Hairy Ball Router", "item": "https://mad-projects.com/projects/hairy-ball-router" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Hairy Ball Theorem?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It states that every continuous tangent vector field on the ordinary 2-sphere S² must vanish at at least one point. Informally, you cannot comb the hair on a ball perfectly flat—there is always at least one cowlick or tuft where the hair stands up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why must there always be a zero?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The obstruction is topological. The Euler characteristic of the sphere is 2, and the Poincaré–Hopf theorem says the indices of a vector field's zeros must sum to the Euler characteristic. Because 2 is not 0, the field cannot be everywhere non-zero."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the router use the theorem?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It builds a continuous tangent field on S² with a designated zero and routes each packet by following the field. Every path flows toward that guaranteed zero, which acts as the sink or destination node."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-go">Go</span>
-          <h1>hairy-ball-router</h1>
+          <h1>Hairy Ball Router: routing along a field you can&rsquo;t comb flat</h1>
           <p class="detail-tagline">Routes packets across the sphere S&#xB2; by following a continuous tangent vector field &mdash; the Hairy Ball Theorem forces at least one zero, which becomes the destination sink.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,16 +157,64 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          The Hairy Ball Theorem (Brouwer, 1912) states that there is no continuous non-vanishing
-          tangent vector field on a sphere S&#xB2;. In other words: you cannot comb a hairy ball flat
-          without creating at least one whorl or cowlick. Every continuous vector field on S&#xB2; must
-          have at least one zero.
+          The Hairy Ball Theorem (proved by L. E. J. Brouwer in 1912) is one of those results that
+          sounds like a party trick and turns out to be deep topology. Imagine a ball completely covered
+          in hair, and try to comb every hair flat so it lies tangent to the surface, with no hair
+          sticking straight up and no bald spot. The theorem says you can&rsquo;t. No matter how you comb,
+          there will always be at least one point &mdash; a cowlick, whorl, or tuft &mdash; where the
+          combing breaks down. Stated formally: there is no continuous, nowhere-zero tangent vector field
+          on the 2-sphere S&#xB2;.
         </p>
         <p>
-          This package routes packets by following a continuous tangent vector field on S&#xB2;.
-          The field has exactly one zero (by construction). Every packet follows the field gradient and
-          converges to that zero &mdash; the mandatory &ldquo;cowlick&rdquo; that topology guarantees
-          must exist. The routing algorithm is simply gradient descent on the sphere.
+          The everyday consequences are real. Because wind is (to good approximation) a tangent vector
+          field on the Earth&rsquo;s surface, the theorem guarantees that at any instant there is at least
+          one point on the globe where the horizontal wind speed is zero &mdash; the calm eye of a
+          cyclone is the vivid example. You cannot have a smooth, non-stop breeze everywhere on a planet.
+        </p>
+        <p>
+          This package turns that guarantee into a routing rule. It defines a continuous tangent vector
+          field on S&#xB2; with a designated zero, and routes each packet by following the field across the
+          sphere. Every path flows steadily toward the mandatory zero &mdash; the &ldquo;cowlick&rdquo;
+          that topology promises must exist &mdash; and uses it as the destination sink. The routing step
+          is a projected gradient-style flow along the sphere.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>Why must a zero exist?</h2>
+        <p>
+          The reason is not about combing skill; it is a topological invariant of the sphere itself. Every
+          closed surface has a whole number called its <strong>Euler characteristic</strong> (&chi;),
+          computable from any triangulation as vertices &minus; edges + faces. For the 2-sphere,
+          &chi;(S&#xB2;) = 2. This number does not depend on how you draw the mesh &mdash; it is baked into
+          the shape.
+        </p>
+        <p>
+          The <strong>Poincar&eacute;&ndash;Hopf theorem</strong> ties vector fields to that invariant:
+          for any continuous tangent vector field with isolated zeros, the sum of the <em>indices</em> of
+          those zeros (a signed count of how the field winds around each one) must equal the Euler
+          characteristic of the surface. On the sphere that sum is forced to be 2. Since an empty sum is 0,
+          a field with no zeros at all is impossible &mdash; 2 &ne; 0. That is precisely the Hairy Ball
+          Theorem. By contrast, a torus (doughnut) has &chi; = 0, which is why you <em>can</em> comb a
+          hairy doughnut flat.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The router constructs an explicit continuous tangent field on the sphere &mdash; a
+          longitude-following &ldquo;comb&rdquo; &mdash; and integrates a packet&rsquo;s motion along it,
+          projecting each step back onto the tangent plane so the packet stays on the surface. The field is
+          built so that a distinguished zero acts as the sink; packets released from arbitrary latitudes
+          and longitudes flow along the field and arrive there.
+        </p>
+        <p>
+          The point of the exercise is that the sink is not an arbitrary design choice you could optimise
+          away &mdash; its existence is <em>guaranteed</em> by topology. No matter how the field is
+          reshaped, Poincar&eacute;&ndash;Hopf insists a zero remains, so there is always somewhere for the
+          flow to terminate. Running the program prints a packet&rsquo;s step count and its shrinking
+          angular distance to the sink as it converges.
         </p>
       </section>
 
@@ -141,6 +253,36 @@ go run .
              rel="noopener" target="_blank">source &#x2197;</a>
         </div>
       </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Hairy Ball Theorem questions</h2>
+        <h3>What is the Hairy Ball Theorem?</h3>
+        <p>
+          It states that every continuous tangent vector field on the ordinary 2-sphere S&#xB2; must vanish
+          at at least one point. Informally, you cannot comb the hair on a ball perfectly flat &mdash; there
+          is always at least one cowlick or tuft where the hair stands up.
+        </p>
+        <h3>Why must there always be a zero?</h3>
+        <p>
+          The obstruction is topological. The Euler characteristic of the sphere is 2, and the
+          Poincar&eacute;&ndash;Hopf theorem says the indices of a vector field&rsquo;s zeros must sum to the
+          Euler characteristic. Because 2 is not 0, the field cannot be everywhere non-zero.
+        </p>
+        <h3>How does the router use the theorem?</h3>
+        <p>
+          It builds a continuous tangent field on S&#xB2; with a designated zero and routes each packet by
+          following the field. Every path flows toward that guaranteed zero, which acts as the sink or
+          destination node.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> using a topological sink as a &ldquo;router&rdquo; is an
+        illustrative framing, not a practical network design &mdash; real routing optimises latency and
+        bandwidth, not descent along a vector field, and a single forced sink would be a bottleneck, not a
+        feature. The theorem itself, and the guarantee that a zero must exist, are exactly correct; the
+        routing application is a teaching metaphor.</p>
+      </div>
 
     </div>
   </main>

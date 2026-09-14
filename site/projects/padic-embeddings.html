@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/padic-embeddings" />
-  <title>padic-embeddings — awesome-mad-projects</title>
+  <title>What Is the p-adic Metric?</title>
   <meta name="description"
-        content="A p-adic embedding space with ultrametric balls, exact Fraction arithmetic, residue-class clustering, and exhaustive metric verification." />
+        content="The p-adic metric explained: two numbers are close when their difference is divisible by a high power of p. Exact-fraction Python demo with ultrametric verification." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="padic-embeddings — awesome-mad-projects" />
-  <meta property="og:description"  content="Embedding space governed by the p-adic metric: ultrametric, exact fractions, hierarchical clustering." />
+  <meta property="og:title"        content="What Is the p-adic Metric?" />
+  <meta property="og:description"  content="The p-adic metric explained: two numbers are close when their difference is divisible by a high power of p. Exact-fraction Python demo with ultrametric verification." />
   <meta property="og:image"        content="https://mad-projects.com/assets/emblems/padic-embeddings.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/padic-embeddings" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="padic-embeddings — awesome-mad-projects" />
-  <meta name="twitter:description" content="p-adic metric embedding space with ultrametric verification." />
+  <meta name="twitter:title"       content="What Is the p-adic Metric?" />
+  <meta name="twitter:description" content="The p-adic metric explained: two numbers are close when their difference is divisible by a high power of p. Exact-fraction Python demo with ultrametric verification." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/padic-embeddings.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "What Is the p-adic Metric?",
+        "description": "The p-adic metric explained: two numbers are close when their difference is divisible by a high power of p. Exact-fraction Python demo with ultrametric verification.",
+        "image": "https://mad-projects.com/assets/banners/padic-embeddings.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/padic-embeddings",
+        "url": "https://mad-projects.com/projects/padic-embeddings",
+        "keywords": "p-adic metric, p-adic numbers, p-adic valuation, ultrametric, strong triangle inequality, non-Archimedean, residue classes, embedding geometry, hierarchical clustering"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "p-adic Embeddings",
+        "description": "Python embedding space governed by the p-adic metric, with exact Fraction arithmetic, ultrametric verification, and residue-class clustering.",
+        "programmingLanguage": "Python",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/padic-embeddings",
+        "url": "https://mad-projects.com/projects/padic-embeddings"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "p-adic Embeddings", "item": "https://mad-projects.com/projects/padic-embeddings" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the p-adic metric?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For a fixed prime p, the p-adic valuation v_p(x) is the exponent of the highest power of p dividing x. The p-adic absolute value is |x|_p = p^(−v_p(x)), and the p-adic distance between a and b is |a − b|_p. So two numbers are 'close' when their difference is divisible by a high power of p, regardless of how far apart they sit on the number line."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the ultrametric (strong triangle) inequality?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The p-adic absolute value satisfies |x + y|_p ≤ max(|x|_p, |y|_p), which is stronger than the ordinary triangle inequality. Two consequences: every triangle is isosceles, and any two balls are either nested or disjoint—never partially overlapping—so the space has a natural tree structure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why use the p-adic metric as an embedding geometry?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Euclidean embeddings measure closeness as numeric proximity; p-adic closeness is arithmetic—shared divisibility by p. That produces canonical hierarchical clustering by residue classes mod p^k, which this project demonstrates using exact Fraction arithmetic and exhaustive ultrametric verification over 720 ordered triples."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-python">Python</span>
-          <h1>padic-embeddings</h1>
+          <h1>The p-adic Metric, as an Embedding Geometry</h1>
           <p class="detail-tagline">An embedding space whose geometry is governed by the p-adic metric instead of the usual Euclidean one &mdash; ultrametric balls, exact arithmetic, and exhaustive triangle-inequality verification.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -105,6 +169,97 @@
           <code>fractions.Fraction</code>, verifies the ultrametric property exhaustively over
           720 ordered triples (zero violations), and demonstrates hierarchical clustering
           by p-adic residue classes.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is the p-adic metric?</h2>
+        <p>
+          Fix a prime number p. The <strong>p-adic valuation</strong> v&#x209A;(x) counts how many times
+          p divides an integer x &mdash; it is the exponent of the highest power of p that is a factor.
+          So v&#x2082;(48) = 4 because 48 = 2&#x2074;&nbsp;&middot;&nbsp;3, and v&#x2082;(3) = 0 because 3 is
+          odd. For a fraction a/b the valuation is v&#x209A;(a)&nbsp;&minus;&nbsp;v&#x209A;(b), which lets the
+          idea extend from the integers to all of the rationals.
+        </p>
+        <p>
+          From the valuation you build the <strong>p-adic absolute value</strong>:
+          |x|&#x209A;&nbsp;=&nbsp;p&#x207B;&#8317;&#7488;&#7523;&#8318;&#8339;&#8318; (with |0|&#x209A;&nbsp;=&nbsp;0),
+          and the <strong>p-adic distance</strong> d&#x209A;(a, b)&nbsp;=&nbsp;|a&nbsp;&minus;&nbsp;b|&#x209A;.
+          The counter-intuitive move is the minus sign: a <em>large</em> power of p dividing the
+          difference makes the absolute value <em>small</em>. Two numbers are p-adically close exactly when
+          their difference is highly divisible by p &mdash; a purely arithmetic notion of nearness that
+          ignores position on the number line. Under p&nbsp;=&nbsp;2, the numbers 1 and 17 are close
+          (d&#x2082;&nbsp;=&nbsp;1/16) because 17&nbsp;&minus;&nbsp;1&nbsp;=&nbsp;16&nbsp;=&nbsp;2&#x2074;, even
+          though 1 and 2 &mdash; numerically adjacent &mdash; are p-adically far apart.
+        </p>
+        <p>
+          What makes this a genuinely different geometry is the <strong>ultrametric</strong>, or strong
+          triangle inequality: |x&nbsp;+&nbsp;y|&#x209A;&nbsp;&le;&nbsp;max(|x|&#x209A;,&nbsp;|y|&#x209A;).
+          This is stronger than the ordinary triangle inequality (which only bounds the sum). It forces
+          two properties that Euclidean space never has: every triangle is isosceles (the two longest
+          sides are equal), and any two balls are either fully nested or completely disjoint &mdash; they
+          can never partly overlap. That nesting is why the p-adic world is naturally a tree rather than a
+          line, and why residue classes mod p&#x1D458; fall into a clean hierarchy. Metrics obeying the
+          strong triangle inequality are called <em>non-Archimedean</em>; the p-adic numbers &#8474;&#x209A;
+          are the canonical example, completing the rationals with respect to |&middot;|&#x209A; instead of
+          the ordinary absolute value that gives the reals.
+        </p>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The package treats the p-adic metric as the geometry of an embedding space, in place of the
+          Euclidean distance that machine-learning embeddings almost always assume. Three design choices
+          keep it honest and reproducible:
+        </p>
+        <ul>
+          <li><strong>Exact arithmetic.</strong> Every valuation, absolute value, and distance is computed
+            with <code>fractions.Fraction</code>, so results like 1/16 are exact &mdash; there is no
+            floating-point rounding to blur a strict inequality.</li>
+          <li><strong>Exhaustive verification.</strong> The strong triangle inequality is checked over all
+            720 ordered triples drawn from the demo set, with zero violations &mdash; a concrete,
+            machine-checked confirmation that the space really is an ultrametric.</li>
+          <li><strong>Hierarchical clustering.</strong> Because residue classes mod p&#x1D458; form balls of
+            radius p&#x207B;&#x1D458; that nest perfectly as k grows, the metric induces a canonical tree over
+            any dataset. Items sharing large powers of p cluster together regardless of numeric size.</li>
+        </ul>
+        <p>
+          Strings are embedded deterministically via SHA-256(item) mod 2&#x00B2;&#x2070;, so the demo is
+          reproducible across machines (unlike Python&rsquo;s salted built-in <code>hash()</code>).
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the p-adic metric here is entirely real mathematics, not a
+          fictional analogy. What is exploratory is the <em>application</em> &mdash; using p-adic geometry
+          as an embedding space is an illustration of how an alternative metric reshapes clustering, not a
+          claim that it outperforms Euclidean embeddings on any downstream task.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>p-adic metric questions</h2>
+        <h3>What is the p-adic metric?</h3>
+        <p>
+          For a fixed prime p, the p-adic valuation v&#x209A;(x) is the exponent of the highest power of p
+          dividing x. The p-adic absolute value is |x|&#x209A;&nbsp;=&nbsp;p&#x207B;&#8317;&#7488;&#7523;&#8318;&#8339;&#8318;,
+          and the p-adic distance between a and b is |a&nbsp;&minus;&nbsp;b|&#x209A;. Two numbers are
+          &ldquo;close&rdquo; when their difference is divisible by a high power of p, regardless of how far
+          apart they sit on the number line.
+        </p>
+        <h3>What is the ultrametric (strong triangle) inequality?</h3>
+        <p>
+          The p-adic absolute value satisfies
+          |x&nbsp;+&nbsp;y|&#x209A;&nbsp;&le;&nbsp;max(|x|&#x209A;,&nbsp;|y|&#x209A;), which is stronger than
+          the ordinary triangle inequality. Two consequences: every triangle is isosceles, and any two
+          balls are either nested or disjoint &mdash; never partially overlapping &mdash; so the space has
+          a natural tree structure.
+        </p>
+        <h3>Why use the p-adic metric as an embedding geometry?</h3>
+        <p>
+          Euclidean embeddings measure closeness as numeric proximity; p-adic closeness is arithmetic
+          &mdash; shared divisibility by p. That produces canonical hierarchical clustering by residue
+          classes mod p&#x1D458;, which this project demonstrates using exact Fraction arithmetic and
+          exhaustive ultrametric verification over 720 ordered triples.
         </p>
       </section>
 

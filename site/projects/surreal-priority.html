@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/surreal-priority" />
-  <title>surreal-priority — awesome-mad-projects</title>
+  <title>Conway's Surreal Numbers, Explained</title>
   <meta name="description"
-        content="Conway's surreal numbers drive deterministic process priorities from 1/ω through dyadic fractions to ω. Pure Rust, zero dependencies, 16 tests." />
+        content="Conway built every number—reals, infinitesimals, infinities—from the {L | R} rule. This Rust demo uses surreal numbers as an exact, dense scheduler priority key." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="surreal-priority — awesome-mad-projects" />
-  <meta property="og:description"  content="Conway surreal numbers as process priorities: 1/ω, dyadic fractions, and ω on one ordered line." />
+  <meta property="og:title"        content="Surreal Priority" />
+  <meta property="og:description"  content="Conway built every number—reals, infinitesimals, infinities—from the {L | R} rule. This Rust demo uses surreal numbers as an exact, dense scheduler priority key." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/surreal-priority.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/surreal-priority" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="surreal-priority — awesome-mad-projects" />
-  <meta name="twitter:description" content="Conway surreal numbers as process priorities. Pure Rust, 16 tests." />
+  <meta name="twitter:title"       content="Surreal Priority" />
+  <meta name="twitter:description" content="Conway built every number—reals, infinitesimals, infinities—from the {L | R} rule. This Rust demo uses surreal numbers as an exact, dense scheduler priority key." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/surreal-priority.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Conway's Surreal Numbers, Explained",
+        "description": "Conway built every number—reals, infinitesimals, infinities—from the {L | R} rule. This Rust demo uses surreal numbers as an exact, dense scheduler priority key.",
+        "image": "https://mad-projects.com/assets/banners/surreal-priority.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/surreal-priority",
+        "url": "https://mad-projects.com/projects/surreal-priority",
+        "keywords": "surreal numbers, John Conway, dyadic rationals, infinitesimals, ordered field, scheduler priority"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Surreal Priority",
+        "description": "A pure-Rust scheduler that uses surreal-number-style priorities (a·ω + b + c/ω) with exact dyadic-rational arithmetic.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/surreal-priority",
+        "url": "https://mad-projects.com/projects/surreal-priority"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Surreal Priority", "item": "https://mad-projects.com/projects/surreal-priority" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are surreal numbers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Surreal numbers are a class of numbers John Conway constructed from a single recursive rule: every number is a pair {L | R} of sets of earlier-created numbers, with every left element strictly less than every right element. Starting from nothing, this builds all the real numbers plus infinitesimals and infinities on one totally ordered line."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a surreal number's birthday?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Surreal numbers are created in stages. The only number born on day 0 is {|} = 0; each later day introduces numbers definable from those already made. A number's birthday is the first day it can appear, and the simplest value between its neighbours—the one with the earliest birthday—is its canonical form."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why use surreal numbers as scheduling priorities?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They form a dense, totally ordered field: between any two priorities you can always insert another, and the system natively includes ω (which beats every finite task) and 1/ω (an infinitesimal that runs only when nothing else can). This demo restricts coefficients to dyadic rationals so every comparison stays exact integer arithmetic with no floating point."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>surreal-priority</h1>
+          <h1>Surreal Priority: Conway&rsquo;s surreal numbers as a scheduler key</h1>
           <p class="detail-tagline">Conway&rsquo;s surreal numbers as process priorities &mdash; 1/&omega;, every dyadic fraction, and &omega; on one ordered line, driving a deterministic scheduler. Pure Rust, zero dependencies.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -106,6 +170,38 @@
           arithmetic &mdash; no floating point. A deterministic scheduler picks the highest-priority
           runnable task each tick and demonstrates that an &omega;-priority task starves all finite tasks,
           while a 1/&omega;-priority task waits for complete idleness.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What are surreal numbers?</h2>
+        <p>
+          Surreal numbers were discovered by mathematician John Conway in the 1970s (and named by Donald
+          Knuth). They are astonishing because the entire system &mdash; every real number, plus quantities
+          that are infinitely large or infinitely small &mdash; is built from a single recursive rule and
+          literally nothing else. Every surreal number is a pair of sets, written
+          <code>{ L | R }</code>, where L is a set of previously-created surreal numbers, R is another, and
+          every element of L is strictly less than every element of R. That is the whole definition.
+        </p>
+        <p>
+          From this rule the numbers unfold in stages called <em>birthdays</em>. On day 0 the only thing
+          you can write, using the empty set on both sides, is <code>{ | } = 0</code>. On day 1 you get
+          <code>{ 0 | } = 1</code> and <code>{ | 0 } = &minus;1</code>. Continuing, day 2 produces 2,
+          &minus;2, and the fraction <code>{ 0 | 1 } = 1/2</code>. Every <em>dyadic rational</em> (a fraction
+          with a power-of-two denominator) appears after finitely many days; the remaining reals such as
+          &pi; arrive at the first infinite stage. A number&rsquo;s value is the simplest number lying
+          strictly between its left and right sets &mdash; the one with the earliest birthday.
+        </p>
+        <p>
+          What makes surreals more than a curiosity is that the construction keeps going past the finite
+          days. The form <code>&omega; = { 0, 1, 2, 3, &hellip; | }</code> is a number larger than every
+          natural number &mdash; a genuine infinity you can do arithmetic with &mdash; and
+          <code>1/&omega; = { 0 | 1, 1/2, 1/4, &hellip; }</code> is a positive <em>infinitesimal</em>,
+          smaller than every positive real yet greater than zero. All of these live on one totally ordered
+          line and form a <em>field</em>: you can add, subtract, multiply, and divide them, and between any
+          two distinct surreals there is always another (the system is dense). That combination &mdash; a
+          single ordered scale holding the finite, the infinite, and the infinitesimal &mdash; is exactly
+          what makes them attractive as priority keys.
         </p>
       </section>
 
@@ -170,6 +266,40 @@ Scheduler run (10 ticks):
              rel="noopener" target="_blank">source &#x2197;</a>
         </div>
       </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Surreal number questions</h2>
+        <h3>What are surreal numbers?</h3>
+        <p>
+          Surreal numbers are a class of numbers John Conway constructed from a single recursive rule:
+          every number is a pair <code>{ L | R }</code> of sets of earlier-created numbers, with every left
+          element strictly less than every right element. Starting from nothing, this builds all the real
+          numbers plus infinitesimals and infinities on one totally ordered line.
+        </p>
+        <h3>What is a surreal number&rsquo;s birthday?</h3>
+        <p>
+          Surreal numbers are created in stages. The only number born on day 0 is <code>{ | } = 0</code>;
+          each later day introduces numbers definable from those already made. A number&rsquo;s birthday is
+          the first day it can appear, and the simplest value between its neighbours &mdash; the one with the
+          earliest birthday &mdash; is its canonical form.
+        </p>
+        <h3>Why use surreal numbers as scheduling priorities?</h3>
+        <p>
+          They form a dense, totally ordered field: between any two priorities you can always insert
+          another, and the system natively includes &omega; (which beats every finite task) and 1/&omega;
+          (an infinitesimal that runs only when nothing else can). This demo restricts coefficients to
+          dyadic rationals so every comparison stays exact integer arithmetic with no floating point.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> this project does not implement the full surreal-number field.
+        It models a practical slice &mdash; priorities of the form <code>a&middot;&omega; + b + c&middot;(1/&omega;)</code>
+        with dyadic-rational coefficients, compared lexicographically &mdash; which captures the useful
+        &ldquo;infinite, finite, infinitesimal&rdquo; ordering without building numbers recursively from
+        <code>{ L | R }</code> or supporting general surreal multiplication. It is faithful as an ordered
+        priority key, not as a complete construction of Conway&rsquo;s numbers.</p>
+      </div>
 
     </div>
   </main>

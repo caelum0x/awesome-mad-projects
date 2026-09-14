@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/domain_expansion" />
-  <title>domain_expansion — awesome-mad-projects</title>
+  <title>Domain Expansion as a Constraint Solver: Well-Posedness Explained</title>
   <meta name="description"
-        content="Domain Expansion as a coupled constraint solver, with stability measured by spectral radius and systems solved by Gauss-Seidel or elimination." />
+        content="Domain Expansion modeled as a constraint solver—well-posedness, contraction mappings, and Gauss–Seidel convergence—in runnable Python with two agreeing solvers and tests." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="domain_expansion — awesome-mad-projects" />
-  <meta property="og:description"  content="Domain Expansion as a coupled constraint solver: power = stability + well-posedness." />
+  <meta property="og:title"        content="Domain Expansion as a Constraint Solver" />
+  <meta property="og:description"  content="Domain Expansion modeled as a constraint solver—well-posedness, contraction mappings, and Gauss–Seidel convergence—in runnable Python with two agreeing solvers and tests." />
   <meta property="og:image"        content="https://mad-projects.com/assets/emblems/domain_expansion.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/domain_expansion" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="domain_expansion — awesome-mad-projects" />
-  <meta name="twitter:description" content="Jujutsu Kaisen Domain Expansion as a Laplace BVP constraint solver." />
+  <meta name="twitter:title"       content="Domain Expansion as a Constraint Solver" />
+  <meta name="twitter:description" content="Domain Expansion modeled as a constraint solver—well-posedness, contraction mappings, and Gauss–Seidel convergence—in runnable Python with two agreeing solvers and tests." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/domain_expansion.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Domain Expansion as a Constraint Solver: Well-Posedness Explained",
+        "description": "Domain Expansion modeled as a constraint solver—well-posedness, contraction mappings, and Gauss–Seidel convergence—in runnable Python with two agreeing solvers and tests.",
+        "image": "https://mad-projects.com/assets/banners/domain_expansion.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/domain_expansion",
+        "url": "https://mad-projects.com/projects/domain_expansion",
+        "keywords": "Domain Expansion, well-posedness, Hadamard, contraction mapping, fixed-point iteration, Gauss-Seidel, Laplace equation, boundary value problem, Jujutsu Kaisen math"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Domain Expansion",
+        "description": "Python model of a Domain Expansion as a Dirichlet boundary-value problem, scoring domains by the stability and well-posedness of their constraint system.",
+        "programmingLanguage": "Python",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinity-lab/packages/domain_expansion",
+        "url": "https://mad-projects.com/projects/domain_expansion"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Domain Expansion", "item": "https://mad-projects.com/projects/domain_expansion" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does well-posedness mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Hadamard's sense a problem is well-posed if a solution exists, is unique, and depends continuously (stably) on the inputs. If any of the three fails—no solution, many solutions, or tiny input changes producing huge output changes—the problem is ill-posed. Here a Domain's 'power' is how well-posed and stable its constraint system is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the model represent a Domain Expansion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "As a Dirichlet boundary-value problem on a 7×7 grid: the boundary ring is pinned to 'sure-hit' values and the interior is solved by the Laplace equation. A rigidity metric—a spectral-radius proxy plus a void bonus minus a noise penalty—scores each domain, and the more rigid, better-posed domain wins the clash."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a contraction mapping and why does the solver converge?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A contraction is a map that brings points strictly closer together by a factor below 1. The Banach fixed-point theorem guarantees it has a unique fixed point that repeated iteration converges to. Gauss–Seidel relaxation is such an iteration for the Laplace system, so it converges to the same solution as direct Gaussian elimination—here they agree to about 2.8×10⁻⁸."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-python">Python</span>
-          <h1>domain_expansion</h1>
+          <h1>Domain Expansion as a Constraint Solver</h1>
           <p class="detail-tagline">Domain Expansion as a coupled constraint solver: power is the stability and well-posedness of the constraint system, measured by spectral radius.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -108,6 +172,70 @@
           Two solvers produce identical results: Gauss&ndash;Seidel relaxation and direct Gaussian
           elimination with partial pivoting. A clash simulation compares two domains and picks the
           winner by rigidity.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is well-posedness?</h2>
+        <p>
+          The mathematical spine of this project is <strong>well-posedness</strong>, a notion due to
+          Jacques Hadamard. A problem is well-posed when three conditions all hold: a solution
+          <em>exists</em>, it is <em>unique</em>, and it depends <em>continuously</em> (stably) on the
+          input data. Break any one of them and the problem is ill-posed &mdash; there may be no answer,
+          several conflicting answers, or an answer so sensitive that an imperceptible change in the
+          inputs sends it flying. That third condition, stability, is the one that matters most in
+          practice: an ill-conditioned system technically has a unique solution, but noise swamps it.
+        </p>
+        <p>
+          A Dirichlet boundary-value problem for the Laplace equation &mdash; fix the values on the
+          boundary, solve for a harmonic interior &mdash; is the textbook example of a well-posed
+          problem. The solution exists, is unique, and varies smoothly with the boundary data. That is
+          precisely why it is a good stand-in for a &ldquo;sure-hit&rdquo; Domain: a well-posed
+          constraint system yields one definite, stable outcome everywhere inside the region.
+        </p>
+        <p>
+          The second concept is the <strong>contraction mapping</strong>. A map T is a contraction if it
+          shrinks the distance between any two points by a fixed factor q&nbsp;&lt;&nbsp;1. The Banach
+          fixed-point theorem then guarantees a single fixed point x* with T(x*)&nbsp;=&nbsp;x*, and that
+          iterating T from any start converges to it, with error falling like q&#8319;. Gauss&ndash;Seidel
+          relaxation for the Laplace grid is exactly such an iteration &mdash; each sweep contracts the
+          error &mdash; so it must converge to the unique solution, the same one direct Gaussian
+          elimination computes. The two solvers agreeing to roughly 2.8&nbsp;&times;&nbsp;10&#8315;&#8312;
+          is the numerical fingerprint of a well-posed, contracting system.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> equating a Domain&rsquo;s in-story &ldquo;power&rdquo; with
+          the well-posedness and rigidity of a boundary-value problem is a deliberate, loose analogy, not
+          anything from <em>Jujutsu Kaisen</em>. The rigidity metric (a spectral-radius proxy plus a void
+          bonus minus a noise penalty) is a hand-built score chosen so that a cleaner, more stable
+          constraint system wins &mdash; it is a modelling choice, not a physical law.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Domain Expansion questions</h2>
+        <h3>What does well-posedness mean?</h3>
+        <p>
+          In Hadamard&rsquo;s sense a problem is well-posed if a solution exists, is unique, and depends
+          continuously (stably) on the inputs. If any of the three fails &mdash; no solution, many
+          solutions, or tiny input changes producing huge output changes &mdash; the problem is
+          ill-posed. Here a Domain&rsquo;s &ldquo;power&rdquo; is how well-posed and stable its
+          constraint system is.
+        </p>
+        <h3>How does the model represent a Domain Expansion?</h3>
+        <p>
+          As a Dirichlet boundary-value problem on a 7&times;7 grid: the boundary ring is pinned to
+          &ldquo;sure-hit&rdquo; values and the interior is solved by the Laplace equation. A rigidity
+          metric &mdash; a spectral-radius proxy plus a void bonus minus a noise penalty &mdash; scores
+          each domain, and the more rigid, better-posed domain wins the clash.
+        </p>
+        <h3>What is a contraction mapping and why does the solver converge?</h3>
+        <p>
+          A contraction is a map that brings points strictly closer together by a factor below 1. The
+          Banach fixed-point theorem guarantees it has a unique fixed point that repeated iteration
+          converges to. Gauss&ndash;Seidel relaxation is such an iteration for the Laplace system, so it
+          converges to the same solution as direct Gaussian elimination &mdash; here they agree to about
+          2.8&nbsp;&times;&nbsp;10&#8315;&#8312;.
         </p>
       </section>
 

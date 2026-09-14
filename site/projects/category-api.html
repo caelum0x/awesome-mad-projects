@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/category-api" />
-  <title>category-api — awesome-mad-projects</title>
+  <title>Category Theory for APIs, Explained (Laws Enforced by Tests)</title>
   <meta name="description"
-        content="An HTTP handler layer modeled as a category: types are objects, handlers are morphisms, and middleware composition is checked with property tests." />
+        content="Category theory for APIs: model HTTP handlers as morphisms that compose, and enforce the identity and associativity laws with property-based TypeScript tests." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="category-api — awesome-mad-projects" />
-  <meta property="og:description"  content="HTTP handler layer as a category: morphisms, composition, identity. TypeScript, property-based tests." />
+  <meta property="og:title"        content="Category Theory for APIs" />
+  <meta property="og:description"  content="Category theory for APIs: model HTTP handlers as morphisms that compose, and enforce the identity and associativity laws with property-based TypeScript tests." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/category-api.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/category-api" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="category-api — awesome-mad-projects" />
-  <meta name="twitter:description" content="HTTP layer as a category: category laws enforced by property-based tests." />
+  <meta name="twitter:title"       content="Category Theory for APIs" />
+  <meta name="twitter:description" content="Category theory for APIs: model HTTP handlers as morphisms that compose, and enforce the identity and associativity laws with property-based TypeScript tests." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/category-api.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Category Theory for APIs, Explained (Laws Enforced by Tests)",
+        "description": "Category theory for APIs: model HTTP handlers as morphisms that compose, and enforce the identity and associativity laws with property-based TypeScript tests.",
+        "image": "https://mad-projects.com/assets/banners/category-api.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/category-api",
+        "url": "https://mad-projects.com/projects/category-api",
+        "keywords": "category theory, morphism, composition, identity, associativity, category laws, HTTP handlers, middleware, property-based testing, fast-check, TypeScript"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Category API",
+        "description": "A TypeScript HTTP handler layer modeled as a category, with the identity and associativity laws enforced by property-based tests.",
+        "programmingLanguage": "TypeScript",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/category-api",
+        "url": "https://mad-projects.com/projects/category-api"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Category API", "item": "https://mad-projects.com/projects/category-api" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a category in category theory?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A category is a collection of objects together with morphisms (arrows) between them, subject to two laws: morphisms compose associatively, and every object has an identity morphism that acts as a unit for composition. In this project the objects are request/response types and the morphisms are HTTP handlers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do the category laws apply to HTTP handlers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Middleware chaining is composition: (g ∘ f)(req) = g(f(req)). A pass-through handler is the identity. Associativity means the outcome cannot depend on how the middleware chain is parenthesized, and identity means inserting a no-op handler changes nothing. Both are real correctness requirements, not just abstractions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are the category laws enforced?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "With property-based tests using fast-check. Random handler triples check that (h ∘ g) ∘ f is equivalent to h ∘ (g ∘ f), and random handlers check that id ∘ f and f ∘ id both equal f. Instead of a few hand-picked cases, the tests probe many generated inputs to expose violations."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-ts">TypeScript</span>
-          <h1>category-api</h1>
+          <h1>Category Theory for APIs</h1>
           <p class="detail-tagline">An HTTP/handler layer modeled as a category &mdash; objects are request/response types, morphisms are handlers, composition is middleware chaining &mdash; with the relevant laws enforced by property-based tests.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -104,6 +168,88 @@
           middleware application must not depend on parenthesization) and identity handlers as the
           category&rsquo;s unit elements. Both laws are enforced by property-based tests using
           fast-check.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is a category?</h2>
+        <p>
+          A <strong>category</strong> is one of the most economical structures in mathematics. It consists
+          of <em>objects</em> and, between them, <em>morphisms</em> (also called arrows or maps). You do
+          not look inside the objects; all the content lives in how the arrows connect and combine. To
+          qualify as a category, three things must hold.
+        </p>
+        <ul>
+          <li><strong>Composition.</strong> If f&nbsp;:&nbsp;A&nbsp;&rarr;&nbsp;B and
+            g&nbsp;:&nbsp;B&nbsp;&rarr;&nbsp;C are morphisms, there is a composite
+            g&nbsp;&#8728;&nbsp;f&nbsp;:&nbsp;A&nbsp;&rarr;&nbsp;C. Arrows that line up can always be
+            joined end to end.</li>
+          <li><strong>Identity.</strong> Every object A has an identity morphism
+            id&#x2090;&nbsp;:&nbsp;A&nbsp;&rarr;&nbsp;A that does nothing when composed:
+            id&nbsp;&#8728;&nbsp;f&nbsp;=&nbsp;f and f&nbsp;&#8728;&nbsp;id&nbsp;=&nbsp;f.</li>
+          <li><strong>Associativity.</strong> Composition does not care how you group it:
+            (h&nbsp;&#8728;&nbsp;g)&nbsp;&#8728;&nbsp;f&nbsp;=&nbsp;h&nbsp;&#8728;&nbsp;(g&nbsp;&#8728;&nbsp;f).</li>
+        </ul>
+        <p>
+          Those two equations &mdash; the identity law and the associativity law &mdash; are <em>the</em>
+          category laws. They sound almost too obvious to state, but that is exactly why they are useful:
+          any system that genuinely satisfies them inherits the entire toolbox of categorical reasoning,
+          and any system that violates them has a concrete bug you can point at.
+        </p>
+      </section>
+
+      <section class="detail-section" id="how-it-works">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The mapping is direct. <strong>Objects</strong> are the request and response types.
+          <strong>Morphisms</strong> are handlers, each a function
+          <code>(req:&nbsp;Req)&nbsp;&rarr;&nbsp;Promise&lt;Res&gt;</code>. <strong>Composition</strong> is
+          middleware chaining, (g&nbsp;&#8728;&nbsp;f)(req)&nbsp;=&nbsp;g(f(req)), and the
+          <strong>identity</strong> is a pass-through handler that returns its input untouched.
+        </p>
+        <p>
+          Written out this way, the two laws stop being abstract. <em>Associativity</em> becomes the
+          requirement that a middleware chain behaves the same no matter how it is grouped &mdash; you can
+          refactor <code>logging(auth(handler))</code> into a pre-composed
+          <code>(logging&nbsp;&#8728;&nbsp;auth)</code> stage without changing behaviour. <em>Identity</em>
+          becomes the guarantee that inserting a no-op middleware is always safe. The project encodes both
+          as executable properties and hands them to <code>fast-check</code>, which generates random
+          handler triples and random single handlers and searches for any input that breaks a law,
+          shrinking failures to a minimal counterexample when it finds one.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> real HTTP handlers can perform side effects and are not pure
+          functions, so &ldquo;handlers form a category&rdquo; is an idealization that holds for the
+          composition behaviour being tested, not a claim that every possible handler is a well-behaved
+          morphism. The value is that writing the laws down as property tests turns a vague sense of
+          &ldquo;middleware should be well-behaved&rdquo; into checks that actually fail when composition
+          misbehaves.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Category theory for APIs questions</h2>
+        <h3>What is a category in category theory?</h3>
+        <p>
+          A category is a collection of objects together with morphisms (arrows) between them, subject to
+          two laws: morphisms compose associatively, and every object has an identity morphism that acts
+          as a unit for composition. In this project the objects are request/response types and the
+          morphisms are HTTP handlers.
+        </p>
+        <h3>How do the category laws apply to HTTP handlers?</h3>
+        <p>
+          Middleware chaining is composition: (g&nbsp;&#8728;&nbsp;f)(req)&nbsp;=&nbsp;g(f(req)). A
+          pass-through handler is the identity. Associativity means the outcome cannot depend on how the
+          middleware chain is parenthesized, and identity means inserting a no-op handler changes nothing.
+          Both are real correctness requirements, not just abstractions.
+        </p>
+        <h3>How are the category laws enforced?</h3>
+        <p>
+          With property-based tests using fast-check. Random handler triples check that
+          (h&nbsp;&#8728;&nbsp;g)&nbsp;&#8728;&nbsp;f is equivalent to
+          h&nbsp;&#8728;&nbsp;(g&nbsp;&#8728;&nbsp;f), and random handlers check that
+          id&nbsp;&#8728;&nbsp;f and f&nbsp;&#8728;&nbsp;id both equal f. Instead of a few hand-picked
+          cases, the tests probe many generated inputs to expose violations.
         </p>
       </section>
 

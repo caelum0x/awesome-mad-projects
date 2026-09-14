@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/divergence-meter" />
-  <title>divergence-meter — awesome-mad-projects</title>
+  <title>Steins;Gate Divergence Meter: the Math</title>
   <meta name="description"
-        content="A Steins;Gate worldline-divergence number: SHA-256 hash to exact Fraction, attractor field classification, and nixie-tube ASCII display." />
+        content="How the Steins;Gate Divergence Meter works: a SHA-256 hash maps any world-state string to an exact, reproducible worldline number and attractor field. Runnable Python." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="divergence-meter — awesome-mad-projects" />
-  <meta property="og:description"  content="Steins;Gate worldline divergence number via SHA-256, exact fractions, nixie-tube display." />
+  <meta property="og:title"        content="Steins;Gate Divergence Meter" />
+  <meta property="og:description"  content="How the Steins;Gate Divergence Meter works: a SHA-256 hash maps any world-state string to an exact, reproducible worldline number and attractor field. Runnable Python." />
   <meta property="og:image"        content="https://mad-projects.com/assets/emblems/divergence-meter.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/divergence-meter" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="divergence-meter — awesome-mad-projects" />
-  <meta name="twitter:description" content="Steins;Gate worldline divergence meter with exact SHA-256 hash arithmetic." />
+  <meta name="twitter:title"       content="Steins;Gate Divergence Meter" />
+  <meta name="twitter:description" content="How the Steins;Gate Divergence Meter works: a SHA-256 hash maps any world-state string to an exact, reproducible worldline number and attractor field. Runnable Python." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/emblems/divergence-meter.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Steins;Gate Divergence Meter",
+        "description": "How the Steins;Gate Divergence Meter works: a SHA-256 hash maps any world-state string to an exact, reproducible worldline number and attractor field. Runnable Python.",
+        "image": "https://mad-projects.com/assets/banners/divergence-meter.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/divergence-meter",
+        "url": "https://mad-projects.com/projects/divergence-meter",
+        "keywords": "divergence meter, Steins;Gate, worldline, attractor field, SHA-256, deterministic hash, exact fractions, Python"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Divergence Meter",
+        "description": "A deterministic Steins;Gate worldline number from a SHA-256 hash, classified into an attractor field and rendered as a nixie-tube ASCII display.",
+        "programmingLanguage": "Python",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/divergence-meter",
+        "url": "https://mad-projects.com/projects/divergence-meter"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Divergence Meter", "item": "https://mad-projects.com/projects/divergence-meter" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is the divergence number random or deterministic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is fully deterministic. The same input string always produces the same worldline number, because the value is derived from a SHA-256 hash of that string converted to an exact fraction. Nothing about the reading is random."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is an attractor field in this project?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The worldline value in [0, 2) is bucketed by fixed thresholds into named fields: Alpha-Low, Alpha, Beta, and Beta-High. The classification is a simple range check on the number; the Steins;Gate worldline story framing around it is fictional."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why use exact fractions instead of floating-point numbers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Python's fractions.Fraction keeps the hash-to-worldline conversion exact and reproducible across machines. Floating-point rounding could shift a value across an attractor-field boundary, so exact arithmetic guarantees the same classification everywhere."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-python">Python</span>
-          <h1>divergence-meter</h1>
+          <h1>Steins;Gate Divergence Meter</h1>
           <p class="detail-tagline">A Steins;Gate worldline-divergence number, classified into an attractor field and rendered on a nixie-tube ASCII display &mdash; the hash is exact, never floating-point.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,15 +157,62 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          In <em>Steins;Gate</em>, the Divergence Meter reads a worldline number &mdash; a value in
-          [0, 2) &mdash; that indicates which attractor field (timeline cluster) the current worldline
-          belongs to. The show's canonical Steins;Gate worldline is exactly 1.048596.
+          In <em>Steins;Gate</em>, the Divergence Meter is a nixie-tube counter that reads a worldline
+          number &mdash; a value in [0, 2) &mdash; indicating which attractor field (timeline cluster)
+          the current worldline belongs to. Small changes to the past nudge the reading; crossing a
+          threshold means the story has jumped to a different attractor field. The show&rsquo;s canonical
+          &ldquo;Steins;Gate&rdquo; worldline is exactly 1.048596.
         </p>
         <p>
-          This package computes a divergence number deterministically from any payload string using
-          SHA-256 hashing, with all arithmetic done as exact <code>fractions.Fraction</code>.
-          The result is classified into an attractor field and rendered on a 3&times;5 seven-segment
-          nixie-tube ASCII display.
+          This package turns that fictional gauge into a real, reproducible function. Given any payload
+          string &mdash; a world-state description, a phrase, a file &mdash; it computes a divergence
+          number deterministically using SHA-256 hashing, with all arithmetic carried out as exact
+          <code>fractions.Fraction</code> values. The result is classified into an attractor field by
+          fixed thresholds and rendered on a 3&times;5 seven-segment nixie-tube ASCII display. The number
+          is a genuine mathematical object; only the &ldquo;worldline&rdquo; meaning attached to it is
+          make-believe.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>Deterministic hashing, in plain terms</h2>
+        <p>
+          A cryptographic hash function like SHA-256 takes an input of any length and returns a
+          fixed-size digest &mdash; here, 256 bits. Two properties make it useful for a
+          &ldquo;meter.&rdquo; First, it is <strong>deterministic</strong>: the identical input always
+          yields the identical digest, on any machine, forever. Second, it exhibits the
+          <strong>avalanche effect</strong>: flipping a single character of the input scrambles roughly
+          half the output bits, so the digest looks unrelated to the one before it. There is no smooth
+          relationship between input and output &mdash; that unpredictability is exactly what a
+          &ldquo;divergence&rdquo; reading wants.
+        </p>
+        <p>
+          To turn a 256-bit digest into a number in a tidy range, this project takes the first eight
+          bytes as a 64-bit integer <code>word</code>, then forms the exact rational
+          <code>Fraction(word, 2^63)</code>. Because a 64-bit unsigned value ranges over
+          [0, 2^64) and the denominator is 2^63, the quotient lands in [0, 2) &mdash; the same interval
+          the show uses. Doing this with <code>Fraction</code> rather than a float means the value is
+          exact: no rounding, no platform-specific drift, and no risk of a reading landing on the wrong
+          side of an attractor-field boundary by a floating-point hair.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The pipeline is small and inspectable: hash the payload, slice 8 bytes, build an exact
+          fraction in [0, 2), then bucket that number into one of four named attractor fields by simple
+          range comparison. Classification is nothing more than &ldquo;which interval does this value
+          fall in,&rdquo; which is why it is completely reproducible &mdash; run it a thousand times and
+          the field never changes for a given input.
+        </p>
+        <p>
+          Two anchors make the behaviour easy to check. The canonical Steins;Gate reading 1.048596 is
+          verified to sit within a tolerance of 5e-7, and the phrase <em>&ldquo;El Psy Congroo&rdquo;</em>
+          is documented to produce a stable reading of 1.062031 from a fixed 64-bit word. Because the
+          function is deterministic, these are not lucky samples &mdash; they are guarantees you can
+          re-derive yourself. The nixie ASCII renderer then draws the digits with a physical-tube feel,
+          using only text so there are no image or font dependencies.
         </p>
       </section>
 
@@ -153,6 +264,34 @@ Reading Steiner: atomic-write JSON store, frozen dataclasses</pre>
                  attractor field. The Steins;Gate 1.048596 target is marked.</p>
             </figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Divergence meter questions</h2>
+        <h3>Is the divergence number random or deterministic?</h3>
+        <p>
+          It is fully deterministic. The same input string always produces the same worldline number,
+          because the value is derived from a SHA-256 hash of that string converted to an exact fraction.
+          Nothing about the reading is random.
+        </p>
+        <h3>What is an attractor field in this project?</h3>
+        <p>
+          The worldline value in [0, 2) is bucketed by fixed thresholds into named fields &mdash;
+          Alpha-Low, Alpha, Beta, and Beta-High. The classification is a simple range check on the
+          number; the Steins;Gate worldline story framing around it is fictional.
+        </p>
+        <h3>Why use exact fractions instead of floating-point numbers?</h3>
+        <p>
+          Python&rsquo;s <code>fractions.Fraction</code> keeps the hash-to-worldline conversion exact and
+          reproducible across machines. Floating-point rounding could shift a value across an
+          attractor-field boundary, so exact arithmetic guarantees the same classification everywhere.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the &ldquo;worldline&rdquo; and &ldquo;attractor field&rdquo;
+          meanings are pure fiction &mdash; there is no physics tying a hash digest to a timeline. What is
+          real and useful here is the deterministic function: an exact, reproducible mapping from an
+          arbitrary string to a number in [0, 2) and a stable bucket.</p>
         </div>
       </section>
 

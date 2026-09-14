@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/death-note" />
-  <title>death-note — awesome-mad-projects</title>
+  <title>How Process Termination Works in Unix (a Sandboxed Death Note)</title>
   <meta name="description"
-        content="A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named sandbox target is terminated. Entirely safe userspace. Rust." />
+        content="How Unix process termination works: PIDs, signals like SIGTERM vs SIGKILL, and reaping, via a safe sandboxed reaper that only kills workers it owns. Runnable Rust." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="death-note — awesome-mad-projects" />
-  <meta property="og:description"  content="Safe sandboxed process reaper: /dev/deathnote-style CLI, safe userspace, Rust." />
+  <meta property="og:title"        content="Death Note: Unix Process Termination" />
+  <meta property="og:description"  content="How Unix process termination works: PIDs, signals like SIGTERM vs SIGKILL, and reaping, via a safe sandboxed reaper that only kills workers it owns. Runnable Rust." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/death-note.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/death-note" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="death-note — awesome-mad-projects" />
-  <meta name="twitter:description" content="Safe sandboxed process reaper in Rust — no kernel access." />
+  <meta name="twitter:title"       content="Death Note: Unix Process Termination" />
+  <meta name="twitter:description" content="How Unix process termination works: PIDs, signals like SIGTERM vs SIGKILL, and reaping, via a safe sandboxed reaper that only kills workers it owns. Runnable Rust." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/death-note.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Death Note: Unix Process Termination",
+        "description": "How Unix process termination works: PIDs, signals like SIGTERM vs SIGKILL, and reaping, via a safe sandboxed reaper that only kills workers it owns. Runnable Rust.",
+        "image": "https://mad-projects.com/assets/banners/death-note.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/death-note",
+        "url": "https://mad-projects.com/projects/death-note",
+        "keywords": "Unix process termination, PID, signals, SIGTERM, SIGKILL, reaping, zombie process, sandbox, safe Rust"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Death Note",
+        "description": "A safe, sandboxed process reaper: name a worker the tool spawned and owns and it is terminated. Written in safe Rust with no external processes affected.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/death-note",
+        "url": "https://mad-projects.com/projects/death-note"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Death Note", "item": "https://mad-projects.com/projects/death-note" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the difference between SIGTERM and SIGKILL?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SIGTERM (signal 15) is a polite request to terminate that a process can catch, handle, and use to clean up before exiting. SIGKILL (signal 9) cannot be caught, blocked, or ignored: the kernel terminates the process immediately with no chance to clean up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does it mean to reap a process?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When a child process exits it becomes a zombie until its parent reads its exit status with wait or waitpid. That read is called reaping, and it releases the last kernel bookkeeping tied to the process. The parent, or the init/reaper process that adopts orphans, is responsible for it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it safe to run? Can it kill real system processes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is safe. The tool only manages workers it spawned and owns, tracked in its own registry. Any attempt to target a process from outside that sandbox is rejected, and it is written in safe Rust with unsafe code forbidden, so no external or system process can be harmed."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>death-note</h1>
+          <h1>Death Note: Unix Process Termination</h1>
           <p class="detail-tagline">A safe, sandboxed process reaper: write a name into a /dev/deathnote-style CLI and the named target &mdash; a process the tool spawned and owns &mdash; is terminated. No kernel access required.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,29 +157,90 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          In <em>Death Note</em>, writing a person&rsquo;s name in the notebook causes their death.
-          This package models that as a process lifecycle manager: the tool spawns named sandbox
-          processes (simulated workers), maintains a registry, and terminates any process whose name
-          you write into the CLI. The processes are threads or child processes that the tool created
-          and owns &mdash; the tool cannot affect any external process.
+          In <em>Death Note</em>, writing a person&rsquo;s name in the notebook causes their death. This
+          package borrows that premise to teach a genuinely useful systems concept: how a program ends
+          another program on Unix. The tool spawns named sandbox processes (simulated workers), maintains a
+          registry, and terminates any worker whose name you write into the CLI. Every &ldquo;target&rdquo;
+          is a thread or child process the tool created and owns &mdash; it cannot touch anything else on
+          your machine.
         </p>
         <p>
-          The constraint is strict: the death note can only kill processes it spawned. Attempting to
-          register a PID from outside the sandbox is rejected. This keeps the project entirely safe
-          while modelling the concept faithfully.
+          The constraint is strict and deliberate: the death note can only kill processes it spawned.
+          Attempting to register or target a PID from outside the sandbox is rejected. That single rule is
+          what makes the project entirely safe while still modelling the real termination flow faithfully.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>How Unix ends a process</h2>
+        <p>
+          On Unix, every running process has a <strong>PID</strong> &mdash; a numeric process identifier the
+          kernel assigns and uses as the handle for everything you do to that process. You don&rsquo;t stop a
+          process by reaching into its memory; you ask the kernel to deliver a <strong>signal</strong> to its
+          PID. Termination is fundamentally a message, not a direct action.
+        </p>
+        <p>
+          Two signals matter most. <strong>SIGTERM</strong> (15) is the polite default: it asks a process to
+          shut down, and the process may install a handler to flush buffers, close files, and exit cleanly.
+          <strong>SIGKILL</strong> (9) is the hard stop: it cannot be caught, blocked, or ignored, so the
+          kernel tears the process down immediately &mdash; no cleanup, no last words. Well-behaved tools try
+          SIGTERM first and escalate to SIGKILL only if a process refuses to leave. There are also
+          permissions: you can generally only signal processes you own, which is why one user cannot casually
+          kill another&rsquo;s programs.
+        </p>
+        <p>
+          Finally there is <strong>reaping</strong>. When a child process exits it does not vanish outright;
+          it lingers as a <em>zombie</em> holding just its exit status until its parent calls
+          <code>wait</code>/<code>waitpid</code> to read that status. That read is reaping, and it frees the
+          last kernel bookkeeping for the process. If a parent dies first, orphaned children are adopted by
+          the init/reaper process, which reaps them so they don&rsquo;t accumulate.
         </p>
       </section>
 
       <section class="detail-section" id="how-it-works">
-        <h2>How it works</h2>
+        <h2>How this project demonstrates it</h2>
         <ul>
-          <li>Spawns a pool of named worker threads, each with a unique name (the &ldquo;target&rdquo;).</li>
-          <li>Maintains a registry mapping names to thread handles or process IDs.</li>
-          <li>Accepts names via stdin or CLI argument. If the name is in the registry, sends a
-            shutdown signal to that worker and removes it from the registry.</li>
-          <li>Workers outside the registry cannot be addressed &mdash; the tool refuses with an error.</li>
-          <li>Written in safe Rust (<code>#![forbid(unsafe_code)]</code>).</li>
+          <li>Spawns a pool of named worker threads, each with a unique name that acts as the human-friendly
+            &ldquo;target&rdquo; standing in for a PID.</li>
+          <li>Maintains a registry mapping names to thread handles or process IDs &mdash; the sandbox&rsquo;s
+            equivalent of the process table the kernel keeps.</li>
+          <li>Accepts names via stdin or CLI argument. If the name is in the registry, it sends a shutdown
+            signal to that worker (a SIGTERM-style cooperative stop) and reaps it by joining the handle and
+            removing it from the registry.</li>
+          <li>Workers outside the registry cannot be addressed &mdash; the tool refuses with an error,
+            mirroring the kernel&rsquo;s ownership and permission checks.</li>
+          <li>Written in safe Rust with <code>#![forbid(unsafe_code)]</code>, so there is no raw pointer or
+            FFI path to a real system call that could reach outside the sandbox.</li>
         </ul>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Death note questions</h2>
+        <h3>What is the difference between SIGTERM and SIGKILL?</h3>
+        <p>
+          SIGTERM (signal 15) is a polite request to terminate that a process can catch, handle, and use to
+          clean up before exiting. SIGKILL (signal 9) cannot be caught, blocked, or ignored: the kernel
+          terminates the process immediately with no chance to clean up.
+        </p>
+        <h3>What does it mean to reap a process?</h3>
+        <p>
+          When a child process exits it becomes a zombie until its parent reads its exit status with
+          <code>wait</code> or <code>waitpid</code>. That read is called reaping, and it releases the last
+          kernel bookkeeping tied to the process. The parent, or the init/reaper process that adopts orphans,
+          is responsible for it.
+        </p>
+        <h3>Is it safe to run? Can it kill real system processes?</h3>
+        <p>
+          It is safe. The tool only manages workers it spawned and owns, tracked in its own registry. Any
+          attempt to target a process from outside that sandbox is rejected, and it is written in safe Rust
+          with unsafe code forbidden, so no external or system process can be harmed.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the <em>Death Note</em> framing is fiction, and this is a
+          sandboxed simulation over a worker registry the tool creates and owns &mdash; not a general
+          <code>kill(2)</code> front-end. It illustrates the shape of PIDs, signals, and reaping without ever
+          signalling a process it did not spawn.</p>
+        </div>
       </section>
 
       <section class="detail-section" id="run">

@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/infinite-hotel-scheduler" />
-  <title>infinite-hotel-scheduler — awesome-mad-projects</title>
+  <title>Hilbert's Infinite Hotel Paradox, Explained + Simulated</title>
   <meta name="description"
-        content="Hilbert's Infinite Hotel as a cloud scheduler — a resource allocator that is never full, using countable re-indexing to accommodate any number of new arrivals." />
+        content="Hilbert's Grand Hotel is full yet always has room. This Go simulation shifts guests n→n+1 and n→2n to seat any countable crowd—countable infinity, live." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="infinite-hotel-scheduler — awesome-mad-projects" />
-  <meta property="og:description"  content="Hilbert's Infinite Hotel as a cloud scheduler: countable re-indexing, never full. Go." />
+  <meta property="og:title"        content="Infinite Hotel Scheduler" />
+  <meta property="og:description"  content="Hilbert's Grand Hotel is full yet always has room. This Go simulation shifts guests n→n+1 and n→2n to seat any countable crowd—countable infinity, live." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/infinite-hotel-scheduler" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="infinite-hotel-scheduler — awesome-mad-projects" />
-  <meta name="twitter:description" content="Hilbert Hotel as a cloud scheduler: never full, countable re-indexing." />
+  <meta name="twitter:title"       content="Infinite Hotel Scheduler" />
+  <meta name="twitter:description" content="Hilbert's Grand Hotel is full yet always has room. This Go simulation shifts guests n→n+1 and n→2n to seat any countable crowd—countable infinity, live." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Hilbert's Infinite Hotel Paradox, Explained + Simulated",
+        "description": "Hilbert's Grand Hotel is full yet always has room. This Go simulation shifts guests n→n+1 and n→2n to seat any countable crowd—countable infinity, live.",
+        "image": "https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/infinite-hotel-scheduler",
+        "url": "https://mad-projects.com/projects/infinite-hotel-scheduler",
+        "keywords": "Hilbert's Grand Hotel, countable infinity, bijection, cardinality, set theory, aleph-null"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Infinite Hotel Scheduler",
+        "description": "A Go scheduler modelled on Hilbert's Grand Hotel that re-indexes occupied slots to admit new arrivals.",
+        "programmingLanguage": "Go",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/infinite-hotel-scheduler",
+        "url": "https://mad-projects.com/projects/infinite-hotel-scheduler"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Infinite Hotel Scheduler", "item": "https://mad-projects.com/projects/infinite-hotel-scheduler" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Hilbert's Infinite Hotel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a thought experiment about a hotel with countably infinitely many rooms, all occupied. Even though it is full, it can still make room for new guests by shifting existing ones, illustrating how infinite sets behave differently from finite ones."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does a full hotel fit one more guest?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Move the guest in room n to room n+1 for every n. This frees room 1 while still giving every original guest a room. It works because there is no last room for anyone to overflow out of."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does it fit infinitely many new guests?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Move each guest from room n to room 2n. That empties every odd-numbered room—infinitely many of them—leaving space for a countably infinite coach of new arrivals to fill the odd rooms."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-go">Go</span>
-          <h1>infinite-hotel-scheduler</h1>
+          <h1>Infinite Hotel Scheduler: Hilbert&rsquo;s Grand Hotel in code</h1>
           <p class="detail-tagline">Hilbert&rsquo;s Infinite Hotel as a cloud scheduler &mdash; a resource allocator that is never full, using countable re-indexing to accommodate any number of new arrivals.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,17 +157,65 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          Hilbert&rsquo;s Infinite Hotel has countably infinitely many rooms, all occupied. Yet it can
-          always accommodate a new guest: shift every guest from room n to room n+1, freeing room 1.
-          For a countably infinite coach of new guests: shift existing guests from room n to room 2n,
-          freeing all odd-numbered rooms.
+          In 1924 David Hilbert offered a hotel to help people feel the strangeness of infinity. His
+          Grand Hotel has countably infinitely many rooms &mdash; one for every natural number 1, 2, 3,
+          &hellip; &mdash; and tonight every single room is occupied. A weary traveller arrives asking for
+          a room. In a finite hotel the answer would be &ldquo;sorry, we&rsquo;re full.&rdquo; In
+          Hilbert&rsquo;s hotel, the clerk simply asks each guest to move up one room: the occupant of
+          room 1 goes to room 2, room 2 goes to room 3, and so on. Every guest still has a room, yet room
+          1 is now empty for the newcomer.
         </p>
         <p>
-          This package models a cloud scheduler as the Infinite Hotel. Worker slots are numbered by
-          natural numbers. When all slots appear full, the scheduler re-indexes to create a vacancy.
-          In practice the &ldquo;infinite&rdquo; capacity is bounded by available RAM &mdash; the code
-          explicitly models the limit and refuses to re-index past it, so it behaves correctly in finite
-          memory while demonstrating the paradox for smaller inputs.
+          It gets stranger. Suppose an infinitely long coach pulls up carrying countably infinitely many
+          new guests. The clerk asks every current occupant of room n to move to room 2n. Now all the
+          even rooms are taken and every odd room &mdash; infinitely many of them &mdash; is free, exactly
+          enough for the infinite coach. A hotel that was completely full has absorbed an infinite crowd
+          without turning anyone away. This only <em>looks</em> paradoxical because our intuition is built
+          for finite sets, where &ldquo;full&rdquo; genuinely means &ldquo;no more room.&rdquo;
+        </p>
+        <p>
+          This package dramatises the hotel as a resource scheduler. Worker slots are numbered by the
+          natural numbers, and when every slot appears occupied the scheduler re-indexes existing jobs to
+          open a vacancy, just as the clerk shuffles guests. It is a hands-on way to watch the arithmetic
+          of countable infinity behave.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>What is countable infinity?</h2>
+        <p>
+          A set is <strong>countably infinite</strong> if its elements can be put into a one-to-one
+          correspondence &mdash; a <em>bijection</em> &mdash; with the natural numbers &#x2115; = {1, 2, 3,
+          &hellip;}. The size (cardinality) of this set is written &alefsym;&#x2080; (&ldquo;aleph-null&rdquo;).
+          The counter-intuitive feature is that a countably infinite set can be matched perfectly with a
+          <em>proper subset</em> of itself. There are, in this precise sense, exactly as many even numbers
+          as there are natural numbers, because n &harr; 2n pairs them off with none left over.
+        </p>
+        <p>
+          Each move in the hotel is just such a bijection. The single-guest shift is the function
+          f(n) = n + 1, which maps the occupied rooms onto {2, 3, 4, &hellip;} and leaves room 1 free.
+          The infinite-coach shift is f(n) = 2n, which maps the occupied rooms onto the even numbers and
+          frees the odds. Because both are genuine bijections, no guest is doubled up and no guest is
+          lost; the hotel stays perfectly booked. Finite hotels have no such trick, which is exactly what
+          makes &alefsym;&#x2080; different from any finite number.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The scheduler numbers its slots like hotel rooms and implements the two classic re-indexings
+          directly: the n&nbsp;&rarr;&nbsp;n+1 shift for a single arrival and the n&nbsp;&rarr;&nbsp;2n
+          shift for a countable batch. For nesting infinitely many coaches it uses a Cantor-style pairing
+          based on unique prime factorisation, mapping each (coach, seat) pair to a distinct room so that
+          no two guests ever collide.
+        </p>
+        <p>
+          Crucially, the program is honest about running on a real computer. Because physical memory is
+          finite, the scheduler enforces an explicit MAX_SLOTS cap and refuses to re-index beyond it,
+          raising a genuine &ldquo;hotel full&rdquo; error rather than pretending. Within that bound it
+          faithfully reproduces the paradox&rsquo;s mechanics, letting you seat &ldquo;impossible&rdquo;
+          new arrivals and inspect the resulting room assignments.
         </p>
       </section>
 
@@ -145,6 +257,35 @@ go run .
              rel="noopener" target="_blank">source &#x2197;</a>
         </div>
       </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Infinite Hotel questions</h2>
+        <h3>What is Hilbert&rsquo;s Infinite Hotel?</h3>
+        <p>
+          It is a thought experiment about a hotel with countably infinitely many rooms, all occupied.
+          Even though it is full, it can still make room for new guests by shifting existing ones,
+          illustrating how infinite sets behave differently from finite ones.
+        </p>
+        <h3>How does a full hotel fit one more guest?</h3>
+        <p>
+          Move the guest in room n to room n+1 for every n. This frees room 1 while still giving every
+          original guest a room. It works because there is no last room for anyone to overflow out of.
+        </p>
+        <h3>How does it fit infinitely many new guests?</h3>
+        <p>
+          Move each guest from room n to room 2n. That empties every odd-numbered room &mdash; infinitely
+          many of them &mdash; leaving space for a countably infinite coach of new arrivals to fill the odd
+          rooms.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> a real computer has finite memory, so no program can actually
+        host infinitely many guests. The scheduler enforces a MAX_SLOTS cap and raises a real
+        &ldquo;hotel full&rdquo; error beyond it. It reproduces the re-indexing <em>logic</em> of the
+        paradox on finite inputs; the true &ldquo;never full&rdquo; property holds only in the
+        mathematical idealisation, not in RAM.</p>
+      </div>
 
     </div>
   </main>

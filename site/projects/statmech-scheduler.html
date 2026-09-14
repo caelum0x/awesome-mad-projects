@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/statmech-scheduler" />
-  <title>statmech-scheduler — awesome-mad-projects</title>
+  <title>Statistical Mechanics for CPU Scheduling, Explained</title>
   <meta name="description"
-        content="A simulation-only CPU scheduler that treats tasks as particles with energy and the system as a temperature — Boltzmann weights, simulated annealing, Go." />
+        content="How the Boltzmann distribution can drive CPU scheduling: tasks become particles with energy and a temperature tunes greedy-to-random selection. Runnable Go." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="statmech-scheduler — awesome-mad-projects" />
-  <meta property="og:description"  content="CPU scheduler with Boltzmann weights and system temperature. Statistical mechanics meets Go." />
+  <meta property="og:title"        content="Statistical Mechanics for CPU Scheduling" />
+  <meta property="og:description"  content="How the Boltzmann distribution can drive CPU scheduling: tasks become particles with energy and a temperature tunes greedy-to-random selection. Runnable Go." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/statmech-scheduler.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/statmech-scheduler" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="statmech-scheduler — awesome-mad-projects" />
-  <meta name="twitter:description" content="Statistical mechanics CPU scheduler: Boltzmann weights and system temperature in Go." />
+  <meta name="twitter:title"       content="Statistical Mechanics for CPU Scheduling" />
+  <meta name="twitter:description" content="How the Boltzmann distribution can drive CPU scheduling: tasks become particles with energy and a temperature tunes greedy-to-random selection. Runnable Go." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/statmech-scheduler.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "Statistical Mechanics for CPU Scheduling",
+        "description": "How the Boltzmann distribution can drive CPU scheduling: tasks become particles with energy and a temperature tunes greedy-to-random selection. Runnable Go.",
+        "image": "https://mad-projects.com/assets/banners/statmech-scheduler.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/statmech-scheduler",
+        "url": "https://mad-projects.com/projects/statmech-scheduler",
+        "keywords": "Boltzmann distribution, statistical mechanics, CPU scheduling, simulated annealing, temperature, Gibbs measure, softmax, Go"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Stat-Mech Scheduler",
+        "description": "A simulation-only CPU scheduler that selects tasks by Boltzmann weights, with a system temperature tuning behaviour from greedy priority to uniform random.",
+        "programmingLanguage": "Go",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/statmech-scheduler",
+        "url": "https://mad-projects.com/projects/statmech-scheduler"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Stat-Mech Scheduler", "item": "https://mad-projects.com/projects/statmech-scheduler" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Boltzmann distribution?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In statistical mechanics it gives the probability of a system occupying a state of energy E at temperature T: p is proportional to exp(-E/kT). Low-energy states are far more likely when T is small, and as T rises all states become comparably likely."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does temperature change scheduling behaviour?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "At low T the weights exp(-E/T) strongly favour the lowest-energy, highest-priority task, so selection is nearly deterministic. At high T the weights flatten out and every task gets a near-equal chance, giving exploratory, randomised scheduling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does this have to do with simulated annealing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simulated annealing starts hot, accepting many random moves to explore, then cools to become greedy. Lowering the scheduler's temperature over time reproduces that schedule: broad exploration early, priority-driven exploitation later."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-go">Go</span>
-          <h1>statmech-scheduler</h1>
+          <h1>Stat-Mech Scheduler</h1>
           <p class="detail-tagline">A simulation-only CPU scheduler where tasks are particles with energy, the system has a temperature, and scheduling decisions are drawn from Boltzmann weights.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -94,14 +158,54 @@
         <h2>The idea</h2>
         <p>
           Statistical mechanics describes how particles in a heat bath distribute over energy levels
-          according to the Boltzmann distribution: low-energy states are exponentially more likely at
-          low temperature; at high temperature all states become roughly equally likely (maximum disorder).
-          This package asks: what if a CPU scheduler used that distribution to pick the next task?
+          according to the Boltzmann distribution: low-energy states are exponentially more likely at low
+          temperature, while at high temperature all states become roughly equally likely (maximum
+          disorder). This package asks a playful question with a serious core: what if a CPU scheduler used
+          that same distribution to pick the next task to run?
         </p>
         <p>
-          At low system temperature the scheduler becomes nearly deterministic, always picking the
-          lowest-energy (highest-priority) task. At high temperature it randomises, giving each task
-          a chance proportional to its Boltzmann weight. Cooling over time mimics simulated annealing.
+          At low system temperature the scheduler becomes nearly deterministic, almost always picking the
+          lowest-energy (highest-priority) task. At high temperature it randomises, giving each task a
+          chance proportional to its Boltzmann weight. Lowering the temperature over the course of a run
+          mimics simulated annealing &mdash; explore broadly while hot, commit to priorities while cool.
+        </p>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>The Boltzmann distribution in one paragraph</h2>
+        <p>
+          For a system in thermal equilibrium at temperature T, the probability of finding it in a state
+          with energy E is proportional to the Boltzmann factor exp(&minus;E / kT), where k is Boltzmann&rsquo;s
+          constant. The full probability is that factor divided by the sum over all states (the partition
+          function), so the values form a valid distribution that adds to one. The key intuition lives in
+          the ratio between two states: it depends only on their energy <em>difference</em> and the
+          temperature. When kT is small compared with that gap, the lower-energy state dominates
+          overwhelmingly; when kT is large, the exponential flattens and the states are chosen almost
+          uniformly. This is exactly the numerically-stable &ldquo;softmax over &minus;E/T&rdquo; that shows
+          up across physics, machine learning, and optimisation.
+        </p>
+        <p>
+          Reading it as a control knob: temperature trades off <strong>exploitation</strong> (pick the best
+          known option) against <strong>exploration</strong> (sample widely, including poor options). That
+          trade-off is the whole reason the distribution is useful far outside a literal gas of particles.
+        </p>
+      </section>
+
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
+        <p>
+          The scheduler assigns each task an energy E<sub>i</sub>, where lower energy means higher priority.
+          Instead of always running the top-priority task, it computes a Boltzmann weight
+          w<sub>i</sub> = exp(&minus;E<sub>i</sub> / T) for every runnable task and selects one with
+          probability w<sub>i</sub> / &Sigma; w<sub>j</sub>. Here the constant k is folded into the units of
+          T (effectively k = 1), so T alone controls how sharply priority is enforced.
+        </p>
+        <p>
+          The result is a single dial that sweeps between two familiar regimes. As T &rarr; 0 the scheduler
+          collapses to strict priority scheduling &mdash; the classic greedy pick. As T grows large it
+          approaches round-robin-like uniform randomness. In between, it gives lower-priority tasks a real
+          but small chance to run, which is a natural way to reduce starvation. The sample run at T = 1.0
+          shows this concretely: the highest-priority task is chosen most of the time, but not always.
         </p>
       </section>
 
@@ -119,6 +223,35 @@ System temperature T:
   Low T  → near-deterministic, picks lowest energy task
   High T → uniform random selection
   T → 0  → pure priority scheduling</pre>
+        </div>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Stat-mech scheduler questions</h2>
+        <h3>What is the Boltzmann distribution?</h3>
+        <p>
+          In statistical mechanics it gives the probability of a system occupying a state of energy E at
+          temperature T: p is proportional to exp(&minus;E/kT). Low-energy states are far more likely when
+          T is small, and as T rises all states become comparably likely.
+        </p>
+        <h3>How does temperature change scheduling behaviour?</h3>
+        <p>
+          At low T the weights exp(&minus;E/T) strongly favour the lowest-energy, highest-priority task, so
+          selection is nearly deterministic. At high T the weights flatten out and every task gets a
+          near-equal chance, giving exploratory, randomised scheduling.
+        </p>
+        <h3>What does this have to do with simulated annealing?</h3>
+        <p>
+          Simulated annealing starts hot &mdash; accepting many random moves to explore &mdash; then cools
+          to become greedy. Lowering the scheduler&rsquo;s temperature over time reproduces that schedule:
+          broad exploration early, priority-driven exploitation later.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the &ldquo;energy&rdquo; here is just an arbitrary priority
+          score, not a physical energy in joules, and k is set to 1 so temperature is dimensionless. This is
+          a simulation to illustrate the distribution, not a proposal to replace a real OS scheduler &mdash;
+          production schedulers optimise for latency, fairness, and cache locality with far more constraints
+          than a single Boltzmann weight.</p>
         </div>
       </section>
 

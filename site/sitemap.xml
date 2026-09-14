@@ -1,127 +1,240 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://mad-projects.com/</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/og-card.png</image:loc>
+      <image:title>Mad Projects — anime &amp; pop-culture math turned into real code</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/gallery</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/at-field</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/at-field.png</image:loc>
+      <image:title>AT Field</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/banach-tarski-dup</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/banach-tarski-dup.png</image:loc>
+      <image:title>Banach–Tarski Duplicator</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/calabi_yau_latent</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/calabi_yau_latent.png</image:loc>
+      <image:title>Calabi–Yau Latent Space</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/category-api</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/category-api.png</image:loc>
+      <image:title>Category API</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/central_finite_curve</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/central_finite_curve.png</image:loc>
+      <image:title>Central Finite Curve</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/death-note</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/death-note.png</image:loc>
+      <image:title>Death Note</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/divergence-meter</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/divergence-meter.png</image:loc>
+      <image:title>Divergence Meter</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/domain_expansion</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/domain_expansion.png</image:loc>
+      <image:title>Domain Expansion</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/equivalent-exchange-fs</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/equivalent-exchange-fs.png</image:loc>
+      <image:title>Equivalent Exchange FS</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/gojo_infinity</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/gojo_infinity.png</image:loc>
+      <image:title>Gojo&apos;s Infinity</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/hairy-ball-router</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/hairy-ball-router.png</image:loc>
+      <image:title>Hairy Ball Router</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/infinite-hotel-scheduler</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/infinite-hotel-scheduler.png</image:loc>
+      <image:title>Infinite Hotel Scheduler</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/jojo-stands</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/jojo-stands.png</image:loc>
+      <image:title>JoJo Stands</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/madoka-entropy</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/madoka-entropy.png</image:loc>
+      <image:title>Madoka Entropy</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/mobius_rickness</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/mobius_rickness.png</image:loc>
+      <image:title>Möbius Rickness</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/padic-embeddings</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/padic-embeddings.png</image:loc>
+      <image:title>p-adic Embeddings</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/reading-steiner-git</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/reading-steiner-git.png</image:loc>
+      <image:title>Reading Steiner Git</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/statmech-scheduler</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/statmech-scheduler.png</image:loc>
+      <image:title>Stat-Mech Scheduler</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/surreal-priority</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/surreal-priority.png</image:loc>
+      <image:title>Surreal Priority</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/unlimited-void</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/unlimited-void.png</image:loc>
+      <image:title>Unlimited Void</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/vanguard-anticheat</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/vanguard-anticheat.png</image:loc>
+      <image:title>Vanguard Anti-Cheat</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mad-projects.com/projects/zeno-protocol</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/banners/zeno-protocol.png</image:loc>
+      <image:title>Zeno Protocol</image:title>
+    </image:image>
   </url>
 </urlset>

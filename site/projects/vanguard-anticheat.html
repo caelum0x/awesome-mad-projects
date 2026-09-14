@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/vanguard-anticheat" />
-  <title>vanguard-anticheat — awesome-mad-projects</title>
+  <title>How Anti-Cheat Software Works (the Honest, Userspace Parts)</title>
   <meta name="description"
-        content="A safe-userspace Rust anti-cheat sandbox with memory-integrity checks and process attestation, without kernel drivers or third-party scanning." />
+        content="A runnable Rust demo of the honest userspace parts of anti-cheat: memory-integrity hashing, signature/heuristic detection, and process attestation—no kernel driver." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="vanguard-anticheat — awesome-mad-projects" />
-  <meta property="og:description"  content="Safe userspace anti-cheat: memory integrity, process attestation, no kernel. Rust." />
+  <meta property="og:title"        content="How Anti-Cheat Software Works (the Honest, Userspace Parts)" />
+  <meta property="og:description"  content="A runnable Rust demo of the honest userspace parts of anti-cheat: memory-integrity hashing, signature/heuristic detection, and process attestation—no kernel driver." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/vanguard-anticheat.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/vanguard-anticheat" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="vanguard-anticheat — awesome-mad-projects" />
-  <meta name="twitter:description" content="Game anti-cheat in safe userspace: integrity checks without kernel access." />
+  <meta name="twitter:title"       content="How Anti-Cheat Software Works (the Honest, Userspace Parts)" />
+  <meta name="twitter:description" content="A runnable Rust demo of the honest userspace parts of anti-cheat: memory-integrity hashing, signature/heuristic detection, and process attestation—no kernel driver." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/vanguard-anticheat.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "How Anti-Cheat Software Works (the Honest, Userspace Parts)",
+        "description": "A runnable Rust demo of the honest userspace parts of anti-cheat: memory-integrity hashing, signature/heuristic detection, and process attestation—no kernel driver.",
+        "image": "https://mad-projects.com/assets/banners/vanguard-anticheat.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/vanguard-anticheat",
+        "url": "https://mad-projects.com/projects/vanguard-anticheat",
+        "keywords": "anti-cheat, memory integrity, integrity hashing, SHA-256, signature detection, heuristic detection, process attestation, userspace anti-cheat, kernel anti-cheat, Rust"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "Vanguard Anti-Cheat",
+        "description": "The honest userspace subset of a game anti-cheat in Rust—integrity hashing, heuristic detection, and process attestation over a sandbox it creates and owns.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/vanguard-anticheat",
+        "url": "https://mad-projects.com/projects/vanguard-anticheat"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "Vanguard Anti-Cheat", "item": "https://mad-projects.com/projects/vanguard-anticheat" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does anti-cheat detect memory tampering?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One common technique is integrity checking: the anti-cheat periodically hashes the region of memory or the files it wants to protect and compares the hash against a known-good baseline. If a cheat writes to that memory outside the legitimate code paths, the next hash no longer matches and the tampering is flagged."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is signature versus heuristic detection?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Signature detection looks for known-bad patterns—a specific byte sequence or file hash belonging to a known cheat. Heuristic detection instead looks for suspicious behaviour, such as an impossible change in game state or a value moving faster than the rules allow, so it can catch cheats it has never seen before at the cost of more false positives."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why can't this catch every cheat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because it stays entirely in userspace. Real production anti-cheat often ships a kernel-mode driver so it can observe the system from a level cheats cannot easily reach. This project deliberately implements only the honest userspace subset—no kernel driver and no rootkit—so a determined cheat with equal or higher privilege can still evade it."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>vanguard-anticheat</h1>
+          <h1>How Anti-Cheat Software Works (the Honest, Userspace Parts)</h1>
           <p class="detail-tagline">The honest subset of a game anti-cheat, entirely in safe userspace over a sandbox it creates and owns &mdash; memory integrity checks and process attestation, no kernel drivers.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,32 +157,100 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          Real game anti-cheats (including Vanguard) run kernel-level drivers to detect memory
-          tampering. This package implements the subset of that functionality that can be done
-          entirely in safe userspace: integrity hashing of the game&rsquo;s in-memory state,
-          process attestation (verifying that a process is who it claims to be via a challenge-
-          response protocol), and anomaly detection on game state deltas.
+          Anti-cheat software has a reputation for being mysterious &mdash; partly because the most
+          talked-about systems (including Riot&rsquo;s Vanguard) ship a kernel-mode driver, which is
+          both powerful and controversial. But a large share of what anti-cheat actually does is not
+          kernel magic at all: it is ordinary integrity checking, pattern matching, and identity
+          verification that runs perfectly well in userspace. This project implements exactly that
+          honest subset in Rust, so you can watch the legitimate techniques work without any of the
+          invasive parts.
         </p>
         <p>
-          The sandbox owns a simulated game state in-memory. A separate &ldquo;cheat&rdquo; process
-          (also in-memory, also spawned by the tool) attempts to modify the game state without going
-          through the legitimate API. The anti-cheat detects the modification via periodic integrity
-          hashes and flags it.
+          The sandbox owns a simulated game state in memory. A separate &ldquo;cheat&rdquo; process
+          &mdash; also in-memory, also spawned by the tool &mdash; attempts to modify that state
+          without going through the legitimate API. The anti-cheat catches it with periodic integrity
+          hashes and flags the offender. Everything happens inside a sandbox the program creates and
+          owns; nothing on your real machine is inspected.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> this is deliberately the <em>userspace-only</em> subset.
+          There is no kernel driver and no rootkit-style hooking, so it cannot see or stop a cheat
+          that runs at equal or higher privilege &mdash; which is precisely why real production
+          anti-cheat reaches for a kernel driver. Treat this as an educational model of the honest
+          techniques, not a shippable anti-cheat.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>The honest techniques, explained</h2>
+        <p>
+          <strong>Integrity checking</strong> is the workhorse. The anti-cheat picks the memory or
+          files it wants to protect and periodically computes a cryptographic hash (here, SHA-256)
+          over them. It keeps a known-good baseline; if anything changes the protected bytes outside
+          the sanctioned code paths, the recomputed hash stops matching and the tamper is detected.
+          This is the same principle behind file-checksum verification and secure-boot measurement,
+          applied to live game state.
+        </p>
+        <p>
+          <strong>Signature and heuristic detection</strong> are two complementary ways to decide
+          what counts as cheating. <em>Signature</em> detection looks for known-bad artefacts &mdash;
+          a specific byte pattern, a module name, or a file hash that belongs to a catalogued cheat.
+          It is precise but only catches cheats it already knows. <em>Heuristic</em> detection
+          instead flags suspicious <em>behaviour</em>: a health value that jumps impossibly, a
+          position that teleports, or a stat that changes faster than the rules permit. Heuristics can
+          catch novel cheats but risk false positives, so they are usually tuned conservatively.
+        </p>
+        <p>
+          <strong>Process attestation</strong> answers a different question: is the thing talking to
+          the game really the legitimate client? A challenge&ndash;response protocol has each process
+          prove it holds a secret without revealing it &mdash; the anti-cheat sends a challenge, and
+          only a process with the right token can produce the correct response. This is the same idea
+          that underlies authentication handshakes and hardware attestation.
         </p>
       </section>
 
-      <section class="detail-section" id="how-it-works">
-        <h2>How it works</h2>
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
         <ul>
-          <li>Game state is a struct in shared memory (in-process, not a real shared memory
-            segment). The anti-cheat takes a SHA-256 hash of the state every N ticks.</li>
-          <li>Legitimate mutations go through a typed API that re-hashes after each write.</li>
-          <li>A simulated cheat thread mutates the backing memory directly (bypassing the API).
-            The anti-cheat detects the hash mismatch on the next tick.</li>
-          <li>Process attestation: each simulated process holds a secret token. The anti-cheat
-            issues a challenge; correct response proves the process is legitimate.</li>
-          <li><code>#![forbid(unsafe_code)]</code> &mdash; no unsafe code in the anti-cheat itself.</li>
+          <li>Game state is a struct in in-process memory (not a real shared-memory segment). The
+            anti-cheat takes a SHA-256 hash of the state every N ticks and compares it to the
+            baseline.</li>
+          <li>Legitimate mutations go through a typed API that re-hashes after each write, so the
+            baseline always tracks sanctioned changes.</li>
+          <li>A simulated cheat thread mutates the backing memory directly, bypassing the API. The
+            anti-cheat detects the hash mismatch on the very next tick &mdash; integrity checking in
+            action.</li>
+          <li>Process attestation: each simulated process holds a secret token; the anti-cheat issues
+            a challenge and a correct response proves the process is legitimate, while the cheat
+            thread fails and has its attestation revoked.</li>
+          <li><code>#![forbid(unsafe_code)]</code> &mdash; the anti-cheat itself contains no unsafe
+            code, keeping the demonstration entirely in safe userspace Rust.</li>
         </ul>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>Anti-cheat questions</h2>
+        <h3>How does anti-cheat detect memory tampering?</h3>
+        <p>
+          A common technique is integrity checking: the anti-cheat periodically hashes the memory or
+          files it protects and compares the result to a known-good baseline. If a cheat writes to
+          that memory outside the legitimate code paths, the next hash no longer matches and the
+          tampering is flagged.
+        </p>
+        <h3>What is signature versus heuristic detection?</h3>
+        <p>
+          Signature detection looks for known-bad patterns &mdash; a specific byte sequence or file
+          hash belonging to a catalogued cheat. Heuristic detection instead looks for suspicious
+          behaviour, such as an impossible change in game state, so it can catch cheats it has never
+          seen before, at the cost of more false positives.
+        </p>
+        <h3>Why can&rsquo;t this catch every cheat?</h3>
+        <p>
+          Because it stays entirely in userspace. Real production anti-cheat often ships a kernel-mode
+          driver so it can observe the system from a level cheats cannot easily reach. This project
+          implements only the honest userspace subset &mdash; no kernel driver, no rootkit &mdash; so
+          a cheat with equal or higher privilege can still evade it.
+        </p>
       </section>
 
       <section class="detail-section" id="run">

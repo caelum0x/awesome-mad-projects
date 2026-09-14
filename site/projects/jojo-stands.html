@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="canonical" href="https://mad-projects.com/projects/jojo-stands" />
-  <title>jojo-stands — awesome-mad-projects</title>
+  <title>How OS Schedulers Work, Simulated as JoJo Stands</title>
   <meta name="description"
-        content="A Rust OS-scheduler simulation where JoJo Stand abilities such as time-stop, amplification, and precognition modify scheduling policy." />
+        content="A runnable Rust simulation of an OS process scheduler: run queue, time quanta, context switches, round-robin and priority policies, each demoed as a JoJo Stand." />
   <meta name="color-scheme" content="light" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 
-  <meta property="og:title"        content="jojo-stands — awesome-mad-projects" />
-  <meta property="og:description"  content="Tick-based scheduler where processes have JoJo Stand abilities as policy modifiers. Rust." />
+  <meta property="og:title"        content="How OS Schedulers Work, Simulated as JoJo Stands" />
+  <meta property="og:description"  content="A runnable Rust simulation of an OS process scheduler: run queue, time quanta, context switches, round-robin and priority policies, each demoed as a JoJo Stand." />
   <meta property="og:image"        content="https://mad-projects.com/assets/banners/jojo-stands.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,9 +22,73 @@
   <meta property="og:url"          content="https://mad-projects.com/projects/jojo-stands" />
 
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="jojo-stands — awesome-mad-projects" />
-  <meta name="twitter:description" content="JoJo Stand abilities as scheduler policies in a tick-based OS sim." />
+  <meta name="twitter:title"       content="How OS Schedulers Work, Simulated as JoJo Stands" />
+  <meta name="twitter:description" content="A runnable Rust simulation of an OS process scheduler: run queue, time quanta, context switches, round-robin and priority policies, each demoed as a JoJo Stand." />
   <meta name="twitter:image"       content="https://mad-projects.com/assets/banners/jojo-stands.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": "How OS Schedulers Work, Simulated as JoJo Stands",
+        "description": "A runnable Rust simulation of an OS process scheduler: run queue, time quanta, context switches, round-robin and priority policies, each demoed as a JoJo Stand.",
+        "image": "https://mad-projects.com/assets/banners/jojo-stands.png",
+        "author": { "@type": "Person", "name": "caelum0x" },
+        "publisher": { "@type": "Organization", "name": "Mad Projects", "url": "https://mad-projects.com/", "logo": "https://mad-projects.com/assets/apple-touch-icon.png" },
+        "mainEntityOfPage": "https://mad-projects.com/projects/jojo-stands",
+        "url": "https://mad-projects.com/projects/jojo-stands",
+        "keywords": "OS scheduler, process scheduling, run queue, time slice, quantum, context switch, round-robin, priority scheduling, preemption, Rust simulation"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "JoJo Stands",
+        "description": "A tick-based OS process scheduler simulation in Rust where Stand abilities act as scheduling-policy modifiers over an in-memory process table.",
+        "programmingLanguage": "Rust",
+        "codeRepository": "https://github.com/caelum0x/awesome-mad-projects/tree/main/jojo-stands",
+        "url": "https://mad-projects.com/projects/jojo-stands"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Projects", "item": "https://mad-projects.com/#projects" },
+          { "@type": "ListItem", "position": 3, "name": "JoJo Stands", "item": "https://mad-projects.com/projects/jojo-stands" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does an OS scheduler actually do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A scheduler decides which ready process runs on the CPU next and for how long. It maintains a run queue, grants each process a time slice (quantum), and performs a context switch to swap one process out and another in when the quantum expires or a higher-priority task becomes ready."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between round-robin and priority scheduling?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Round-robin gives every ready process an equal fixed quantum in rotation, which is fair but ignores urgency. Priority scheduling always runs the highest-priority ready process first; preemptive priority scheduling can interrupt a running task the moment a higher-priority one arrives, at the cost of possibly starving low-priority work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this a real kernel scheduler?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. It is an in-memory simulation. The processes are plain Rust structs in a single program, and the clock is a tick counter. No real OS threads or processes are scheduled, so it can model policies safely without kernel privileges."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../assets/site.css" />
 </head>
@@ -70,7 +134,7 @@
       <div class="detail-hero-inner">
         <div>
           <span class="lang-badge lang-rust">Rust</span>
-          <h1>jojo-stands</h1>
+          <h1>How OS Schedulers Work, Simulated as JoJo Stands</h1>
           <p class="detail-tagline">A tick-based OS-scheduler simulation whose in-memory processes are granted JoJo Stand abilities &mdash; time-stop, power amplification, precognition &mdash; as real scheduler policy modifiers.</p>
           <div class="source-cta">
             <a class="btn primary"
@@ -93,28 +157,105 @@
       <section class="detail-section" id="idea">
         <h2>The idea</h2>
         <p>
-          JoJo Stand abilities map surprisingly well onto scheduler concepts: <em>The World</em>
-          (time-stop) is priority preemption that freezes all other tasks; <em>Star Platinum</em>
-          (precision) is deterministic FIFO scheduling; <em>Crazy Diamond</em> (restoration) is
-          checkpoint/rollback; <em>Gold Experience</em> (life) is process spawning. Each Stand
-          ability is implemented as a scheduling policy modifier that affects how the tick-based
-          simulator allocates CPU time.
+          A modern CPU can only run a handful of instructions at a time, yet a running computer
+          juggles hundreds of processes. The part of the operating system that decides <em>which</em>
+          ready process gets the CPU next, and for <em>how long</em>, is the scheduler. This project
+          builds a small, tick-based scheduler in Rust and then dresses each scheduling policy up as
+          a JoJo Stand, because the anime&rsquo;s abilities map cleanly onto real scheduler moves:
+          <em>The World</em> (time-stop) behaves like non-preemptible priority that freezes everyone
+          else; <em>Star Platinum</em> (precision) behaves like deterministic FIFO order; and
+          <em>Crazy Diamond</em> (restoration) behaves like checkpoint/rollback of a task&rsquo;s
+          saved state.
+        </p>
+        <p>
+          The goal is to make the mechanics of scheduling &mdash; the run queue, the time quantum,
+          the context switch &mdash; observable. You start the simulation, watch processes take
+          turns tick by tick, and see exactly when and why the scheduler hands the CPU from one
+          process to another.
+        </p>
+        <div class="caveats" style="margin-top:0;">
+          <p><strong>Honest caveat:</strong> the JoJo mapping is a teaching metaphor, not a
+          one-to-one correspondence &mdash; real Stands do not model any specific algorithm, and the
+          simulator is an in-memory model, not a kernel. No real OS processes or threads are
+          scheduled; &ldquo;processes&rdquo; are plain structs and the clock is a tick counter.</p>
+        </div>
+      </section>
+
+      <section class="detail-section" id="concept">
+        <h2>Scheduling in one page</h2>
+        <p>
+          Every process the scheduler knows about sits in one of a few states. A <strong>ready</strong>
+          process wants the CPU and is waiting in the <strong>run queue</strong>; a
+          <strong>running</strong> process currently owns the CPU; a <strong>blocked</strong> process
+          is waiting on something (I/O, a timer) and is not eligible to run. The scheduler&rsquo;s job
+          is to move processes between these states and pick the next runner whenever the CPU comes
+          free.
+        </p>
+        <p>
+          To keep any single process from monopolising the CPU, the scheduler hands out the CPU in
+          bounded slices called a <strong>time quantum</strong> (or time slice). When a process&rsquo;s
+          quantum expires, the scheduler performs a <strong>context switch</strong>: it saves the
+          outgoing process&rsquo;s state (its registers and program counter, here just its saved
+          fields), selects a new process, and restores that one&rsquo;s state. Context switches are
+          not free &mdash; a quantum that is too short wastes time switching, while one that is too
+          long hurts responsiveness.
+        </p>
+        <p>
+          Which process is picked is the <strong>scheduling policy</strong>. Two classic policies
+          bracket the design space. <strong>Round-robin</strong> gives every ready process an equal
+          quantum in strict rotation: simple and fair, but it treats an urgent task the same as a
+          background one. <strong>Priority scheduling</strong> always runs the highest-priority ready
+          process; in its <strong>preemptive</strong> form, the arrival of a higher-priority process
+          immediately interrupts whatever is running. Preemption improves responsiveness for
+          important work but risks <strong>starvation</strong>, where low-priority processes never
+          get a turn.
         </p>
       </section>
 
-      <section class="detail-section" id="how-it-works">
-        <h2>How it works</h2>
+      <section class="detail-section" id="demonstrates">
+        <h2>How this project demonstrates it</h2>
         <ul>
-          <li>Processes are in-memory structs with a priority, a Stand ability, and a work queue.</li>
-          <li>Each tick the scheduler evaluates Stand modifiers before choosing the next process.</li>
-          <li>Time-stop (The World): the Stand user runs uninterrupted for N ticks regardless of
-            other priorities.</li>
-          <li>Precision (Star Platinum): process always runs in strict FIFO order within its
-            priority band, never yielding early.</li>
-          <li>Restoration (Crazy Diamond): scheduler can roll back any process to a previous
-            in-memory state (checkpointing).</li>
-          <li>All processes are in-memory; no real OS processes are spawned or affected.</li>
+          <li>Each process is an in-memory struct holding a priority, a remaining work count, a
+            saved state for rollback, and a Stand ability that acts as a policy modifier.</li>
+          <li>On every tick the scheduler consults the run queue, applies any active Stand modifiers,
+            picks the next process, decrements its remaining work, and switches when the quantum
+            ends &mdash; the same loop a real scheduler runs, minus the hardware.</li>
+          <li><em>Time-stop</em> (The World) models non-preemptible priority: the Stand user runs
+            uninterrupted for a fixed number of ticks regardless of what else is ready, then normal
+            scheduling resumes.</li>
+          <li><em>Precision</em> (Star Platinum) models deterministic FIFO within a priority band:
+            the process runs to completion in arrival order and never yields early.</li>
+          <li><em>Restoration</em> (Crazy Diamond) models checkpoint/rollback: the scheduler can
+            reset a process to a previously saved in-memory state, illustrating how saved context is
+            what makes preemption and recovery possible.</li>
+          <li>Because everything is in-memory and driven by a single tick loop, the run is
+            deterministic and easy to inspect &mdash; the output log shows each policy decision as it
+            happens.</li>
         </ul>
+      </section>
+
+      <section class="detail-section" id="questions">
+        <h2>JoJo Stands scheduler questions</h2>
+        <h3>What does an OS scheduler actually do?</h3>
+        <p>
+          It decides which ready process runs on the CPU next and for how long. It keeps a run queue
+          of ready processes, grants each a time slice (quantum), and performs a context switch to
+          swap one process out and another in when the quantum expires or a higher-priority task
+          becomes ready.
+        </p>
+        <h3>What is the difference between round-robin and priority scheduling?</h3>
+        <p>
+          Round-robin gives every ready process an equal fixed quantum in rotation &mdash; fair, but
+          blind to urgency. Priority scheduling always runs the highest-priority ready process, and
+          in its preemptive form interrupts a running task the moment a higher-priority one arrives,
+          at the risk of starving low-priority work.
+        </p>
+        <h3>Is this a real kernel scheduler?</h3>
+        <p>
+          No. It is an in-memory simulation: the processes are plain Rust structs in one program and
+          the clock is a tick counter. No real OS threads or processes are scheduled, which is what
+          lets it model policies safely without any kernel privileges.
+        </p>
       </section>
 
       <section class="detail-section" id="run">
