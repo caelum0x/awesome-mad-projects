@@ -1,20 +1,20 @@
 <div align="center">
 
-# awesome-mad-projects
+# Awesome Mad Projects
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](./LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)][license-link]
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)][contributing-link]
 ![Projects](https://img.shields.io/badge/projects-22-d1341a)
 ![Tests](https://img.shields.io/badge/tests-600%2B%20passing-success)
-[![Live](https://img.shields.io/badge/live-mad--projects.com-16150f)](https://mad-projects.com)
+[![Live](https://img.shields.io/badge/live-mad--projects.com-16150f)][site-link]
 
-**A curated collection of absurd-but-real projects at the intersection of
-anime / pop-culture / games and mathematics — turned into actual, runnable, tested code.**
+A curated collection of absurd-but-real projects at the intersection of
+anime / pop-culture / games and mathematics — turned into actual, runnable, tested code.
 
 ![awesome-mad-projects](./infinity-lab/artifacts/poster.png)
 
-🌐 **[mad-projects.com](https://mad-projects.com)** · 📬 **caelum0x42@gmail.com**
+🌐 **[mad-projects.com][site-link]** · 📬 **[caelum0x42@gmail.com][mail-link]**
 
 </div>
 
@@ -33,10 +33,8 @@ anime / pop-culture / games and mathematics — turned into actual, runnable, te
 - [Standalone prototypes](#standalone-prototypes)
 - [Running everything](#running-everything)
 - [Repository layout](#repository-layout)
-- [Contributing](#contributing)
 - [Safety](#safety)
 - [Attribution](#attribution)
-- [License](#license)
 
 ---
 
@@ -60,10 +58,15 @@ mathematics, it cites the source rather than reproducing it.
 
 ## Featured
 
-|  |  |
-|---|---|
-| **Gojo's Infinity, in 3-D** — a real Riemannian-manifold geodesic solver: geodesics bend toward the singularity, and the felt length to reach it diverges. | **The Central Finite Curve** — the honest zero-set `R⁻¹(0)` traced on a Möbius strip, since a ruled surface forces `K < 0`. |
-| ![geodesics](./infinity-lab/artifacts/gojo_geodesic_3d.png) | ![mobius curve](./infinity-lab/artifacts/mobius_strip_curve.png) |
+**Gojo's Infinity, in 3-D** — a real Riemannian-manifold geodesic solver: geodesics bend
+toward the singularity, and the felt length to reach it diverges.
+
+![geodesics](./infinity-lab/artifacts/gojo_geodesic_3d.png)
+
+**The Central Finite Curve** — the honest zero-set `R⁻¹(0)` traced on a Möbius strip, since
+a ruled surface forces `K < 0`.
+
+![mobius curve](./infinity-lab/artifacts/mobius_strip_curve.png)
 
 More rendered figures and animations live in the [gallery](https://mad-projects.com/gallery.html)
 and under [`infinity-lab/artifacts/`](./infinity-lab/artifacts).
@@ -72,14 +75,14 @@ and under [`infinity-lab/artifacts/`](./infinity-lab/artifacts).
 
 ## infinity-lab — the Python monorepo
 
-The most-developed work lives in [`infinity-lab/`](./infinity-lab): a **stdlib-first Python
+The most-developed work lives in [`infinity-lab/`][infinity-lab-link]: a **stdlib-first Python
 monorepo** where nine packages share an internal `commons` package. The pure core is
-offline and zero-install; numpy/matplotlib are optional, import-guarded accelerators.
+offline and zero-install; NumPy/Matplotlib are optional, import-guarded accelerators.
 
-- **576 tests pass offline**, **600+ with the optional extras** — both interpreters green.
-- A shared `commons` package (seeded RNG, numerics, exact arithmetic, ASCII/PNG rendering).
-- A gallery of 35+ rendered figures/animations, a landing page, `make` glue, and per-package
-  `docs/` (architecture, plan, resolved-math).
+**576 tests pass offline**, **600+ with the optional extras** — both interpreters green. A
+shared `commons` package provides seeded RNG, numerics, exact arithmetic, and ASCII/PNG
+rendering. A gallery of 35+ rendered figures/animations, a landing page, `make` glue, and
+per-package `docs/` (architecture, plan, resolved-math) round out the monorepo.
 
 ### [Gojo's Infinity](./infinity-lab/packages/gojo_infinity)
 ![Gojo's Infinity](./infinity-lab/packages/gojo_infinity/banner.png)
@@ -222,7 +225,7 @@ of a self-spawned child, and a rolling-HMAC heartbeat that rejects replay and fo
 [Source ↗](https://github.com/caelum0x/awesome-mad-projects/tree/main/vanguard-anticheat) · [README](./vanguard-anticheat/README.md)
 
 > `gojo-infinity/`, `mobius-rickness/`, and `central-finite-curve/` at the repo root are
-> pointer READMEs — those projects now live as packages inside [`infinity-lab/`](./infinity-lab).
+> pointer READMEs — those projects now live as packages inside [`infinity-lab/`][infinity-lab-link].
 
 ---
 
@@ -260,7 +263,7 @@ awesome-mad-projects/
 
 ## Contributing
 
-Contributions welcome — this is meant to grow. See **[CONTRIBUTING.md](./CONTRIBUTING.md)**
+Contributions welcome — this is meant to grow. See **[CONTRIBUTING.md][contributing-link]**
 for how to add a project (a folder with an honest core, a README, tests, and a `projects.json`
 entry), the quality bar, and the PR flow. Be kind: see [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 
@@ -280,12 +283,16 @@ We implement and cite the mathematics; the essay text itself is not redistribute
 Anime, manga, and game references are © their respective creators; this repository contains
 only original code and original renders.
 
-## License
-
-Original code is released under the [MIT License](./LICENSE).
+Original code is released under the [MIT License][license-link].
 
 <div align="center">
 
-**If you like this, ⭐ the repo.** · [mad-projects.com](https://mad-projects.com) · caelum0x42@gmail.com
+**If you like this, ⭐ the repo.** · [mad-projects.com][site-link] · [caelum0x42@gmail.com][mail-link]
 
 </div>
+
+[license-link]: ./LICENSE
+[contributing-link]: ./CONTRIBUTING.md
+[site-link]: https://mad-projects.com
+[mail-link]: mailto:caelum0x42@gmail.com
+[infinity-lab-link]: ./infinity-lab
