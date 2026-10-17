@@ -103,14 +103,20 @@ def run_simulation(cfg: SimConfig = SimConfig()) -> SimResult:
                 continue
             if rng.random() < cfg.wish_probability:
                 order = _order_cast_this_step(rng, cfg)
-                d_global, d_local = wish_deltas(order, cfg.karmic_multiplier)
-                ledger = ledger.with_changes(
-                    d_global=d_global,
-                    d_local=d_local,
-                    d_harvest=incubator.harvest_from_wish(d_global, d_local),
-                )
-                girl = girl.cast(order, cfg.decay_per_order)
-                order_cast[girl.name] += order
+                # A girl cannot export more local order than the entropy her
+                # subsystem still holds (mirrors the floor in `cast`). Using
+                # the same capped amount here keeps the ledger's local_entropy
+                # exactly equal to sum(girl.local_entropy) at every step.
+                order_applied = max(0.0, min(order, girl.local_entropy))
+                if order_applied > 0:
+                    d_global, d_local = wish_deltas(order_applied, cfg.karmic_multiplier)
+                    ledger = ledger.with_changes(
+                        d_global=d_global,
+                        d_local=d_local,
+                        d_harvest=incubator.harvest_from_wish(d_global, d_local),
+                    )
+                    girl = girl.cast(order_applied, cfg.decay_per_order)
+                    order_cast[girl.name] += order_applied
             new_girls.append(girl)
         girls = tuple(new_girls)
 

@@ -21,17 +21,24 @@ class MagicalGirl:
     witch_step: int = -1   # simulation step at which she turned (or -1)
 
     def cast(self, local_order: float, decay_per_order: float) -> "MagicalGirl":
-        """Return a NEW girl after casting magic worth ``local_order`` units.
+        """Return a NEW girl after casting magic requested at ``local_order``
+        units.
 
-        Her subsystem entropy drops by ``local_order`` (more order imposed) and
-        her purity decays by ``decay_per_order * local_order``. Purity is clamped
-        at 0 so downstream code can detect the witch threshold crossing.
+        A subsystem cannot export more local order than the entropy it still
+        holds, so the amount actually applied is ``local_order`` capped to
+        ``self.local_entropy``. Her subsystem entropy drops by that applied
+        amount (never below 0) and her purity decays by
+        ``decay_per_order * applied``. Purity is clamped at 0 so downstream
+        code can detect the witch threshold crossing; local_entropy gets the
+        same non-negative floor so a subsystem's entropy -- a physical,
+        honest quantity in this model -- can never go negative.
         """
-        new_purity = max(0.0, self.purity - decay_per_order * local_order)
+        applied = max(0.0, min(local_order, self.local_entropy))
+        new_purity = max(0.0, self.purity - decay_per_order * applied)
         return replace(
             self,
             purity=new_purity,
-            local_entropy=self.local_entropy - local_order,
+            local_entropy=self.local_entropy - applied,
         )
 
     def become_witch(self, step: int) -> "MagicalGirl":
