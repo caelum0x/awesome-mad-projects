@@ -109,6 +109,76 @@
         "url": "https://mad-projects.com/",
         "logo": "https://mad-projects.com/assets/apple-touch-icon.png",
         "sameAs": [ "https://github.com/caelum0x/awesome-mad-projects" ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mad-projects.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Gojo Satoru's Infinity mathematically possible to escape?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, under any of the four mathematical lenses this repo checks: as a geometric series the gap after n halvings only reaches zero in the limit; as a Lebesgue measure the uncovered points have measure zero; as Riemannian geometry the geodesic length approaching the singularity diverges to infinity; and topologically the space's structure blocks the approach. Full derivations and runnable Python are in the Gojo's Infinity project."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the Banach-Tarski paradox real, and can you actually duplicate a sphere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The theorem is real: a solid ball can be partitioned into finitely many pieces and reassembled, using only rotations and translations, into two balls identical to the original. It requires the Axiom of Choice to build non-measurable pieces that have no volume in the usual sense, which is why it never applies to any physical object. The Banach-Tarski Duplicator project implements the combinatorial core on the free group F2 only, and says so explicitly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Central Finite Curve from Rick and Morty, in real math?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Modeled honestly as the zero-set of a residual function traced on a ruled surface (a Mobius strip), it forces Gaussian curvature K < 0 everywhere, a real saddle rather than a plot device. The Central Finite Curve project renders the zero-set, a cross-validating ridge, and a torus counter-example."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the hairy ball theorem force a bald spot, and what does that have to do with network routing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The hairy ball theorem proves there is no continuous, non-vanishing tangent vector field on an even-dimensional sphere, so combing it flat always leaves at least one singular point. The Hairy Ball Router project routes packets along a continuous tangent field on the sphere, drops packets at the field's singularity, and shows that relocating the field never removes it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Zeno's paradox actually solved by math, or is motion still impossible?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is resolved for motion: the infinite sum 1/2 + 1/4 + 1/8 + ... converges to exactly 1, so infinitely many steps fit inside a finite distance and a finite time. The Zeno Protocol project implements that convergence as a transport protocol that reaches any target within a chosen epsilon after a finite, computable number of ticks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Steins;Gate's divergence meter based on real physics?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, the worldline divergence reading itself is fiction and the project says so plainly. What is real is the underlying engineering pattern the Divergence Meter project implements: a worldline-divergence number classified into attractor-field basins with a 'Reading Steiner' store for jumps between recorded states."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are JoJo Stand powers or Death Note kills simulated for real, or is that just marketing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Neither touches a real process outside a sandbox the tool creates and owns. JoJo Stands models abilities like The World and King Crimson over a simulated, in-memory process table. Death Note is a rule-accurate process reaper that refuses raw PIDs, refuses to run as root, and kills only harmless child processes it spawned itself, with a PID-reuse guard."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does any project in this repo claim fictional physics is literally true?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Every project in awesome-mad-projects must have an honest mathematical or systems core; where the real thing is impossible or unsafe, the code is a clearly labeled safe simulation that states its own caveats."
+            }
+          }
+        ]
       }
     ]
   }
@@ -505,6 +575,37 @@
     .caveats li { margin-bottom: 16px; color: var(--ink-2); line-height: 1.70; }
     .caveats li b { color: var(--ink); }
 
+    /* ── FAQ ────────────────────────────────────────────────────────────── */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: var(--cream-2);
+      border: 1px solid var(--rule-2);
+    }
+    .faq-item summary {
+      cursor: pointer;
+      padding: 18px 24px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+      list-style: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::before {
+      content: '+';
+      display: inline-block;
+      width: 18px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .faq-item[open] summary::before { content: '\2212'; }
+    .faq-item p {
+      margin: 0;
+      padding: 0 24px 20px 42px;
+      color: var(--ink-2);
+      line-height: 1.70;
+    }
+    .faq-item p a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
     /* ── Open Source section ────────────────────────────────────────────── */
     .oss-tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
     .oss-tag {
@@ -592,6 +693,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#opensource">Open source</a></li>
         <li><a href="#caveats">Caveats</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="/gallery">Gallery</a></li>
         <li>
           <a class="nav-btn star"
@@ -928,6 +1030,97 @@
               Banach&ndash;Tarski's duplication (m(Z) = 0 for the free-group set) each capture
               one true idea and deliberately ignore the rest of the physics.</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ───────────────────────────────────────────────────────────── -->
+    <section class="block" id="faq">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="section-label">Section 5 &mdash; FAQ</span>
+          <h2>Anime math, fact-checked</h2>
+          <p>The questions people actually ask about these ideas &mdash; answered with the
+             same honesty-first rule as the rest of this repo. Each answer links to the
+             runnable code and derivation.</p>
+        </div>
+
+        <div class="faq-list reveal">
+          <details class="faq-item">
+            <summary>Is Gojo Satoru's Infinity mathematically possible to escape?</summary>
+            <p>No &mdash; not under any of the four lenses this repo checks. As a geometric series,
+               the gap after n halvings is (1/2)<sup>n</sup>, which only reaches zero in the limit,
+               never at a finite step. As a Lebesgue measure, the uncovered points have measure
+               zero. As Riemannian geometry, geodesics approaching the singularity have length that
+               diverges to infinity, so the felt distance never closes. Topologically, the space's
+               structure simply blocks the approach. Four independent descriptions, one answer.
+               Full derivations and runnable Python: <a href="/projects/gojo_infinity">Gojo's Infinity</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is the Banach&ndash;Tarski paradox real, and can you actually duplicate a sphere?</summary>
+            <p>The theorem is real: a solid ball can be partitioned into finitely many pieces and
+               reassembled, using only rotations and translations, into two balls identical to the
+               original. It needs the Axiom of Choice to build non-measurable pieces that have no
+               volume in the usual sense &mdash; which is why it never applies to anything you could
+               cut with a knife. Our implementation stays honest about that limit: it manipulates
+               words in the free group F&#8322; combinatorially and makes no claim about real matter.
+               Source and explanation: <a href="/projects/banach-tarski-dup">Banach&ndash;Tarski Duplicator</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What is the Central Finite Curve from Rick and Morty, in real math?</summary>
+            <p>Rick and Morty call it the one timeline-strand where Rick is the smartest version of
+               himself. Modeled honestly as the zero-set of a residual function traced on a ruled
+               surface (a M&ouml;bius strip), it forces Gaussian curvature K &lt; 0 everywhere &mdash;
+               a real saddle, not a loophole. The code renders that zero-set plus a cross-validating
+               ridge, with a torus counter-example to show the result isn't an artifact of the surface
+               choice. Details: <a href="/projects/central_finite_curve">Central Finite Curve</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why does the hairy ball theorem force a bald spot, and what does that have to do with network routing?</summary>
+            <p>The hairy ball theorem says there is no continuous, non-vanishing tangent vector field
+               on an even-dimensional sphere &mdash; comb a hairy ball flat and at least one point stays
+               a cowlick. This repo turns that into a packet router that follows a continuous tangent
+               field on S&sup2;: wherever the field vanishes, packets at that point get dropped, and
+               moving the field around never removes the singularity, only relocates it.
+               Code and proof sketch: <a href="/projects/hairy-ball-router">Hairy Ball Router</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is Zeno's paradox actually solved by math, or is motion still "impossible"?</summary>
+            <p>Solved, in the sense that matters for motion: the infinite sum 1/2 + 1/4 + 1/8 + &hellip;
+               converges to exactly 1, so infinitely many steps fit inside a finite distance and a
+               finite time. Zeno's error was assuming infinitely many steps must take infinite time.
+               This repo implements that convergence as a transport protocol &mdash; each tick covers
+               half the remaining distance, landing within any chosen &epsilon; after exactly
+               &lceil;log&#8322;(1/&epsilon;)&rceil; ticks. Code: <a href="/projects/zeno-protocol">Zeno Protocol</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is Steins;Gate's divergence meter based on real physics?</summary>
+            <p>No &mdash; and the project says so plainly. The decimal "reading" that marks which
+               worldline you're on is not a measured physical quantity in this universe or any other;
+               it's fiction. What is real here is the engineering pattern underneath it: a
+               worldline-divergence number classified into attractor-field basins, with a "Reading
+               Steiner" store for jumps between recorded states. Code and the honest caveat:
+               <a href="/projects/divergence-meter">Divergence Meter</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Are JoJo Stand powers or Death Note kills simulated for real, or is that just marketing?</summary>
+            <p>Neither touches a real process outside a sandbox the tool creates and owns.
+               JoJo Stands models abilities like The World (time stop) and King Crimson (rollback) as
+               operations over a simulated, in-memory process table &mdash; no real time-stop exists.
+               Death Note is a rule-accurate process reaper that refuses raw PIDs, refuses to run as
+               root, and kills only the harmless child processes it spawned itself, with a PID-reuse
+               guard. Both are safe by construction, not real OS-level or kernel capabilities.
+               Code: <a href="/projects/jojo-stands">JoJo Stands</a> &middot;
+               <a href="/projects/death-note">Death Note</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does any project in this repo claim fictional physics is literally true?</summary>
+            <p>No. The one rule of this repo is that every project needs an honest mathematical or
+               systems core; where the real thing is impossible or unsafe, the code is a
+               clearly-labeled safe simulation and says so in its own caveat section &mdash; see the
+               <a href="#caveats">honest caveats</a> above or the
+               <a href="#projects">full project directory</a> for all 22 projects.</p>
+          </details>
         </div>
       </div>
     </section>
