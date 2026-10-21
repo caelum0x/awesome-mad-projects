@@ -5,7 +5,7 @@
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)][license-link]
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)][contributing-link]
-![Projects](https://img.shields.io/badge/projects-22-d1341a)
+![Projects](https://img.shields.io/badge/projects-23-d1341a)
 ![Tests](https://img.shields.io/badge/tests-600%2B%20passing-success)
 [![Live](https://img.shields.io/badge/live-mad--projects.com-16150f)][site-link]
 
@@ -170,6 +170,13 @@ Endpoints as morphisms, middleware as functors — with the category, functor, a
 **laws property-tested** and an honest exact-vs-metaphorical note.
 [Source ↗](https://github.com/caelum0x/awesome-mad-projects/tree/main/category-api) · [README](./category-api/README.md)
 
+### [Shadow Clone CRDT](./shadow-clone-crdt) · `Go`
+![Shadow Clone CRDT](./shadow-clone-crdt/banner.png)
+Naruto's Shadow Clone Jutsu as a real state-based CRDT — five join-semilattice types (counters,
+sets, a last-writer-wins register) whose merge is proven commutative, associative, and idempotent,
+so dispel order never matters.
+[Source ↗](https://github.com/caelum0x/awesome-mad-projects/tree/main/shadow-clone-crdt) · [README](./shadow-clone-crdt/README.md)
+
 ### [Zeno Protocol](./zeno-protocol) · `Go`
 ![Zeno Protocol](./zeno-protocol/banner.png)
 A transport where each tick covers half the remaining distance — progress `1 − (1/2)^k`,
@@ -255,7 +262,7 @@ awesome-mad-projects/
 ├── infinity-lab/          # Python monorepo: commons + 8 packages, tests, gallery, docs
 ├── site/                  # showcase website (Cloudflare Worker + static assets)
 ├── worker/                # Worker entry (serves site/ + /api/projects)
-├── <14 standalone Rust/Go/TypeScript projects>/
+├── <15 standalone Rust/Go/TypeScript projects>/
 ├── wrangler.toml          # Cloudflare deploy config
 ├── CONTRIBUTING.md · CODE_OF_CONDUCT.md · LICENSE
 └── README.md

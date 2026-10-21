@@ -3,7 +3,7 @@
     "title": "awesome-mad-projects",
     "thesis": "Turning fictional and folk-math claims into real, tested code.",
     "repo": "https://github.com/caelum0x/awesome-mad-projects",
-    "count": 22
+    "count": 23
   },
   "clusters": [
     {
@@ -101,6 +101,13 @@
           "tagline": "The combinatorial heart of the Banach–Tarski paradox on the free group F2, constructively and exactly.",
           "language": "Rust",
           "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/banach-tarski-dup"
+        },
+        {
+          "name": "Shadow Clone CRDT",
+          "slug": "shadow-clone-crdt",
+          "tagline": "Naruto's Shadow Clone Jutsu as a real state-based CRDT — dispel order never matters because merge is a join-semilattice.",
+          "language": "Go",
+          "github_url": "https://github.com/caelum0x/awesome-mad-projects/tree/main/shadow-clone-crdt"
         },
         {
           "name": "Zeno Protocol",
