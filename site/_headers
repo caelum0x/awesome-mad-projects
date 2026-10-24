@@ -23,6 +23,9 @@
 /gallery
   Cache-Control: no-cache
 
+/does-zenos-paradox-mean-you-never-arrive
+  Cache-Control: no-cache
+
 /
   Cache-Control: no-cache
 

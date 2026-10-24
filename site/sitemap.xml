@@ -18,6 +18,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mad-projects.com/does-zenos-paradox-mean-you-never-arrive</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://mad-projects.com/assets/gojo_series_convergence.png</image:loc>
+      <image:title>Zeno series partial sums climbing toward 1</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://mad-projects.com/projects/at-field</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>

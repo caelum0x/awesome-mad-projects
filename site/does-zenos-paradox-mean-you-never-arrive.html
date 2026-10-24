@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://mad-projects.com/does-zenos-paradox-mean-you-never-arrive" />
+  <title>Does Zeno's Paradox Mean You Never Arrive? | Mad Projects</title>
+  <meta name="description"
+        content="No finite half-step in this repo lands on the endpoint. The infinite sum of those steps is exactly 1, and at speed 1/2 the arrival time is exactly 2. Checked against the Zeno Protocol and Gojo's Infinity tests." />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <meta property="og:site_name" content="Mad Projects" />
+  <meta property="og:title" content="Does Zeno's Paradox Mean You Never Arrive?" />
+  <meta property="og:description" content="No finite half-step lands on the endpoint. The infinite sum is exactly 1, and at speed 1/2 the arrival time is exactly 2." />
+  <meta property="og:image" content="https://mad-projects.com/assets/gojo_series_convergence.png" />
+  <meta property="og:image:width" content="640" />
+  <meta property="og:image:height" content="480" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mad-projects.com/does-zenos-paradox-mean-you-never-arrive" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Does Zeno's Paradox Mean You Never Arrive?" />
+  <meta name="twitter:description" content="No finite half-step lands on the endpoint. The infinite sum is exactly 1, and at speed 1/2 the arrival time is exactly 2." />
+  <meta name="twitter:image" content="https://mad-projects.com/assets/gojo_series_convergence.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does Zeno's paradox mean you never arrive?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. In this repo a finite number of half-steps never lands on the endpoint: after k steps the crossed fraction is 1 - (1/2)^k, which the Go tests keep strictly below 1, and the leftover gap (1/2)^n stays a positive exact fraction even at n = 1075. The infinite sum of the steps is exactly 1. At constant speed 1/2 the total arrival time is exactly 2. The Go transport only calls a packet delivered once a positive epsilon is met; with epsilon 0 it never delivers."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mad-projects.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Does Zeno's paradox mean you never arrive?", "item": "https://mad-projects.com/does-zenos-paradox-mean-you-never-arrive" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand-link" href="/" aria-label="awesome-mad-projects — home">
+        <img src="assets/logo.svg" alt="mad·projects logo" height="36" width="220" />
+      </a>
+      <ul>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li>
+          <a class="nav-btn star"
+             href="https://github.com/caelum0x/awesome-mad-projects"
+             rel="noopener" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Star
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="/">home</a><span>/</span>does Zeno&rsquo;s paradox mean you never arrive?
+  </div>
+
+  <main id="main">
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="lang-badge lang-go">Go + Python</span>
+          <h1>Does Zeno&rsquo;s paradox mean you never arrive?</h1>
+          <p class="detail-tagline">No. No finite half-step in this repo lands on the endpoint. The infinite sum of those steps is exactly 1, and at speed 1/2 the arrival time is exactly 2.</p>
+        </div>
+        <figure class="hero-img-frame">
+          <img src="assets/gojo_series_convergence.png"
+               alt="Partial sums S_n = 1 - (1/2)^n climbing toward the limit 1, with a residual gap that stays positive at every finite n."
+               width="640" height="480" />
+          <figcaption>Series figure already in site/assets: S&#x2099; = 1 &minus; (1/2)&#x207F; toward 1.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <section class="detail-section" id="answer">
+        <h2>The short answer</h2>
+        <p>
+          Zeno&rsquo;s dichotomy says that to finish a trip you must first cover half of it, then half
+          of what is left, and so on. After k of those steps the crossed fraction in both codebases is
+          S&#x2096; = 1 &minus; (1/2)&#x1D4F;. That quantity is always short of 1 for a finite k. The
+          infinite sum is not short of 1. Those are different statements, and the tests pin both.
+        </p>
+        <p>
+          So the paradox does not mean the trip never finishes. It means you should not look for a
+          finite step whose position is exactly the endpoint. The Go transport makes that operational:
+          it delivers when the leftover gap is within a positive tolerance, and it refuses to deliver
+          when that tolerance is zero.
+        </p>
+      </section>
+
+      <section class="detail-section" id="go">
+        <h2>What the Go transport checks</h2>
+        <p>
+          In <code>zeno-protocol/zeno/math.go</code>, <code>Progress(k)</code> returns
+          <code>1 - math.Ldexp(1, -k)</code>, which is 1 &minus; 2&#x207B;&#x1D4F;, and
+          <code>Residual(k)</code> returns 2&#x207B;&#x1D4F;. <code>TestProgressNeverReachesOne</code>
+          requires <code>Progress(k) &lt; 1</code> for k in {1, 2, 5, 10, 30, 52}, and requires
+          <code>1 - Progress(k)</code> to match <code>Residual(k)</code> within 1e-15.
+          <code>TestProgressGeometricSeries</code> checks that adding the step sizes
+          1/2 + 1/4 + &hellip; + 1/2&#x1D4F; reproduces <code>Progress(k)</code> for k from 1 through 20.
+        </p>
+        <p>
+          Delivery is not &ldquo;progress equals 1&rdquo;. <code>Transport.Send</code> sets
+          <code>Delivered</code> only when <code>Epsilon &gt; 0</code> and the residual is less than
+          or equal to that epsilon, and only that packet carries the payload.
+          <code>TicksForEpsilon</code> returns <code>ceil(log2(1/eps))</code> for eps in (0, 1),
+          returns 1 when eps is at least 1, and returns <code>math.MaxInt</code> when eps is 0 or
+          negative. <code>TestTicksForEpsilon</code> pins the pairs 0.5 &rarr; 1 tick, 0.25 &rarr; 2,
+          0.1 &rarr; 4, 1e-3 &rarr; 10, and 1e-6 &rarr; 20, and checks that the residual at that tick
+          is actually within epsilon. <code>TestSendDelivers</code> sends with epsilon 1e-6 and
+          <code>MaxTicks</code> 64 and expects the original message back in exactly 20 ticks.
+          <code>TestSendPureParadoxNeverDelivers</code> sends with epsilon 0 and <code>MaxTicks</code>
+          20: <code>Delivered</code> stays false, the run uses all 20 ticks, and the residual equals
+          <code>Residual(20)</code>.
+        </p>
+      </section>
+
+      <section class="detail-section" id="python">
+        <h2>What the exact-fraction lens checks</h2>
+        <p>
+          <code>gojo_infinity.core.zeno.partial_sum(n)</code> is the exact fraction
+          1 &minus; (1/2)&#x207F;. <code>test_partial_sums_exact_fractions</code> pins the first eight
+          values at 1/2, 3/4, 7/8, 15/16, 31/32, 63/64, 127/128, and 255/256.
+          <code>test_geometric_sum_is_exactly_one</code> requires <code>zeno_series_sum()</code> to be
+          the fraction 1. <code>total_arrival_time</code> returns 1/speed.
+          <code>test_arrival_time_series_converges_finite</code> pins speed 2 &rarr; 1/2, speed 1 &rarr; 1,
+          and speed 1/3 &rarr; 3. The speed 1/2 case is the CLI line
+          &ldquo;Total arrival time at speed 1/2 = 2 -&gt; FINITE.&rdquo;
+          <code>test_cli.py</code> asserts the substring &ldquo;Total arrival time at speed 1/2 = 2&rdquo;.
+        </p>
+        <p>
+          The leftover gap stays positive in exact arithmetic. <code>residual(1075)</code> equals
+          1/2&#xB9;&#x2070;&#x2077;&#x2075; and is strictly greater than 0, including at the point
+          where <code>0.5 ** 1075</code> underflows to 0.0 as a float.
+          <code>epsilon_N(1/1000)</code> returns N = 10 under a strict inequality:
+          (1/2)^N &lt; 1/1000 and (1/2)^(N&minus;1) &ge; 1/1000, so (1/2)^9 is still at least
+          1/1000. That N matches the Go tick count for 1e-3,
+          but the two predicates are not the same on a pure power of one half: Go accepts
+          residual &le; eps, so <code>TicksForEpsilon(0.5)</code> is 1, while the Python oracle asks
+          for a residual strictly under eps. The lens verdict string is <code>Fragile</code>: the gap
+          never closes at a finite n, and the traveler still arrives because the time series is finite.
+        </p>
+      </section>
+
+      <section class="detail-section" id="read-next">
+        <h2>Where this is implemented</h2>
+        <p>
+          The Go half-step transport, including the epsilon rule and the pure-paradox mode that never
+          delivers, is <a href="/projects/zeno-protocol">Zeno Protocol</a>. The same series as an exact
+          fraction, with the finite arrival time at speed 1/2, is lens 1 of
+          <a href="/projects/gojo_infinity">Gojo&rsquo;s Infinity</a>. The plot on this page is one of
+          the rendered figures in the <a href="/gallery">gallery</a>.
+        </p>
+      </section>
+
+      <div class="caveats">
+        <p><strong>Honest caveat:</strong> the Go program is an in-process teaching transport over a
+        channel, not a network protocol. Packets on a real network do not move by halving a remaining
+        distance. The numbers above are what those two test files pin, not a claim about a physical
+        runner beyond the series.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div class="attrib">
+          <p>Contact: <a href="mailto:caelum0x42@gmail.com">caelum0x42@gmail.com</a></p>
+        </div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="https://github.com/caelum0x/awesome-mad-projects" rel="noopener" target="_blank">Repository &#x2197;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
