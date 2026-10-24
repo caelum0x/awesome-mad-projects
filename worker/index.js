@@ -12,6 +12,18 @@
  * HTMLRewriter, rather than hand-editing ~24 independent static HTML files
  * (index.html, gallery.html, and each page under site/projects/) that share no
  * build-time template.
+ *
+ * IMPORTANT: site/_headers allowlists this exact inline script by SHA-256 hash
+ * in its Content-Security-Policy script-src directive (CSP hash allowlisting,
+ * not a domain — the script is inline, injected at request time, not served
+ * from a URL). If you edit a single byte of TWITTER_PIXEL_SNIPPET below
+ * (including whitespace), the hash in site/_headers goes stale and the pixel
+ * silently stops firing with a CSP violation in the browser console — it will
+ * NOT show up as a deploy or build failure. Recompute with:
+ *   printf '%s' "$SNIPPET_BODY" | openssl dgst -sha256 -binary | openssl base64
+ * where $SNIPPET_BODY is the exact text between (and including the newlines
+ * immediately after) <script> and </script> below, then update the
+ * 'sha256-...' value in site/_headers to match.
  */
 
 const TWITTER_PIXEL_SNIPPET = `<!-- X conversion tracking base code -->
